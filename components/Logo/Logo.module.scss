@@ -1,0 +1,33 @@
+@import '../../styles/variables';
+
+.logo-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: $orange-main;
+
+    .logo {
+        background: $orange-main;
+        border-radius: 2px;
+        font-size: 30px;
+        padding: 2px 12px;
+        color: white;
+        font-family: 'kollektif bold';
+        margin-right: $space-xs;
+    }
+
+    span {
+        font-family: 'kollektif bold';
+        margin-right: 4px;
+        font-size: 26px;
+    }
+}
+
+.logo-section-inverted {
+    color: $white;
+
+    .logo {
+        background: $white;
+        color: $orange-main;
+    }
+}

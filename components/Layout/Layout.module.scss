@@ -1,0 +1,13 @@
+@import '../../styles/variables';
+
+.layout {
+    margin-top: 70px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    @media (max-width: $small-device) {
+        margin-top: 64px;
+    }
+}

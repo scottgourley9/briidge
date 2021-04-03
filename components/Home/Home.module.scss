@@ -1,0 +1,365 @@
+@import '../../styles/variables';
+
+.home-page-wrapper {
+    @media (max-width: $large-device) {
+        padding: 0 32px;
+    }
+
+    @media (max-width: $small-device) {
+        padding: 0;
+    }
+
+    .cover-image-section {
+        background-image: url('../../public/briidgeCover.jpg');
+        height: calc(100vh - 150px);
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-attachment: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+
+        @media (max-width: $large-device) {
+            width: calc(100% + 64px);
+            margin-left: -$space-lg;
+        }
+
+        @media (max-width: $small-device) {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+
+    .call-to-action-box {
+        width: calc(100% - 64px);
+        max-width: 600px;
+        background: $white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: $space-lg;
+        opacity: 0.9;
+
+        h1 {
+            font-size: 36px;
+            margin: 0;
+            text-align: center;
+
+            @media (max-width: $small-device) {
+                font-size: 32px;
+            }
+        }
+
+        p {
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+            margin-top: $space-sm;
+
+            @media (max-width: $small-device) {
+                flex-direction: column;
+            }
+
+            button {
+                &:nth-child(1) {
+                    margin-right: $space-xs;
+                }
+
+                &:nth-child(2) {
+                    margin-left: $space-xs;
+                }
+
+                @media (max-width: $small-device) {
+                    &:nth-child(1) {
+                        margin-right: 0;
+                    }
+
+                    &:nth-child(2) {
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .connect-with-purpose {
+        text-align: center;
+        font-size: 50px;
+        color: $orange-main;
+        background: $white;
+        width: 100%;
+        padding: $space-md $space-md 0;
+    }
+
+    .marketing-for-title {
+        margin: $space-lg 0 $space-md;
+    }
+
+    h2 {
+        font-size: 32px;
+        margin: 0;
+        text-align: center;
+
+        @media (max-width: $small-device) {
+            font-size: 28px;
+        }
+    }
+
+    h3 {
+        font-size: 28px;
+        margin: 0;
+        text-align: center;
+
+        @media (max-width: $small-device) {
+            font-size: 24px;
+        }
+    }
+
+    .marketing-for-section {
+        display: flex;
+        align-items: flex-start;
+        visibility: hidden;
+
+        @media (max-width: $small-device) {
+            flex-direction: column;
+        }
+    }
+
+    .marketing-for-tile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 32%;
+
+        @media (max-width: $small-device) {
+            width: 100%;
+            height: auto;
+        }
+
+        &:nth-child(4) {
+            margin: 0 2%;
+
+            @media (max-width: $small-device) {
+                margin: 0;
+            }
+        }
+
+        p {
+            margin: $space-lg $space-sm;
+            font-size: 14px;
+            text-align: center;
+
+            @media (max-width: $small-device) {
+                font-size: 16px;
+            }
+        }
+
+        button {
+            width: 150px;
+        }
+    }
+
+    .marketing-for {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+
+        @media (max-width: $small-device) {
+            width: 100%;
+            height: 100%;
+            margin: $space-sm 0;
+        }
+
+        &:after {
+            content: "";
+            display: block;
+            padding-bottom: 100%;
+        }
+    }
+
+    .marketing-for-img-container {
+        position: absolute;
+        width: 130%;
+        height: 140%;
+        margin-left: -15%;
+        margin-bottom: -32px;
+
+        img {
+            object-fit: cover;
+        }
+    }
+
+    .green-section {
+        background: linear-gradient(135deg,$white 0%,$green-one-comp 50%,$green-one 100%);
+    }
+
+    .orange-section {
+        background: linear-gradient(135deg,$white 0%,$orange-main-comp 50%,$orange-main 100%);
+    }
+
+    .blue-section {
+        background: linear-gradient(135deg,$white 0%,$blue-one-comp 50%,$blue-one 100%);
+    }
+
+    .tag {
+        font-size: 20px;
+        position: absolute;
+        padding: 16px;
+        background: $white;
+        font-family: 'kollektif bold';
+        text-align: right;
+        z-index: 1;
+
+        @media (max-width: $large-device) {
+            font-size: 16px;
+        }
+
+        @media (max-width: $small-device) {
+            font-size: 20px;
+        }
+    }
+
+    .tag-top {
+        bottom: 75%;
+    }
+
+    .tag-bottom {
+        bottom: 5%;
+
+        @media (max-width: $small-device) {
+            bottom: 70%
+        }
+    }
+
+    .tag-middle {
+        bottom: 65%;
+
+        @media (max-width: $small-device) {
+            bottom: 70%
+        }
+    }
+}
+
+@-webkit-keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0)
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0)
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0)
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0)
+    }
+}
+
+.fade-in-up {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+    animation-duration: 1s;
+    visibility: visible !important;
+}
+
+.also-for-section {
+    background-image: url('../../public/goldenGate.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding: 0 $space-xxxxlg $space-xxxxlg;
+
+    @media (max-width: $small-device) {
+        padding: 0 0 $space-xlg;
+    }
+}
+
+.also-for-tile {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    height: 400px;
+    visibility: hidden;
+    margin-top: $space-xxxxlg;
+
+    @media (max-width: $small-device) {
+        flex-direction: column;
+        margin-top: $space-sm;
+    }
+
+    .title-box {
+        margin-bottom: $space-sm;
+        font-size: 28px;
+    }
+
+    .image-container {
+        width: 50%;
+        position: relative;
+
+        @media (max-width: $small-device) {
+            width: 100%;
+            height: inherit;
+        }
+
+        img {
+            object-fit: cover;
+        }
+    }
+
+    .info-box {
+        position: absolute;
+        bottom: 30%;
+        padding: $space-md;
+        font-size: 14px;
+        background: $white;
+        width: 50%;
+
+        @media (max-width: $small-device) {
+            font-size: 16px;
+            width: 100%;
+            bottom: 0%;
+            position: relative;
+            left: 0% !important;
+            right: 0% !important;
+        }
+    }
+}
+
+.also-for-tile-left {
+    .info-box {
+        left: 40%;
+    }
+}
+
+.also-for-tile-right {
+    justify-content: flex-end;
+
+    .info-box {
+        right: 40%;
+    }
+}

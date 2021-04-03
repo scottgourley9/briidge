@@ -1,0 +1,49 @@
+@import '../../../styles/variables';
+
+.button {
+    background: $orange-main;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: 0.04em;
+    color: $white;
+    border: none;
+    height: 40px;
+    width: 100%;
+    cursor: pointer;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 2px solid $orange-main;
+    transition: background .2s, color .2s;
+    outline: none;
+
+    &:hover {
+        background: $black;
+        color: $white;
+        border-color: $black;
+    }
+    &:disabled {
+        background: $grey-one;
+        border-color: $grey-one;
+        cursor: default;
+
+        &:hover {
+            background: $grey-one;
+            color: $white;
+        }
+    }
+}
+
+.secondary {
+    background: $white;
+    color: $orange-main;
+
+    &:hover {
+        background: $black;
+        color: $white;
+        border-color: $orange-main;
+    }
+}

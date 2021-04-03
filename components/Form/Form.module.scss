@@ -1,0 +1,7 @@
+@import '../../styles/variables';
+
+.form-page-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: $space-xxlg $space-md;
+}

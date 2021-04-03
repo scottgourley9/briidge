@@ -1,0 +1,14 @@
+@import '../../styles/variables';
+
+.footer {
+    background: $black;
+    color: $white;
+    height: 140px;
+    padding: $space-sm $space-lg;
+    left: 0;
+    right: 0;
+    position: absolute;
+    @media (max-width: $small-device) {
+        padding: $space-xs $space-md;
+    }
+}

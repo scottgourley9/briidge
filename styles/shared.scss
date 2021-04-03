@@ -1,0 +1,27 @@
+@import './variables';
+
+@mixin errorMessageList {
+    padding: 0;
+    list-style-type: none;
+    font-size: 13px;
+    line-height: 14px;
+    color: $red-one;
+    margin-top: 5px;
+
+    li {
+        margin-bottom: 10px;
+    }
+}
+
+@mixin successMessageList {
+    padding: 0;
+    list-style-type: none;
+    font-size: 13px;
+    line-height: 14px;
+    color: $green-one;
+    margin-top: 5px;
+
+    li {
+        margin-bottom: 10px;
+    }
+}
