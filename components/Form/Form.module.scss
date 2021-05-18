@@ -3,5 +3,12 @@
 .form-page-wrapper {
     display: flex;
     justify-content: center;
-    padding: $space-xxlg $space-md;
+
+    iframe {
+        display: none;
+        width: 100vw;
+        height: calc(100vh - 70px);
+        border: none;
+        padding: $space-sm $space-md;
+    }
 }

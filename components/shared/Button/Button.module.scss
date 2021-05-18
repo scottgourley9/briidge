@@ -14,7 +14,7 @@
     height: 40px;
     width: 100%;
     cursor: pointer;
-    margin-bottom: 15px;
+    margin-bottom: $space-sm;
     box-sizing: border-box;
     border: 2px solid $orange-main;
     transition: background .2s, color .2s;

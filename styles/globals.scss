@@ -12,6 +12,7 @@ body {
   max-width: $large-device;
   margin: auto;
   color: $dark-grey-one;
+  scroll-behavior: smooth;
 }
 
 button {
@@ -39,4 +40,22 @@ li {
 .pipedriveWebForms {
     display: flex;
     justify-content: center;
+}
+
+.slick-dots {
+    bottom: -$space-lg !important;
+
+    li {
+        button::before {
+            font-size: 10px !important;
+            color: $orange-main !important;
+            opacity: 0.35 !important;
+        }
+    }
+
+    .slick-active {
+        button:before {
+            opacity: 1 !important;
+        }
+    }
 }

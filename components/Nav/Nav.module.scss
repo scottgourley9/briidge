@@ -6,7 +6,7 @@
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
     transition: top 0.4s;
 }
 .move-nav-up {
@@ -51,7 +51,7 @@
         background: $orange-main;
         position: fixed;
         top: 0;
-        z-index: 1;
+        z-index: 2;
         justify-content: flex-start;
         padding: $space-sm 0 0 $space-md;
         transition: margin 0.25s;
@@ -110,7 +110,7 @@
 }
 .nav-overlay-showing {
     opacity: 0.75;
-    z-index: 1;
+    z-index: 2;
 }
 .logo-and-close,
 .logo-and-ham {
@@ -159,5 +159,21 @@
     padding: $space-sm 0;
     @media (max-width: $small-device) {
         padding-bottom: 0;
+    }
+}
+
+.social-icons {
+    display: none;
+    font-size: 30px;
+    color: $white;
+    width: 100%;
+    align-items: center;
+    margin-top: auto;
+    justify-content: space-around;
+    margin-left: -12px;
+    margin-bottom: 32px;
+
+    @media (max-width: $small-device) {
+        display: flex;
     }
 }

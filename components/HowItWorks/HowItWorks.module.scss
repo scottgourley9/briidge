@@ -1,0 +1,46 @@
+@import '../../styles/variables';
+
+.how-it-works-page-wrapper {
+    padding: $space-md;
+}
+
+.main-title {
+    width: 100%;
+    text-align: center;
+}
+
+.faq-section {
+    border: 1px solid $grey-one;
+    width: 100%;
+}
+
+.user-type-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-type-box {
+    width: 16%;
+    border: 1px solid $grey-one;
+    padding: $space-sm;
+}
+
+.blog-section {
+    border: 1px solid $grey-one;
+    width: 100%;
+}
+
+.blog-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.blog-box {
+    width: 16%;
+    border: 1px solid $grey-one;
+    padding: $space-sm;
+}

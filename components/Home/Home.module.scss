@@ -93,17 +93,9 @@
         }
     }
 
-    .connect-with-purpose {
-        text-align: center;
-        font-size: 50px;
-        color: $orange-main;
-        background: $white;
-        width: 100%;
-        padding: $space-md $space-md 0;
-    }
-
     .marketing-for-title {
-        margin: $space-lg 0 $space-md;
+        margin: $space-lg 0;
+        padding: 0 $space-sm;
     }
 
     h2 {
@@ -130,6 +122,7 @@
         display: flex;
         align-items: flex-start;
         visibility: hidden;
+        margin-bottom: $space-sm;
 
         @media (max-width: $small-device) {
             flex-direction: column;
@@ -201,15 +194,15 @@
     }
 
     .green-section {
-        background: linear-gradient(135deg,$white 0%,$green-one-comp 50%,$green-one 100%);
+        background: linear-gradient(135deg,$yellow-one, #F2CB05, #F2B705);
     }
 
     .orange-section {
-        background: linear-gradient(135deg,$white 0%,$orange-main-comp 50%,$orange-main 100%);
+        background: linear-gradient(135deg,#F28705,#F25C05,$orange-main);
     }
 
     .blue-section {
-        background: linear-gradient(135deg,$white 0%,$blue-one-comp 50%,$blue-one 100%);
+        background: linear-gradient(135deg,#05F2F2,#05DBF2, $blue-one-comp);
     }
 
     .tag {
@@ -286,80 +279,150 @@
     visibility: visible !important;
 }
 
-.also-for-section {
-    background-image: url('../../public/goldenGate.png');
+.slider-container {
+    width: 100%;
+    margin-bottom: $space-xxxlg;
+    margin-top: $space-lg;
+    visibility: hidden;
+
+    @media (max-width: $x-small-device) {
+        width: 100%;
+
+        svg {
+            display: none !important;
+        }
+    }
+}
+
+.slider-slide {
+    position: relative;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: $x-small-device) {
+        height: 80vh;
+    }
+
+    .call-to-action-box {
+        position: relative;
+        z-index: 1;
+
+        @media (max-width: $x-small-device) {
+            margin-top: auto;
+            opacity: 1;
+            background: linear-gradient(transparent, $black, $black, $black);
+            color: $white;
+            width: 100%;
+        }
+    }
+}
+
+.image-container {
+    height: 80vh;
+
+    @media (max-width: $medium-device) {
+        height: 65vh;
+    }
+
+    @media (max-width: $small-device) {
+        height: 50vh;
+    }
+
+    @media (max-width: $x-small-device) {
+        div {
+            height: 45vh;
+        }
+    }
+}
+
+.slick-button {
+    position: absolute;
+    padding: $space-sm;
+    top: 50%;
+    margin-top: -31px;
+    background: $orange-main;
+    z-index: 1;
+    cursor: pointer;
+    transition: background 0.25s;
+
+    @media (max-width: $small-device) {
+        display: none;
+    }
+
+    &:hover {
+        background: $black;
+    }
+
+    svg {
+        width: 30px;
+        height: 30px;
+
+        polyline {
+            stroke: $white;
+        }
+    }
+}
+
+.next-button-container {
+    transform: rotate(90deg);
+    right: 2px;
+}
+
+.prev-button-container {
+    transform: rotate(-90deg);
+    left: 2px;
+}
+
+.big-red-box-section {
+    background-attachment: fixed;
+    background-image: url('../../public/bridgeCloseUp.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    padding: 0 $space-xxxxlg $space-xxxxlg;
-
-    @media (max-width: $small-device) {
-        padding: 0 0 $space-xlg;
-    }
-}
-
-.also-for-tile {
-    position: relative;
-    display: flex;
-    justify-content: flex-start;
     width: 100%;
-    height: 400px;
-    visibility: hidden;
-    margin-top: $space-xxxxlg;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 100vh;
 
-    @media (max-width: $small-device) {
+    @media (max-width: $medium-device) {
         flex-direction: column;
-        margin-top: $space-sm;
     }
 
-    .title-box {
-        margin-bottom: $space-sm;
-        font-size: 28px;
+    .call-to-action-box {
+        height: fit-content;
+        width: 33%;
+        min-width: 360px;
     }
 
-    .image-container {
-        width: 50%;
-        position: relative;
+    .holes {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        width: 33%;
+        justify-content: space-around;
 
-        @media (max-width: $small-device) {
+        @media (max-width: $medium-device) {
+            min-height: 100%;
+            width: 80%;
+        }
+
+        @media (max-width: $x-small-device) {
+            min-height: 100%;
             width: 100%;
-            height: inherit;
-        }
-
-        img {
-            object-fit: cover;
         }
     }
 
-    .info-box {
-        position: absolute;
-        bottom: 30%;
+    .bridge-hole {
         padding: $space-md;
-        font-size: 14px;
-        background: $white;
-        width: 50%;
-
-        @media (max-width: $small-device) {
-            font-size: 16px;
-            width: 100%;
-            bottom: 0%;
-            position: relative;
-            left: 0% !important;
-            right: 0% !important;
-        }
-    }
-}
-
-.also-for-tile-left {
-    .info-box {
-        left: 40%;
-    }
-}
-
-.also-for-tile-right {
-    justify-content: flex-end;
-
-    .info-box {
-        right: 40%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 200px;
+        width: 100%;
+        color: $white;
+        font-size: 18px;
+        visibility: hidden;
     }
 }

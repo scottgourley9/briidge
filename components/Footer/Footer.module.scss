@@ -1,14 +1,55 @@
 @import '../../styles/variables';
 
 .footer {
-    background: $black;
-    color: $white;
     height: 140px;
-    padding: $space-sm $space-lg;
-    left: 0;
-    right: 0;
-    position: absolute;
+    padding: $space-xxlg $space-lg;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 80px;
+
     @media (max-width: $small-device) {
         padding: $space-xs $space-md;
+    }
+
+    .footer-top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: $space-md;
+    }
+
+    .social-logos {
+        display: flex;
+        font-size: 22px;
+        margin-left: $space-xxxlg;
+
+        @media (max-width: $small-device) {
+            margin-left: $space-xs;
+        }
+
+        svg {
+            margin: $space-xs;
+        }
+    }
+
+    .footer-links {
+        width: 50%;
+        text-align: center;
+
+        @media (max-width: $small-device) {
+            width: 100%;
+        }
+
+        a {
+            text-decoration: underline;
+            margin: $space-xs;
+        }
+    }
+
+    .copyright {
+        opacity: 0.75;
+        font-size: 14px;
     }
 }

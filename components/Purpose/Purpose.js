@@ -1,9 +1,14 @@
+import { Fragment } from 'react';
+
 import styles from './Purpose.module.scss';
 
 const Purpose = () => (
-    <section className={styles['purpose-page-wrapper']}>
-        Purpose page
-    </section>
+    <Fragment>
+        <div className={styles['golden-gate']} />
+        <section className={styles['purpose-page-wrapper']}>
+            Purpose
+        </section>
+    </Fragment>
 );
 
 export default Purpose;

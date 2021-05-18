@@ -2,6 +2,10 @@ import { Fragment, useState, useEffect, useRef } from 'react';
 import Link from 'next/link'
 import { GrMenu } from 'react-icons/gr';
 import { GrClose } from 'react-icons/gr';
+import { GrInstagram } from 'react-icons/gr';
+import { GrFacebook } from 'react-icons/gr';
+import { GrTwitter } from 'react-icons/gr';
+import { GrPinterest } from 'react-icons/gr';
 
 import Logo from '../Logo/Logo';
 
@@ -93,8 +97,13 @@ const Nav = () => {
                         </li>
                     </Link>
                     <li onClick={handleToggleMenu}>
-                        <Link href="/purpose">
+                        <Link href="/#purposeStart">
                             <a>Purpose</a>
+                        </Link>
+                    </li>
+                    <li onClick={handleToggleMenu}>
+                        <Link href="/about">
+                            <a>About</a>
                         </Link>
                     </li>
                     <li onClick={handleToggleMenu}>
@@ -102,16 +111,12 @@ const Nav = () => {
                             <a>How It Works</a>
                         </Link>
                     </li>
-                    <li onClick={handleToggleMenu}>
-                        <Link href="/howItWorks/#blogSection">
-                            <a>Blog</a>
-                        </Link>
-                    </li>
-                    <li onClick={handleToggleMenu}>
-                        <Link href="/howItWorks/#faqSection">
-                            <a>FAQ</a>
-                        </Link>
-                    </li>
+                    <div className={styles['social-icons']}>
+                        <GrInstagram />
+                        <GrFacebook />
+                        <GrTwitter />
+                        <GrPinterest />
+                    </div>
                 </ul>
             </nav>
         </Fragment>
