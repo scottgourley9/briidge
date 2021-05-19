@@ -97,8 +97,13 @@ const Nav = () => {
                         </li>
                     </Link>
                     <li onClick={handleToggleMenu}>
-                        <Link href="/#purposeStart">
+                        <Link href="/purpose">
                             <a>Purpose</a>
+                        </Link>
+                    </li>
+                    <li onClick={handleToggleMenu}>
+                        <Link href="/howItWorks">
+                            <a>How It Works</a>
                         </Link>
                     </li>
                     <li onClick={handleToggleMenu}>
@@ -107,8 +112,8 @@ const Nav = () => {
                         </Link>
                     </li>
                     <li onClick={handleToggleMenu}>
-                        <Link href="/howItWorks">
-                            <a>How It Works</a>
+                        <Link href="/blog">
+                            <a>Blog</a>
                         </Link>
                     </li>
                     <div className={styles['social-icons']}>

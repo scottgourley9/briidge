@@ -1,0 +1,23 @@
+@import '../../styles/variables';
+
+.blog-page-wrapper {
+    padding: $space-md;
+}
+
+.blog-section {
+    border: 1px solid $grey-one;
+    width: 100%;
+}
+
+.blog-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.blog-box {
+    width: 16%;
+    border: 1px solid $grey-one;
+    padding: $space-sm;
+}
