@@ -111,11 +111,13 @@ const Nav = () => {
                             <a>About</a>
                         </Link>
                     </li>
-                    <li onClick={handleToggleMenu}>
-                        <Link href="/blog">
-                            <a>Blog</a>
-                        </Link>
-                    </li>
+                    {/*
+                        <li onClick={handleToggleMenu}>
+                            <Link href="/blog">
+                                <a>Blog</a>
+                            </Link>
+                        </li>
+                    */}
                     <div className={styles['social-icons']}>
                         <GrInstagram />
                         <GrFacebook />
