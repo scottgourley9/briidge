@@ -1,4 +1,6 @@
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
+
+import Logo from '../Logo/Logo';
 
 import styles from './Form.module.scss';
 
@@ -15,12 +17,17 @@ const FormInvestor = () => {
     }
 
     return (
-        <section className={styles['form-page-wrapper']}>
-            {/*
-                <div class="pipedriveWebForms" data-pd-webforms="https://webforms.pipedrive.com/f/1HFNdm99C9qQHzm0pC5cdBz8cnVx1dvR63iUpobC5lmpIARmGSlhRZzda0jl1hv5p" />
-            */}
-            <iframe onLoad={handleOnLoad} src="https://webforms.pipedrive.com/f/1HFNdm99C9qQHzm0pC5cdBz8cnVx1dvR63iUpobC5lmpIARmGSlhRZzda0jl1hv5p?embeded=1&uuid=idzxeyp9" />
-        </section>
+        <Fragment>
+            <div className={styles['temp-head']}>
+                <Logo />
+            </div>
+            <section className={styles['form-page-wrapper']}>
+                {/*
+                    <div class="pipedriveWebForms" data-pd-webforms="https://webforms.pipedrive.com/f/1HFNdm99C9qQHzm0pC5cdBz8cnVx1dvR63iUpobC5lmpIARmGSlhRZzda0jl1hv5p" />
+                */}
+                <iframe onLoad={handleOnLoad} src="https://ghdjnm6x0t1.typeform.com/to/J9VCXLQV" />
+            </section>
+        </Fragment>
     );
 };
 

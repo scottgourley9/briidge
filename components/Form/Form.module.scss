@@ -9,6 +9,14 @@
         width: 100vw;
         height: calc(100vh - 70px);
         border: none;
-        padding: $space-sm $space-md;
+        // padding: $space-sm $space-md;
+        // height: 100vh;
     }
+}
+
+.temp-head {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 0 $space-sm;
 }
