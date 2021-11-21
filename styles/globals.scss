@@ -7,9 +7,9 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'kollektif', sans-serif;
+  font-family: 'poppins', sans-serif;
   letter-spacing: 0.02em;
-  max-width: $large-device;
+  overflow-x: hidden;
   margin: auto;
   color: $dark-grey-one;
   scroll-behavior: smooth;
@@ -30,7 +30,7 @@ a {
 
 * {
     box-sizing: border-box;
-    font-family: 'kollektif';
+    font-family: 'poppins';
 }
 
 ul {

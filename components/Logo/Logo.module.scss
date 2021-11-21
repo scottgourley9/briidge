@@ -5,21 +5,22 @@
     justify-content: flex-start;
     align-items: center;
     color: $orange-main;
+    margin-bottom: 2px;
 
     .logo {
         background: $orange-main;
         border-radius: 2px;
-        font-size: 30px;
+        font-size: 40px;
         padding: 2px 12px;
         color: white;
-        font-family: 'kollektif bold';
+        font-family: 'poppins bold';
         margin-right: $space-xs;
+        display: none;
     }
 
     span {
-        font-family: 'kollektif bold';
-        margin-right: 4px;
-        font-size: 26px;
+        font-family: 'poppins bold';
+        font-size: 33px;
     }
 }
 

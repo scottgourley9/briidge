@@ -33,7 +33,7 @@
     &.size-xl {
         min-width: 600px;
     }
-    @media (max-width: $small-device) {
+    @media (max-width: $small-screen) {
         min-width: 330px !important;
     }
 }

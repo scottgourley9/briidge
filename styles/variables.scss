@@ -1,11 +1,15 @@
 $white: #ffffff;
 $black: #000000;
+$black-two: #18181B;
 $grey-one: #d3d3d3;
 $grey-two: #888888;
 $grey-three: #dadcdf;
 $grey-four: #444;
 $grey-five: #eeeeee;
 $dark-grey-one: #333333;
+
+$grey-background: #F5F5F5;
+$blue-background: #224A5D;
 
 $orange-main: #C0362C;
 $orange-two: #D64C27;
@@ -16,6 +20,7 @@ $green-one-comp: #7EFF61;
 $blue-one: #0F7371;
 $blue-two: #1E0BE3;
 $blue-one-comp: #2CBFBD;
+$blue-three: #028090;
 $yellow-one: #FFF803;
 $violet-one: #9100FA;
 $red-one:#C70000;
@@ -31,9 +36,8 @@ $space-xxlg: 48px;
 $space-xxxlg: 56px;
 $space-xxxxlg: 64px;
 
-$x-small-device: 480px;
-$small-device: 767px;
-$medium-device: 1000px;
-// $large-device: 1280px;
-$large-device: 720px;
-$max-screen: 1520px;
+$x-small-screen: 480px;
+$small-screen: 767px;
+$medium-screen: 1000px;
+$large-screen: 1280px;
+$max-screen: 1610px;

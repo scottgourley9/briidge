@@ -8,11 +8,12 @@ import { GrTwitter } from 'react-icons/gr';
 import { GrPinterest } from 'react-icons/gr';
 
 import Logo from '../Logo/Logo';
+import { Button } from '../shared/Button/Button';
 
 import styles from './Nav.module.scss';
 import animate from '../../styles/animate.module.css';
 
-const Nav = () => {
+const Nav = ({ user }) => {
     const navRef = useRef();
     const [showing, toggleMenu] = useState(false);
     const [notAtTop, toggleNotAtTop] = useState(false);
@@ -97,27 +98,41 @@ const Nav = () => {
                         </li>
                     </Link>
                     <li onClick={handleToggleMenu}>
-                        <Link href="/purpose">
-                            <a>Purpose</a>
-                        </Link>
-                    </li>
-                    <li onClick={handleToggleMenu}>
-                        <Link href="/howItWorks">
-                            <a>How It Works</a>
-                        </Link>
-                    </li>
-                    <li onClick={handleToggleMenu}>
                         <Link href="/about">
                             <a>About</a>
                         </Link>
                     </li>
-                    {/*
-                        <li onClick={handleToggleMenu}>
-                            <Link href="/blog">
-                                <a>Blog</a>
+                    <li onClick={handleToggleMenu}>
+                        <Link href="/contactus">
+                            <a>Contact</a>
+                        </Link>
+                    </li>
+                    {user?.given_name ?
+                        <li className={styles['log-in']} onClick={handleToggleMenu}>
+                            <Link href="/profile">
+                                <a>{user.given_name}</a>
                             </Link>
                         </li>
-                    */}
+                        :
+                        <Fragment>
+                            <li className={styles['log-in']} onClick={handleToggleMenu}>
+                                <a href="/api/auth/login">Log in</a>
+                            </li>
+                            <li className={styles['last-list-item']} onClick={handleToggleMenu}>
+                                <a href="/api/auth/login">
+                                    <Button className={styles['sign-up']}>
+                                        Sign up
+                                    </Button>
+                                </a>
+                            </li>
+                            <li className={styles['last-list-item-mobile']} onClick={handleToggleMenu}>
+                                <a href="/api/auth/login">
+                                    Sign up
+                                </a>
+                            </li>
+                        </Fragment>
+                    }
+
                     <div className={styles['social-icons']}>
                         <GrInstagram />
                         <GrFacebook />

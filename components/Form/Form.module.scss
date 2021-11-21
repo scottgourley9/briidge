@@ -7,7 +7,7 @@
     iframe {
         display: none;
         width: 100vw;
-        height: calc(100vh - 70px);
+        height: calc(100vh - 90px);
         border: none;
         // padding: $space-sm $space-md;
         // height: 100vh;
@@ -15,7 +15,7 @@
 }
 
 .temp-head {
-    height: 70px;
+    height: 90px;
     display: flex;
     align-items: center;
     padding: 0 $space-sm;

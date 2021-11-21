@@ -8,4 +8,4 @@ export const getServerSideProps = ({ req }) => {
     };
 };
 
-export { default } from '../components/Home/Home';
+export { default } from '../components/ContactUs/ContactUs';
