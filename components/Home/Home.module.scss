@@ -134,7 +134,7 @@
         margin-top: 230px;
 
         @media (max-width: $small-screen) {
-            margin-top: 50px;
+            margin-top: $space-xxlg;
         }
 
         .title {
