@@ -1,11 +1,17 @@
-import { getSession } from '@auth0/nextjs-auth0';
+import { getUserFromRequestData } from '../helpers/getUserFromRequestData';
 
-export const getServerSideProps = ({ req }) => {
-    const sessionData = getSession(req, {});
+export const getServerSideProps = async ({ req }) => {
+    try {
+        const user = await getUserFromRequestData(req);
 
-    return {
-        props: { user: sessionData?.user || {} }
-    };
+        return {
+            props: { user: JSON.parse(JSON.stringify(user)) }
+        };
+    } catch (e) {
+        return {
+            props: { user: {} }
+        };
+    }
 };
 
 export { default } from '../components/About/About';

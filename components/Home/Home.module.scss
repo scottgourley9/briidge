@@ -166,6 +166,7 @@
 
         @media (max-width: $small-screen) {
             margin-top: $space-lg;
+            display: none;
         }
 
         .user-card {
@@ -258,6 +259,69 @@
                     justify-content: center;
                     margin-bottom: $space-sm;
                 }
+            }
+        }
+    }
+
+    .user-cards-slider {
+        width: 100%;
+        display: none;
+        margin: $space-xlg 0 $space-xxxlg;
+
+        :global {
+            .slick-list {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: $small-screen) {
+            display: inherit;
+        }
+
+        .user-card {
+            width: 100%;
+            flex-direction: column;
+            background: $grey-background;
+            padding: $space-lg;
+            display: flex;
+            justify-content: space-around;
+
+            .details {
+                .card-title {
+                    margin: 0;
+                    font-size: 20px;
+                    margin-bottom: $space-sm;
+                }
+
+                .card-subtitle {
+                    margin: 0;
+                    font-size: 16px;
+                    margin-bottom: $space-md;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    flex-wrap: wrap;
+                }
+
+                .card-description {
+                    margin: 0;
+                    font-size: 12px;
+                    line-height: 25px;
+                }
+            }
+
+            &:nth-child(2) {
+                padding-left: $space-lg;
+
+                .details {
+                    margin-left: 0;
+                }
+            }
+
+            .card-image {
+                display: flex;
+                justify-content: center;
+                margin-bottom: $space-sm;
             }
         }
     }

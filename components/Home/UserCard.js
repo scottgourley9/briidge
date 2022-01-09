@@ -26,7 +26,7 @@ const UserCard = ({ user }) => {
             <div className={styles.details}>
                 <h3 className={styles['card-title']}>{name}</h3>
                 <h4 className={styles['card-subtitle']}>
-                    <span>{type}</span><span>{need}</span>
+                    <span>{type}&nbsp;</span><span>{need}</span>
                 </h4>
                 <p className={styles['card-description']}>{description}</p>
             </div>

@@ -1,11 +1,27 @@
-import { getSession } from '@auth0/nextjs-auth0';
+import { getUserFromRequestData } from '../helpers/getUserFromRequestData';
 
-export const getServerSideProps = ({ req }) => {
-    const sessionData = getSession(req, {});
+export const getServerSideProps = async ({ req }) => {
+    try {
+        const user = await getUserFromRequestData(req);
 
-    return {
-        props: { user: sessionData?.user || {} }
-    };
+        if (user?.email && !Object.keys(user?.investor || {}).length && !Object.keys(user?.operator || {}).length) {
+            // has not registered yet
+            return {
+                redirect: {
+                    destination: '/onboard',
+                    permanent: false,
+                }
+            }
+        }
+
+        return {
+            props: { user: JSON.parse(JSON.stringify(user)) }
+        };
+    } catch (e) {
+        return {
+            props: { user: {} }
+        };
+    }
 };
 
 export { default } from '../components/Home/Home';

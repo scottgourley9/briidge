@@ -1,0 +1,18 @@
+@import '../../../styles/variables';
+@import '../OnBoard.module.scss';
+
+.min-max-other {
+    display: flex;
+    align-items: center;
+    border: 1px solid $black;
+    width: 340px;
+    height: 60px;
+    margin-bottom: $space-md;
+
+    input {
+        width: 100%;
+        border: none;
+        height: 58px;
+        margin: 0;
+    }
+}

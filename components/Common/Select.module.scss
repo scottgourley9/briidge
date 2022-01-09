@@ -1,0 +1,36 @@
+@import '../../styles/variables';
+
+.large-select {
+    width: 340px;
+    height: 60px;
+    font-size: 20px;
+    border-radius: 0px;
+    border: 1px solid $black;
+    margin-bottom: $space-md;
+    padding: 0 $space-sm;
+    text-align: left;
+}
+
+.select-wrapper {
+    position: relative;
+}
+
+.select-chevron {
+    position: absolute;
+    top: 25px;
+    right: 16px;
+}
+
+.error-state {
+    border: 1px solid $red-one;
+}
+
+.select-message {
+    font-size: 16px;
+    margin-top: -$space-sm;
+    line-height: 20px;
+}
+
+.error-message {
+    color: $red-one;
+}

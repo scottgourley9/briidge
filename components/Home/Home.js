@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import Slider from 'react-slick';
 
 import { Button } from '../shared/Button/Button';
 import UserCard from './UserCard';
@@ -16,6 +17,15 @@ import styles from './Home.module.scss';
 
 const Home = () => {
     const fakeUserData = getFakeUserData();
+
+    const settings = {
+        arrows: false,
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    };
 
     return (
         <section className={styles['home-page-wrapper']}>
@@ -51,6 +61,11 @@ const Home = () => {
                     return <UserCard key={i} user={user} />
                 })}
             </div>
+            <Slider className={styles['user-cards-slider']} {...settings}>
+                {fakeUserData.map((user, i) => {
+                    return <UserCard key={i} user={user} />
+                })}
+            </Slider>
             <Button className={styles['join-now']}>
                 Join Now to See More
             </Button>

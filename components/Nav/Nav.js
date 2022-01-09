@@ -21,6 +21,8 @@ const Nav = ({ user }) => {
     const [scrollingUp, updateScrollingUp] = useState(false);
     const [scrolledPastHeader, updateScrolledPastHeader] = useState(false);
 
+    const loggedIn = Boolean(user?.email);
+
     const handleOnScroll = () => {
         if (window.pageYOffset > 0) {
             toggleNotAtTop(true);
@@ -97,6 +99,23 @@ const Nav = ({ user }) => {
                             <Logo />
                         </li>
                     </Link>
+                    {loggedIn &&
+                        <Fragment>
+                            <li onClick={handleToggleMenu}>
+                                <Link href="/operators">
+                                    <a>Operators</a>
+                                </Link>
+                            </li>
+                            <li onClick={handleToggleMenu}>
+                                <Link href="/investors">
+                                    <a>Investors</a>
+                                </Link>
+                            </li>
+                            {/*
+                                <Search />
+                            */}
+                        </Fragment>
+                    }
                     <li onClick={handleToggleMenu}>
                         <Link href="/about">
                             <a>About</a>
@@ -107,10 +126,10 @@ const Nav = ({ user }) => {
                             <a>Contact</a>
                         </Link>
                     </li>
-                    {user?.given_name ?
+                    {loggedIn ?
                         <li className={styles['log-in']} onClick={handleToggleMenu}>
                             <Link href="/profile">
-                                <a>{user.given_name}</a>
+                                <a>{user?.first_name || user?.email}</a>
                             </Link>
                         </li>
                         :

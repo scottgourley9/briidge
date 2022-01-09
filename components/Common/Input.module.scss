@@ -1,0 +1,31 @@
+@import '../../styles/variables';
+
+.large-input {
+    width: 340px;
+    height: 60px;
+    font-size: 20px;
+    border-radius: 0px;
+    border: 1px solid $black;
+    margin-bottom: $space-md;
+    padding: 0 $space-sm;
+    text-align: center;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.error-state {
+    border: 1px solid $red-one;
+}
+
+.input-message {
+    font-size: 16px;
+    margin-top: -$space-sm;
+    line-height: 20px;
+}
+
+.error-message {
+    color: $red-one;
+}

@@ -1,0 +1,29 @@
+@import '../../styles/variables';
+
+.large-textarea {
+    border: 1px solid $black;
+    border-radius: 0;
+    font-size: 20px;
+    resize: none;
+    padding: $space-sm;
+    margin-bottom: $space-md;
+}
+
+.textarea-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.error-state {
+    border: 1px solid $red-one;
+}
+
+.textarea-message {
+    font-size: 16px;
+    margin-top: -$space-sm;
+    line-height: 20px;
+}
+
+.error-message {
+    color: $red-one;
+}

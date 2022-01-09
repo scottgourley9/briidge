@@ -1,0 +1,130 @@
+@import '../../styles/variables';
+
+.onboard-page-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $space-md;
+    flex-direction: column;
+
+    .pills {
+        display: flex;
+        margin-top: $space-lg;
+
+        .step-pill {
+            background: $grey-background-two;
+            width: 70px;
+            height: 5px;
+            margin: 0 3px;
+            border-radius: 3px;
+        }
+
+        .pill-filled {
+            background: $orange-main;
+        }
+    }
+
+    .steps-container {
+        position: relative;
+        margin-top: $space-xxxxlg;
+        width: 100%;
+    }
+
+    .main-type-buttons {
+        display: flex;
+
+        .left,
+        .right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            span {
+                color: $grey-six;
+                font-size: 15px;
+                line-height: 30px;
+            }
+        }
+
+        .left {
+            margin-right: 15px;
+        }
+
+        .right {
+            margin-left: 15px;
+        }
+    }
+}
+
+.step {
+    // position: absolute;
+    // top: 0;
+    // opacity: 0;
+    // transition: opacity 0.5s;
+    width: 100%;
+    background: $white;
+    // z-index: -1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    h2 {
+        font-weight: 600;
+        font-size: 38px;
+        margin-bottom: $space-xxlg;
+    }
+
+    h3 {
+        font-weight: normal;
+        font-size: 28px;
+        margin-bottom: $space-md;
+    }
+}
+
+// .active-step {
+//     opacity: 1;
+//     z-index: 2;
+// }
+
+.row {
+    display: flex;
+    align-items: center;
+    margin-bottom: $space-md;
+
+    & > :first-child {
+        margin-right: 15px;
+    }
+
+    & > :last-child {
+        margin-left: 15px;
+    }
+
+    .left,
+    .right {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.button-actions {
+    margin-top: $space-xxxxlg;
+    margin-bottom: $space-xlg;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .right {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .margined-button {
+        margin-left: auto;
+        margin-right: $space-sm;
+    }
+}
+
+.ideal-partner {
+    width: 710px;
+    height: 120px;
+}

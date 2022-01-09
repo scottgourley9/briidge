@@ -1,15 +1,14 @@
 @import '../../styles/variables';
 
 .layout {
-    margin-top: 90px;
     min-height: calc(100vh - 338px);
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     max-width: $max-screen;
-    margin: auto;
+    margin: 90px auto auto;
 
     @media (max-width: $small-screen) {
-        margin-top: 64px;
+        margin: 64px auto auto;
     }
 }
