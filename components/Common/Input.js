@@ -9,16 +9,17 @@ const Input = ({
     message,
     messageType,
     onFocus,
+    containerClassName,
     ...rest
 }) => {
     return (
-        <div className={styles['input-section']}>
+        <div className={`${styles['input-section']} ${containerClassName || ''}`}>
             <input
                 {...rest}
                 onFocus={onFocus}
                 value={value}
                 onChange={onChange}
-                className={`${size === 'lg' ? styles['large-input'] : ''} ${messageType === 'error' ? styles['error-state'] : ''} ${className}`.trim()}
+                className={`${size === 'lg' ? styles['large-input'] : styles['small-input']} ${messageType === 'error' ? styles['error-state'] : ''} ${className || ''}`.trim()}
                 placeholder={placeholder}
             />
             {message &&

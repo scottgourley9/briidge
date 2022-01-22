@@ -62,6 +62,7 @@ const Step1 = () => {
             <h3>What are you looking for?</h3>
             <div className={styles.row}>
                 <Button
+                    containerClassName={styles['form-field']}
                     onFocus={() => updateOperatorState({
                         needErrorObj: {
                             message: '',
@@ -76,6 +77,7 @@ const Step1 = () => {
                     A loan
                 </Button>
                 <Button
+                    containerClassName={styles['form-field']}
                     onFocus={() => updateOperatorState({
                         needErrorObj: {
                             message: '',
@@ -93,6 +95,7 @@ const Step1 = () => {
             <h3>How much capital do you need?</h3>
             <div className={styles.row}>
                 <Select
+                    containerClassName={styles['form-field']}
                     id="selectCapital"
                     onFocus={() => updateOperatorState({
                         capitalAmountMinErrorObj: {
@@ -132,6 +135,7 @@ const Step1 = () => {
                 />
                 <div className={styles['min-max-other']}>
                     <Input
+                        containerClassName={styles['form-field']}
                         onFocus={() => {
                             updateOperatorState({
                                 capitalAmountMinErrorObj: {
@@ -153,6 +157,7 @@ const Step1 = () => {
                     />
                     <span>-</span>
                     <Input
+                        containerClassName={styles['form-field']}
                         onFocus={() => {
                             updateOperatorState({
                                 capitalAmountMaxErrorObj: {
@@ -182,6 +187,7 @@ const Step1 = () => {
             <h3>What category are you operating in?</h3>
             <div className={styles.row}>
                 <Select
+                    containerClassName={styles['form-field']}
                     onFocus={() => updateOperatorState({
                         operatingCategoryErrorObj: {
                             message: '',
@@ -207,6 +213,7 @@ const Step1 = () => {
                     messageType={operatingCategoryErrorObj.messageType}
                 />
                 <Input
+                    containerClassName={styles['form-field']}
                     onFocus={() => {
                         updateOperatorState({
                             operatingCategoryErrorObj: {
@@ -230,6 +237,7 @@ const Step1 = () => {
             </div>
             <div className={styles['button-actions']}>
                 <Button
+                    containerClassName={styles['back-button-section']}
                     onClick={() => updateOnBoardState({ step: step - 1 })}
                     size="sm"
                 >
@@ -237,9 +245,9 @@ const Step1 = () => {
                 </Button>
                 <div className={styles.right}>
                     <Button
+                        containerClassName={styles['margined-button']}
                         onClick={() => updateOnBoardState({ step: step + 1 })}
                         size="sm"
-                        className={styles['margined-button']}
                     >
                         Finish later
                     </Button>

@@ -16,18 +16,25 @@ const UserCard = ({ user }) => {
 
     return (
         <div className={styles['user-card']}>
-            <div className={styles['card-image']} style={{ height, flex: `0 0 ${width}px` }}>
-                <Image
-                    src={photo}
-                    width={width || 150}
-                    height={height || 165}
-                />
+            <div className={styles['user-card-inner']}>
+                <div className={styles['card-image']} style={{ height, flex: `0 0 ${width}px` }}>
+                    <Image
+                        src={photo}
+                        width={width || 150}
+                        height={height || 165}
+                    />
+                </div>
+                <div className={styles.details}>
+                    <h3 className={styles['card-title']}>{name}</h3>
+                    <h4 className={styles['card-subtitle']}>
+                        <span>{type}&nbsp;</span><span>{need}</span>
+                    </h4>
+                    <div className={styles['large-ui']}>
+                        <p className={styles['card-description']}>{description}</p>
+                    </div>
+                </div>
             </div>
-            <div className={styles.details}>
-                <h3 className={styles['card-title']}>{name}</h3>
-                <h4 className={styles['card-subtitle']}>
-                    <span>{type}&nbsp;</span><span>{need}</span>
-                </h4>
+            <div className={styles['small-ui']}>
                 <p className={styles['card-description']}>{description}</p>
             </div>
         </div>

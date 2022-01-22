@@ -7,6 +7,7 @@ import Investor from './Investor/Investor';
 import Operator from './Operator/Operator';
 import SocialLinks from './SocialLinks/SocialLinks';
 import Button from '../Common/Button';
+import Chevron from '../SVG/Chevron';
 
 import styles from './OnBoard.module.scss';
 
@@ -33,12 +34,21 @@ const OnBoard = ({
 
     return (
         <section className={styles['onboard-page-wrapper']}>
-            <Logo />
-            <div className={styles.pills}>
-                <div className={`${styles['step-pill']} ${step >= 1 ? styles['pill-filled'] : ''}`.trim()} />
-                <div className={`${styles['step-pill']} ${step >= 2 ? styles['pill-filled'] : ''}`.trim()} />
-                <div className={`${styles['step-pill']} ${step >= 3 ? styles['pill-filled'] : ''}`.trim()} />
-                <div className={`${styles['step-pill']} ${step >= 4 ? styles['pill-filled'] : ''}`.trim()} />
+            <div className={styles['onboard-logo']}>
+                <Logo />
+            </div>
+            <div className={styles['chevron-and-pills']}>
+                {step > 1 &&
+                    <div onClick={() => updateOnBoardState({ step: step - 1 })} className={styles['back-svg-container']}>
+                        <Chevron className={styles['onboard-back-chevron']} /> Back
+                    </div>
+                }
+                <div className={styles.pills}>
+                    <div className={`${styles['step-pill']} ${step >= 1 ? styles['pill-filled'] : ''}`.trim()} />
+                    <div className={`${styles['step-pill']} ${step >= 2 ? styles['pill-filled'] : ''}`.trim()} />
+                    <div className={`${styles['step-pill']} ${step >= 3 ? styles['pill-filled'] : ''}`.trim()} />
+                    <div className={`${styles['step-pill']} ${step >= 4 ? styles['pill-filled'] : ''}`.trim()} />
+                </div>
             </div>
             <div className={styles['steps-container']}>
                 {step === 1 &&
@@ -50,6 +60,7 @@ const OnBoard = ({
                         <div className={styles['main-type-buttons']}>
                             <div className={styles.left}>
                                 <Button
+                                    containerClassName={styles['button-container']}
                                     onClick={() => handleTypeClick('investor')}
                                 >
                                     Investor
@@ -59,6 +70,7 @@ const OnBoard = ({
                             </div>
                             <div className={styles.right}>
                                 <Button
+                                    containerClassName={styles['button-container']}
                                     onClick={() => handleTypeClick('operator')}
                                 >
                                     Operator

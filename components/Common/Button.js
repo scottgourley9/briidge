@@ -9,14 +9,15 @@ const Button = ({
     selected,
     children,
     type = 'button',
-    onFocus
+    onFocus,
+    containerClassName
 }) => {
     return (
-        <div className={styles['button-section']}>
+        <div className={`${styles['button-section']} ${containerClassName || ''}`}>
             <button
                 onFocus={onFocus}
                 onClick={onClick}
-                className={`${size === 'lg' ? styles['large-button'] : ''} ${size === 'sm' ? styles['small-button'] : ''} ${selected ? styles['selected-button'] : ''} ${className}`.trim()}
+                className={`${size === 'lg' ? styles['large-button'] : ''} ${size === 'sm' ? styles['small-button'] : ''} ${selected ? styles['selected-button'] : ''} ${className || ''}`.trim()}
                 type={type}
             >
                 {children}

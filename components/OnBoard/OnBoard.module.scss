@@ -6,21 +6,73 @@
     justify-content: center;
     padding: $space-md;
     flex-direction: column;
+    position: relative;
 
-    .pills {
+    .chevron-and-pills {
         display: flex;
-        margin-top: $space-lg;
+        align-items: center;
+        width: 100%;
+        flex-direction: column;
 
-        .step-pill {
-            background: $grey-background-two;
-            width: 70px;
-            height: 5px;
-            margin: 0 3px;
-            border-radius: 3px;
+        .back-svg-container {
+            display: none;
+            width: 100%;
+            justify-content: flex-start;
+            margin-bottom: $space-lg;
+            align-items: center;
+            margin-left: -14px;
+
+            @media (max-width: $small-screen) {
+                display: inherit;
+            }
+
+            .onboard-back-chevron {
+                transform: rotate(90deg);
+                height: 30px;
+                width: 30px;
+            }
         }
 
-        .pill-filled {
-            background: $orange-main;
+        .pills {
+            display: flex;
+            margin-top: $space-lg;
+
+            @media (max-width: $small-screen) {
+                margin-top: 0;
+            }
+
+            @media (max-width: $x-small-screen) {
+                width: 100%;
+            }
+
+            .step-pill {
+                background: $grey-background-two;
+                width: 70px;
+                height: 5px;
+                margin: 0 3px;
+                border-radius: 3px;
+
+                @media (max-width: $x-small-screen) {
+                    width: 100%;
+                }
+            }
+
+            .pill-filled {
+                background: $orange-main;
+            }
+        }
+    }
+
+    @media (max-width: $small-screen) {
+        .onboard-logo {
+            display: none;
+        }
+    }
+
+    @media (max-width: $small-screen-medium) {
+        h2,
+        h3 {
+            text-align: center;
         }
     }
 
@@ -28,20 +80,37 @@
         position: relative;
         margin-top: $space-xxxxlg;
         width: 100%;
+
+        @media (max-width: $small-screen) {
+            margin-top: $space-lg;
+
+            h2 {
+                max-width: 430px;
+            }
+        }
     }
 
     .main-type-buttons {
         display: flex;
+
+        .button-container {
+            width: 100%;
+
+            button {
+                border-radius: 0;
+            }
+        }
 
         .left,
         .right {
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 230px;
 
             span {
                 color: $grey-six;
-                font-size: 15px;
+                font-size: 14px;
                 line-height: 30px;
             }
         }
@@ -52,6 +121,23 @@
 
         .right {
             margin-left: 15px;
+        }
+
+        @media (max-width: $small-screen-medium) {
+            flex-direction: column;
+            width: 100%;
+            margin-bottom: $space-xxxxlg;
+
+            .left,
+            .right {
+                width: 100%;
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .left {
+                margin-bottom: $space-md;
+            }
         }
     }
 }
@@ -70,14 +156,25 @@
 
     h2 {
         font-weight: 600;
-        font-size: 38px;
-        margin-bottom: $space-xxlg;
+        font-size: 30px;
+        margin-bottom: $space-xlg;
+
+        @media (max-width: $small-screen) {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: $space-lg;
+        }
     }
 
     h3 {
         font-weight: normal;
-        font-size: 28px;
+        font-size: 22px;
         margin-bottom: $space-md;
+
+        @media (max-width: $small-screen) {
+            font-size: 18px;
+            margin-bottom: $space-sm;
+        }
     }
 }
 
@@ -86,25 +183,52 @@
 //     z-index: 2;
 // }
 
-.row {
+.row,
+.row-single {
     display: flex;
     align-items: center;
     margin-bottom: $space-md;
+    width: 600px;
 
     & > :first-child {
-        margin-right: 15px;
+        margin-right: 12px;
     }
 
     & > :last-child {
-        margin-left: 15px;
+        margin-left: 12px;
     }
 
     .left,
     .right {
         display: flex;
         flex-direction: column;
+        width: 100%;
+    }
+
+    @media (max-width: $small-screen-medium) {
+        flex-direction: column;
+        width: 100%;
+
+        & > :first-child {
+            margin-right: 0;
+        }
+
+        & > :last-child {
+            margin-left: 0;
+        }
     }
 }
+
+.row-single {
+    & > :first-child {
+        margin-right: 0;
+    }
+
+    & > :last-child {
+        margin-left: 0;
+    }
+}
+
 
 .button-actions {
     margin-top: $space-xxxxlg;
@@ -113,18 +237,69 @@
     display: flex;
     justify-content: space-between;
 
+    @media (max-width: $small-screen-medium) {
+        & * {
+            width: 100%;
+        }
+    }
+
     .right {
         display: flex;
         flex-direction: row;
+
+        @media (max-width: $xx-small-screen) {
+            flex-direction: column;
+        }
     }
 
     .margined-button {
         margin-left: auto;
-        margin-right: $space-sm;
+        margin-right: $space-md;
+
+        @media (max-width: $small-screen-medium) {
+            margin-left: 0;
+            margin-right: $space-sm;
+        }
+    }
+
+    button {
+        width: 200px;
+
+        @media (max-width: $small-screen) {
+            width: 150px;
+        }
+
+        @media (max-width: $small-screen-medium) {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: $small-screen) {
+        margin-top: 0;
+        margin-bottom: 0;
+        justify-content: flex-end;
+
+        .button-section {
+            display: none;
+        }
     }
 }
 
 .ideal-partner {
-    width: 710px;
+    width: 100%;
     height: 120px;
+}
+
+.form-field {
+    width: 100%;
+
+    button {
+        border-radius: 0;
+    }
+}
+
+.back-button-section {
+    @media (max-width: $small-screen) {
+        display: none;
+    }
 }

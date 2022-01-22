@@ -1,0 +1,38 @@
+@import '../../styles/variables';
+
+@-webkit-keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.small-spinner {
+    width: 30px !important;
+    height: 30px !important;
+    border: 2px solid $white;
+    border-top: 2px solid transparent;
+}
+
+.spinner {
+    border-radius: 50%;
+    -webkit-animation-name: spin;
+    animation-name: spin;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    margin: auto;
+}

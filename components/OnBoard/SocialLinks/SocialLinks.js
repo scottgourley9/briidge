@@ -10,6 +10,8 @@ import {
 
 import Input from '../../Common/Input';
 import Button from '../../Common/Button';
+import Spinner from '../../Common/Spinner';
+import Alert from '../../Common/Alert';
 
 import FacebookCircle from '../../SVG/FacebookCircle';
 import LinkedIn from '../../SVG/LinkedIn';
@@ -20,7 +22,7 @@ import styles from './SocialLinks.module.scss';
 const SocialLinks = ({ user }) => {
     const [onBoardState, updateOnBoardState] = useOnBoardState();
 
-    const { onSaveUserData, isLoading: saveUserDataLoading } = useSaveUserData();
+    const { onSaveUserData, isLoading: saveUserDataLoading, isError: saveUserDataIsError } = useSaveUserData();
 
     const {
         type,
@@ -84,21 +86,34 @@ const SocialLinks = ({ user }) => {
                 </div>
             </div>
             <div className={styles['button-actions']}>
-                <Button size="sm" onClick={() => updateOnBoardState({ step: step - 1 })}>
+                <Button
+                    containerClassName={styles['back-button-section']}
+                    size="sm"
+                    onClick={() => updateOnBoardState({ step: step - 1 })}
+                >
                     Back
                 </Button>
                 {saveUserDataLoading
                     ?
-                    <Button size="sm" selected={true} onClick={() => {}}>
-                        Entering the SITE!!!
+                    <Button className={styles['enter-site']} size="sm" selected={true} onClick={() => {}}>
+                        <Spinner />
                     </Button>
                     :
-                    <Button size="sm" selected={true} onClick={handleEnterSiteClick}>
+                    <Button
+                        className={styles['enter-site']}
+                        size="sm"
+                        selected={true}
+                        onClick={handleEnterSiteClick}
+                    >
                         Enter Site
                     </Button>
                 }
-
             </div>
+            {saveUserDataIsError &&
+                <Alert>
+                    We apologize, but we are unable to create your profile at this time, please try again later.
+                </Alert>
+            }
         </section>
     );
 }

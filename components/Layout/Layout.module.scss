@@ -1,14 +1,15 @@
 @import '../../styles/variables';
 
 .layout {
-    min-height: calc(100vh - 338px);
+    min-height: calc(100vh - 390px);
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    max-width: $max-screen;
+    max-width: $large-screen;
     margin: 90px auto auto;
 
     @media (max-width: $small-screen) {
         margin: 64px auto auto;
+        min-height: calc(100vh - 364px);
     }
 }

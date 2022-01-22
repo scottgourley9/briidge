@@ -9,15 +9,15 @@ export const getFakeUserData = () => {
             width: 150,
             height: 176
         },
-        // {
-        //     photo: '/userCard2.png',
-        //     name: 'Preston Doyle',
-        //     type: 'Opertator',
-        //     need: '$600k-$1m needed',
-        //     description: 'I’m looking for financing or a capital partner to finance 2-3 Jimmy John’s franchises. Preferred location: Oklahoma City, OK (willing to move)',
-        //     width: 213,
-        //     height: 239
-        // },
+        {
+            photo: '/userCard2.png',
+            name: 'Preston Doyle',
+            type: 'Opertator',
+            need: '$600k-$1m needed',
+            description: 'I’m looking for financing or a capital partner to finance 2-3 Jimmy John’s franchises. Preferred location: Oklahoma City, OK (willing to move)',
+            width: 150,
+            height: 200
+        },
         {
             photo: '/userCard3.png',
             name: 'Dante Porter',

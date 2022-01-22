@@ -65,6 +65,7 @@ const Step2 = () => {
                 <div className={styles.left}>
                     <h3>Preferred Location</h3>
                     <Select
+                        containerClassName={styles['form-field']}
                         onFocus={() => updateOperatorState({
                             preferredLocationErrorObj: {
                                 message: '',
@@ -84,6 +85,7 @@ const Step2 = () => {
                 <div className={styles.right}>
                     <h3>Investment type</h3>
                     <Select
+                        containerClassName={styles['form-field']}
                         onFocus={() => updateOperatorState({
                             investmentTypeErrorObj: {
                                 message: '',
@@ -107,6 +109,7 @@ const Step2 = () => {
             <h3>Timeframe</h3>
             <div className={styles.row}>
                 <Select
+                    containerClassName={styles['form-field']}
                     onFocus={() => updateOperatorState({
                         timeframeErrorObj: {
                             message: '',
@@ -130,6 +133,7 @@ const Step2 = () => {
                     messageType={timeframeErrorObj.messageType}
                 />
                 <Input
+                    containerClassName={styles['form-field']}
                     onFocus={() => {
                         updateOperatorState({
                             timeframeErrorObj: {
@@ -152,8 +156,9 @@ const Step2 = () => {
                 />
             </div>
             <h3>Describe your ideal investor</h3>
-            <div className={styles.row}>
+            <div className={styles['row-single']}>
                 <TextArea
+                    containerClassName={styles['form-field']}
                     onFocus={() => updateOperatorState({
                         idealInvestorDescriptionErrorObj: {
                             message: '',
@@ -170,6 +175,7 @@ const Step2 = () => {
             </div>
             <div className={styles['button-actions']}>
                 <Button
+                    containerClassName={styles['back-button-section']}
                     onClick={() => updateOnBoardState({ step: step - 1 })}
                     size="sm"
                 >
@@ -179,7 +185,7 @@ const Step2 = () => {
                     <Button
                         onClick={() => updateOnBoardState({ step: step + 1 })}
                         size="sm"
-                        className={styles['margined-button']}
+                        containerClassName={styles['margined-button']}
                     >
                         Finish later
                     </Button>

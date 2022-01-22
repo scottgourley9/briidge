@@ -11,12 +11,13 @@ const Select = ({
     messageType,
     size = 'lg',
     onFocus,
+    containerClassName,
     ...rest
 }) => {
     return (
-        <div className={styles['select-wrapper']}>
+        <div className={`${styles['select-wrapper']} ${containerClassName || ''}`}>
             <Chevron className={styles['select-chevron']}/>
-            <select {...rest} onFocus={onFocus} onChange={onChange} className={`${size === 'lg' ? styles['large-select'] : ''} ${messageType === 'error' ? styles['error-state'] : ''} ${className}`.trim()}>
+            <select {...rest} onFocus={onFocus} onChange={onChange} className={`${size === 'lg' ? styles['large-select'] : styles['small-select']} ${messageType === 'error' ? styles['error-state'] : ''} ${className || ''}`.trim()}>
                 {placeholder &&
                     <option value="" disabled selected>{placeholder}</option>
                 }

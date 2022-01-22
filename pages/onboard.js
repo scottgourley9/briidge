@@ -12,7 +12,17 @@ export const getServerSideProps = async ({ req }) => {
     try {
         const user = await getUserFromRequestData(req);
 
-        if (user?.registered) {
+        if (!user) {
+            // not logged in
+            return {
+                redirect: {
+                    destination: '/api/auth/login',
+                    permanent: false
+                }
+            }
+        }
+
+        if (user && user?.registered) {
             // has registered take to profile page
             return {
                 redirect: {

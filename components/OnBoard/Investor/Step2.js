@@ -65,6 +65,7 @@ const Step2 = () => {
                 <div className={styles.left}>
                     <h3>Preferred Location</h3>
                     <Select
+                        containerClassName={styles['form-field']}
                         onFocus={() => updateInvestorState({
                             preferredLocationErrorObj: {
                                 message: '',
@@ -84,6 +85,7 @@ const Step2 = () => {
                 <div className={styles.right}>
                     <h3>Investment type</h3>
                     <Select
+                        containerClassName={styles['form-field']}
                         onFocus={() => updateInvestorState({
                             investmentTypeErrorObj: {
                                 message: '',
@@ -107,6 +109,7 @@ const Step2 = () => {
             <h3>Investment timeframe</h3>
             <div className={styles.row}>
                 <Select
+                    containerClassName={styles['form-field']}
                     onFocus={() => updateInvestorState({
                         investmentTimeframeErrorObj: {
                             message: '',
@@ -130,6 +133,7 @@ const Step2 = () => {
                     messageType={investmentTimeframeErrorObj.messageType}
                 />
                 <Input
+                    containerClassName={styles['form-field']}
                     onFocus={() => {
                         updateInvestorState({
                             investmentTimeframeErrorObj: {
@@ -152,8 +156,9 @@ const Step2 = () => {
                 />
             </div>
             <h3>Describe your ideal operator</h3>
-            <div className={styles.row}>
+            <div className={styles['row-single']}>
                 <TextArea
+                    containerClassName={`${styles['form-field']} ${styles['text-area-field-section']}`.trim()}
                     onFocus={() => updateInvestorState({
                         idealOperatorDescriptionErrorObj: {
                             message: '',
@@ -170,6 +175,7 @@ const Step2 = () => {
             </div>
             <div className={styles['button-actions']}>
                 <Button
+                    containerClassName={styles['back-button-section']}
                     onClick={() => updateOnBoardState({ step: step - 1 })}
                     size="sm"
                 >
@@ -179,7 +185,7 @@ const Step2 = () => {
                     <Button
                         onClick={() => updateOnBoardState({ step: step + 1 })}
                         size="sm"
-                        className={styles['margined-button']}
+                        containerClassName={styles['margined-button']}
                     >
                         Finish later
                     </Button>

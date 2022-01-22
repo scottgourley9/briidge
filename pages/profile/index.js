@@ -15,8 +15,8 @@ export const getServerSideProps = async ({ req }) => {
             // not logged in
             return {
                 redirect: {
-                    destination: '/',
-                    permanent: false,
+                    destination: '/api/auth/login',
+                    permanent: false
                 }
             }
         }

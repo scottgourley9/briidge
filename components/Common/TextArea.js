@@ -8,15 +8,16 @@ const TextArea = ({
     size = 'lg',
     message,
     messageType,
-    onFocus
+    onFocus,
+    containerClassName
 }) => {
     return (
-        <div className={styles['textarea-section']}>
+        <div className={`${styles['textarea-section']} ${containerClassName || ''}`}>
             <textarea
                 onFocus={onFocus}
                 value={value}
                 onChange={onChange}
-                className={`${size === 'lg' ? styles['large-textarea'] : ''} ${messageType === 'error' ? styles['error-state'] : ''} ${className}`.trim()}
+                className={`${size === 'lg' ? styles['large-textarea'] : styles['small-textarea']} ${messageType === 'error' ? styles['error-state'] : ''} ${className || ''}`.trim()}
                 placeholder={placeholder}
             />
             {message &&

@@ -64,6 +64,7 @@ const Step1 = () => {
             <h3>What are you looking for?</h3>
             <div className={styles.row}>
                 <Button
+                    containerClassName={styles['form-field']}
                     onFocus={() => updateInvestorState({
                         needErrorObj: {
                             message: '',
@@ -80,6 +81,7 @@ const Step1 = () => {
                     An operating partner
                 </Button>
                 <Button
+                    containerClassName={styles['form-field']}
                     onFocus={() => updateInvestorState({
                         needErrorObj: {
                             message: '',
@@ -99,6 +101,7 @@ const Step1 = () => {
             <h3>How much do you want to invest?</h3>
             <div className={styles.row}>
                 <Select
+                    containerClassName={styles['form-field']}
                     id="selectInvestment"
                     onFocus={() => updateInvestorState({
                         investmentAmountMinErrorObj: {
@@ -138,6 +141,7 @@ const Step1 = () => {
                 />
                 <div className={styles['min-max-other']}>
                     <Input
+                        containerClassName={styles['form-field']}
                         onFocus={() => {
                             updateInvestorState({
                                 investmentAmountMinErrorObj: {
@@ -159,6 +163,7 @@ const Step1 = () => {
                     />
                     <span>-</span>
                     <Input
+                        containerClassName={styles['form-field']}
                         onFocus={() => {
                             updateInvestorState({
                                 investmentAmountMaxErrorObj: {
@@ -188,6 +193,7 @@ const Step1 = () => {
             <h3>Preferred Investment category</h3>
             <div className={styles.row}>
                 <Select
+                    containerClassName={styles['form-field']}
                     onFocus={() => updateInvestorState({
                         investmentCategoryErrorObj: {
                             message: '',
@@ -213,6 +219,7 @@ const Step1 = () => {
                     messageType={investmentCategoryErrorObj.messageType}
                 />
                 <Input
+                    containerClassName={styles['form-field']}
                     onFocus={() => {
                         updateInvestorState({
                             investmentCategoryErrorObj: {
@@ -236,6 +243,7 @@ const Step1 = () => {
             </div>
             <div className={styles['button-actions']}>
                 <Button
+                    containerClassName={styles['back-button-section']}
                     onClick={() => updateOnBoardState({ step: step - 1 })}
                     size="sm"
                 >
@@ -245,7 +253,7 @@ const Step1 = () => {
                     <Button
                         onClick={() => updateOnBoardState({ step: step + 1 })}
                         size="sm"
-                        className={styles['margined-button']}
+                        containerClassName={styles['margined-button']}
                     >
                         Finish later
                     </Button>

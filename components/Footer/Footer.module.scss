@@ -8,6 +8,7 @@
     flex-direction: column;
     color: $white;
     background: $black-two;
+    min-height: 300px;
 
     @media (max-width: $small-screen) {
         padding: $space-xs $space-md;

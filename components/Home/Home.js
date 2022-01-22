@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Slider from 'react-slick';
 
 import Button from '../Common/Button';
+import Spinner from '../Common/Spinner';
 import UserCard from './UserCard';
 import Connecting from '../SVG/Connecting';
 import LineUp from '../SVG/LineUp';
@@ -16,6 +18,8 @@ import { getFakeUserData } from './fakeUserData';
 import styles from './Home.module.scss';
 
 const Home = () => {
+    const [showSpinners, updateShowSpinners] = useState(false);
+
     const fakeUserData = getFakeUserData();
 
     const settings = {
@@ -36,11 +40,18 @@ const Home = () => {
                         <h2 className={styles.title}>FRANCHISE OPERATORS & INVESTORS</h2>
                         <p className={styles.subtitle}>Opening the door to franchise ownership.</p>
                         <Button
-                            onClick={() => window.location.href = '/api/auth/login?returnTo=/profile'}
+                            onClick={() => {
+                                updateShowSpinners(true);
+                                window.location.href = '/api/auth/login?returnTo=/profile';
+                            }}
                             size="sm"
                             selected={true}
                         >
-                            View Opportunities
+                            {showSpinners ?
+                                <Spinner />
+                                :
+                                <>View Opportunities</>
+                            }
                         </Button>
                     </div>
                 </div>
@@ -48,8 +59,8 @@ const Home = () => {
                     <div className={styles['top-image']}>
                         <Image
                             src="/mancoffee.png"
-                            width={500}
-                            height={500}
+                            width={450}
+                            height={450}
                             quality={75}
                         />
                         <LineUp />
@@ -71,12 +82,19 @@ const Home = () => {
                 })}
             </Slider>
             <Button
-                onClick={() => window.location.href = '/api/auth/login?returnTo=/profile'}
+                onClick={() => {
+                    updateShowSpinners(true);
+                    window.location.href = '/api/auth/login?returnTo=/profile';
+                }}
                 className={styles['join-now']}
                 size="sm"
                 selected={true}
             >
-                Join Now to See More
+                {showSpinners ?
+                    <Spinner />
+                    :
+                    <>Join Now to See More</>
+                }
             </Button>
             <div className={styles['the-easy-way-section']}>
                 <div className={styles.left}>
@@ -216,12 +234,19 @@ const Home = () => {
                 </div>
             </Slider>
             <Button
-                onClick={() => window.location.href = '/api/auth/login?returnTo=/profile'}
-                className={styles['opportunities-now']}
+                onClick={() => {
+                    updateShowSpinners(true);
+                    window.location.href = '/api/auth/login?returnTo=/profile';
+                }}
                 size="sm"
                 selected={true}
+                className={styles['opportunities-now']}
             >
-                View Opportunities Now
+                {showSpinners ?
+                    <Spinner />
+                    :
+                    <>View Opportunities</>
+                }
             </Button>
         </section>
     )
