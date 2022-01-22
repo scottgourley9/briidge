@@ -1,37 +1,32 @@
 import { Client } from 'pg';
 
-export const updateUserById = async (existingUserData, newData) => {
-    let dbResponse = [];
-
+export const updateUserById = async data => {
     const {
-        user: {
-            email,
-            first_name,
-            last_name,
-            picture
-        },
-        onBoardState: {
-            type,
-            investor,
-            operator
-        }
-    } = newData || {};
-
-    const facebook = type === 'investor' ? investor?.socialMediaLinks?.facebook : operator?.socialMediaLinks?.facebook;
-    const linkedin = type === 'investor' ? investor?.socialMediaLinks?.linkedin : operator?.socialMediaLinks?.linkedin;
-    const website = type === 'investor' ? investor?.socialMediaLinks?.website : operator?.socialMediaLinks?.website;
+        email,
+        first_name,
+        last_name,
+        picture,
+        type,
+        investor,
+        operator,
+        id,
+        facebook,
+        linkedin,
+        website
+    } = data || {};
 
     try {
         const client = new Client();
         await client.connect();
-        const text = 'UPDATE users SET investor = $1, operator = $2, facebook = $3, linkedin = $4, website = $5 WHERE id = $6 RETURNING id';
-        const values = [existingUserData?.investor || type === 'investor', existingUserData?.operator || type === 'operator', facebook, linkedin, website, existingUserData?.id];
+        const text = 'UPDATE users SET email = $1, first_name = $2, last_name = $3, investor = $4, operator = $5, facebook = $6, linkedin = $7, website = $8 WHERE id = $9 RETURNING id';
+        const values = [email, first_name, last_name, investor || type === 'investor', operator || type === 'operator', facebook, linkedin, website, id];
         const res = await client.query(text, values);
-        dbResponse = res?.rows?.[0];
+        const dbResponse = res?.rows?.[0];
         await client.end();
+
+        return dbResponse || {};
     } catch (error) {
         console.log('error updating user: ', error);
+        throw error;
     }
-
-    return dbResponse;
 };

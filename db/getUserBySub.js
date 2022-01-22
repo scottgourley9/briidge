@@ -1,13 +1,13 @@
 import { Client } from 'pg';
 
-export const getUserByEmail = async email => {
+export const getUserBySub = async sub => {
     let dbResponse = [];
 
     try {
         const client = new Client();
         await client.connect();
-        const text = 'SELECT * from users where email = $1';
-        const values = [email];
+        const text = 'SELECT * from users where sub = $1';
+        const values = [sub];
         const res = await client.query(text, values);
         dbResponse = res?.rows?.[0];
         await client.end();

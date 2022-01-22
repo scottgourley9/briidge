@@ -9,6 +9,7 @@ import Footer from '../components/Footer/Footer';
 import '../styles/globals.scss';
 
 const App = ({ Component, pageProps }) => {
+    console.log(pageProps);
     return (
         <Fragment>
             <Head>

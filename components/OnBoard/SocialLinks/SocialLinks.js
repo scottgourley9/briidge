@@ -39,7 +39,6 @@ const SocialLinks = ({ user }) => {
     } = operatorState || {};
 
     const handleEnterSiteClick = () => {
-        console.log('Save data and Enter Site');
         onSaveUserData();
     }
 

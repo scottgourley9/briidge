@@ -8,7 +8,8 @@ export const addUser = async body => {
             email,
             first_name,
             last_name,
-            picture
+            picture,
+            sub
         },
         onBoardState: {
             type,
@@ -21,8 +22,8 @@ export const addUser = async body => {
     const linkedin = type === 'investor' ? investor?.socialMediaLinks?.linkedin : operator?.socialMediaLinks?.linkedin;
     const website = type === 'investor' ? investor?.socialMediaLinks?.website : operator?.socialMediaLinks?.website;
 
-    const text = 'INSERT INTO users(email, first_name, last_name, investor, operator, facebook, linkedin, website, picture) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id'
-    const values = [email, first_name, last_name, type === 'investor', type === 'operator', facebook, linkedin, website, picture];
+    const text = 'INSERT INTO users(email, first_name, last_name, investor, operator, facebook, linkedin, website, picture, sub) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id'
+    const values = [email, first_name, last_name, type === 'investor', type === 'operator', facebook, linkedin, website, picture, sub];
 
     try {
         const client = new Client();

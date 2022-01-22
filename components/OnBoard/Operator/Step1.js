@@ -115,16 +115,16 @@ const Step1 = () => {
                     value={capitalSelected ? `${capitalAmountMin}-${capitalAmountMax}` : ''}
                     placeholder="Capital Amount"
                     options={[
-                        { value: '$0-$50,000', description: '$0-50,000' },
-                        { value: '$50,000-$100,000', description: '$50,000-100,000' },
-                        { value: '$100,000-$150,000', description: '$100,000-150,000' },
-                        { value: '$150,000-$200,000', description: '$150,000-200,000' },
-                        { value: '$200,000-$250,000', description: '$200,000-250,000' },
-                        { value: '$250,000-$300,000', description: '$250,000-300,000' },
-                        { value: '$300,000-$350,000', description: '$300,000-350,000' },
-                        { value: '$350,000-$400,000', description: '$350,000-400,000' },
-                        { value: '$400,000-$450,000', description: '$400,000-450,000' },
-                        { value: '$450,000-$500,000', description: '$450,000-500,000' },
+                        { value: '$0-$50,000', description: '$0-$50,000' },
+                        { value: '$50,000-$100,000', description: '$50,000-$100,000' },
+                        { value: '$100,000-$150,000', description: '$100,000-$150,000' },
+                        { value: '$150,000-$200,000', description: '$150,000-$200,000' },
+                        { value: '$200,000-$250,000', description: '$200,000-$250,000' },
+                        { value: '$250,000-$300,000', description: '$250,000-$300,000' },
+                        { value: '$300,000-$350,000', description: '$300,000-$350,000' },
+                        { value: '$350,000-$400,000', description: '$350,000-$400,000' },
+                        { value: '$400,000-$450,000', description: '$400,000-$450,000' },
+                        { value: '$450,000-$500,000', description: '$450,000-$500,000' },
                         { value: '$500,000+-No Max', description: '$500,000+' }
                     ]}
                     message={capitalAmountMinErrorObj.message || capitalAmountMaxErrorObj.message}

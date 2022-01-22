@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 
 .nav-wrapper {
-    position: fixed;
+    position: absolute;
     background: $white;
     width: 100%;
     top: 0;
@@ -9,15 +9,24 @@
     z-index: 2;
     transition: top 0.4s;
 }
-.move-nav-up {
+.nav-fixed {
+    position: fixed;
+}
+.nav-up {
     top: -100px;
+}
+.nav-down {
+    top: 0px;
+}
+.on-page {
+    color: $orange-main;
 }
 .nav-list-wrapper {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    transition: all 0.5s;
+    transition: box-shadow 0.5s;
     width: 100%;
     margin: 0 auto;
     box-shadow: none;
@@ -25,9 +34,9 @@
     height: 90px;
 
     li {
-        margin-left: 80px;
+        margin-left: 40px;
         transition: color 0.25s;
-        font-size: 24px;
+        font-size: 16px;
 
         &:hover {
             color: $orange-main;
@@ -52,7 +61,7 @@
 
     .sign-up {
         margin: 0;
-        font-size: 24px;
+        font-size: 16px;
     }
 
     @media (max-width: $small-screen) {

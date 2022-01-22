@@ -7,18 +7,19 @@ const Select = ({
     placeholder,
     options,
     onChange,
-    defaultValue,
     message,
     messageType,
     size = 'lg',
     onFocus,
-    value
+    ...rest
 }) => {
     return (
         <div className={styles['select-wrapper']}>
             <Chevron className={styles['select-chevron']}/>
-            <select value={value} onFocus={onFocus} onChange={onChange} defaultValue={defaultValue} className={`${size === 'lg' ? styles['large-select'] : ''} ${messageType === 'error' ? styles['error-state'] : ''} ${className}`.trim()}>
-                <option value="" disabled selected>{placeholder}</option>
+            <select {...rest} onFocus={onFocus} onChange={onChange} className={`${size === 'lg' ? styles['large-select'] : ''} ${messageType === 'error' ? styles['error-state'] : ''} ${className}`.trim()}>
+                {placeholder &&
+                    <option value="" disabled selected>{placeholder}</option>
+                }
                 {options.map((option, i) => {
                     return (
                         <option key={i} value={option.value}>{option.description}</option>

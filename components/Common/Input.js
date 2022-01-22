@@ -8,11 +8,13 @@ const Input = ({
     size = 'lg',
     message,
     messageType,
-    onFocus
+    onFocus,
+    ...rest
 }) => {
     return (
         <div className={styles['input-section']}>
             <input
+                {...rest}
                 onFocus={onFocus}
                 value={value}
                 onChange={onChange}

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Slider from 'react-slick';
 
-import { Button } from '../shared/Button/Button';
+import Button from '../Common/Button';
 import UserCard from './UserCard';
 import Connecting from '../SVG/Connecting';
 import LineUp from '../SVG/LineUp';
@@ -35,7 +35,11 @@ const Home = () => {
                     <div className={styles.push}>
                         <h2 className={styles.title}>FRANCHISE OPERATORS & INVESTORS</h2>
                         <p className={styles.subtitle}>Opening the door to franchise ownership.</p>
-                        <Button>
+                        <Button
+                            onClick={() => window.location.href = '/api/auth/login?returnTo=/profile'}
+                            size="sm"
+                            selected={true}
+                        >
                             View Opportunities
                         </Button>
                     </div>
@@ -66,7 +70,12 @@ const Home = () => {
                     return <UserCard key={i} user={user} />
                 })}
             </Slider>
-            <Button className={styles['join-now']}>
+            <Button
+                onClick={() => window.location.href = '/api/auth/login?returnTo=/profile'}
+                className={styles['join-now']}
+                size="sm"
+                selected={true}
+            >
                 Join Now to See More
             </Button>
             <div className={styles['the-easy-way-section']}>
@@ -159,7 +168,59 @@ const Home = () => {
                     </p>
                 </div>
             </div>
-            <Button className={styles['opportunities-now']}>
+            <Slider className={styles['who-slider-container']} {...settings}>
+                <div className={styles['who-card-slider']}>
+                    <div className={styles['who-title-section']}>
+                        <div className={styles.symbol}>
+                            <Circle />
+                        </div>
+                        <h3 className={styles.title}>
+                            Investor
+                        </h3>
+                    </div>
+                    <p className={styles.details}>
+                        Investors are looking for new opportunities for their money.
+                    </p>
+                    <p className={styles.details}>
+                        They need a great operating partner to successfully handle the day-to-day management and take accountability for the operations.
+                    </p>
+                </div>
+                <div className={styles['who-card-slider']}>
+                    <div className={styles['who-title-section']}>
+                        <div className={styles.symbol}>
+                            <Square />
+                        </div>
+                        <h3 className={styles.title}>
+                            Operator
+                        </h3>
+                    </div>
+                    <p className={styles.details}>
+                        Aspiring business owners/operators have very limited options for financing. A private capital partner provides a new, alternative option to financing your franchise.
+                    </p>
+                </div>
+                <div className={styles['who-card-slider']}>
+                    <div className={styles['who-title-section']}>
+                        <div className={styles.symbol}>
+                            <Hexagon />
+                        </div>
+                        <h3 className={styles.title}>
+                            Franchisor
+                        </h3>
+                    </div>
+                    <p className={styles.details}>
+                        Franchisors are always looking to grow and expand their brand.
+                    </p>
+                    <p className={styles.details}>
+                        Briidge connects the operators and investors, opening the door for both franchisor and franchisee.
+                    </p>
+                </div>
+            </Slider>
+            <Button
+                onClick={() => window.location.href = '/api/auth/login?returnTo=/profile'}
+                className={styles['opportunities-now']}
+                size="sm"
+                selected={true}
+            >
                 View Opportunities Now
             </Button>
         </section>

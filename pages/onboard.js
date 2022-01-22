@@ -12,6 +12,16 @@ export const getServerSideProps = async ({ req }) => {
     try {
         const user = await getUserFromRequestData(req);
 
+        if (user?.registered) {
+            // has registered take to profile page
+            return {
+                redirect: {
+                    destination: `/profile/${user?.id}`,
+                    permanent: false,
+                }
+            }
+        }
+
         return {
             props: { user: JSON.parse(JSON.stringify(user)) }
         };

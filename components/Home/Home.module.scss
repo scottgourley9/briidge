@@ -6,6 +6,10 @@
     flex-direction: column;
     align-items: center;
 
+    @media (max-width: $small-screen) {
+        padding: $space-md;
+    }
+
     .title {
         font-size: 60px;
         font-weight: 600;
@@ -49,7 +53,17 @@
 
                 @media (max-width: $small-screen) {
                     margin-left: 0;
-                    width: 72vw;
+                    width: 400px;
+                }
+
+                @media (max-width: $x-small-screen) {
+                    margin-left: 0;
+                    width: 300px;
+                }
+
+                @media (max-width: $xx-small-screen) {
+                    margin-left: 0;
+                    width: 280px;
                 }
             }
 
@@ -68,7 +82,15 @@
 
                     @media (max-width: $small-screen) {
                         text-align: center;
-                        width: 100%;
+                        width: 270px;
+                        font-size: 34px;
+                        line-height: 40px;
+                        margin-top: $space-lg;
+                    }
+
+                    @media (max-width: $x-small-screen) {
+                        text-align: center;
+                        width: 270px;
                         font-size: 30px;
                         line-height: 34px;
                         margin-top: $space-xs;
@@ -109,7 +131,7 @@
 
                 @media (max-width: $small-screen) {
                     margin-right: inherit;
-                    width: 100%;
+                    width: calc(100% - 24px);
                     height: inherit;
                 }
 
@@ -213,6 +235,7 @@
 
                     @media (max-width: $small-screen) {
                         font-size: 20px;
+                        margin-bottom: $space-xs;
                     }
                 }
 
@@ -227,6 +250,7 @@
                     @media (max-width: $small-screen) {
                         font-size: 16px;
                         flex-wrap: wrap;
+                        margin-bottom: $space-xs;
                     }
                 }
 
@@ -257,7 +281,7 @@
                 @media (max-width: $small-screen) {
                     display: flex;
                     justify-content: center;
-                    margin-bottom: $space-sm;
+                    margin-bottom: $space-xs;
                 }
             }
         }
@@ -270,7 +294,22 @@
 
         :global {
             .slick-list {
+                display: flex;
+                overflow: visible;
                 width: 100%;
+
+                .slick-track {
+                    display: flex;
+                    align-items: center;
+
+                    .slick-slide {
+                        display: flex;
+
+                        & > div {
+                            display: flex;
+                        }
+                    }
+                }
             }
         }
 
@@ -279,24 +318,28 @@
         }
 
         .user-card {
-            width: 100%;
-            flex-direction: column;
+            flex-direction: row;
             background: $grey-background;
             padding: $space-lg;
             display: flex;
-            justify-content: space-around;
+            justify-content: flex-start;
+            margin: 0 $space-xs 0;
+
+            @media (max-width: $x-small-screen + 40px) {
+                flex-direction: column;
+            }
 
             .details {
                 .card-title {
                     margin: 0;
                     font-size: 20px;
-                    margin-bottom: $space-sm;
+                    margin-bottom: $space-xs;
                 }
 
                 .card-subtitle {
                     margin: 0;
                     font-size: 16px;
-                    margin-bottom: $space-md;
+                    margin-bottom: $space-xs;
                     display: flex;
                     align-items: center;
                     justify-content: flex-start;
@@ -321,13 +364,18 @@
             .card-image {
                 display: flex;
                 justify-content: center;
-                margin-bottom: $space-sm;
+                margin-right: $space-md;
+
+                @media (max-width: $x-small-screen + 40px) {
+                    margin-bottom: $space-md;
+                    margin-right: 0;
+                }
             }
         }
     }
 
     .join-now {
-        margin-bottom: 120px;
+        margin-bottom: 72px;
     }
 
     .the-easy-way-section {
@@ -416,7 +464,7 @@
 
         @media (max-width: $small-screen) {
             flex-wrap: wrap;
-            margin-top: $space-md;
+            margin-top: 0;
             margin-bottom: 80px;
         }
 
@@ -444,6 +492,10 @@
                 line-height: 34px;
                 max-width: 310px;
 
+                @media (max-width: $small-screen) {
+                    margin-top: $space-xxxlg;
+                }
+
                 .colored-blue {
                     color: $blue-three;
                 }
@@ -465,6 +517,10 @@
                     margin-bottom: 24px;
                     display: flex;
                     align-items: flex-start;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
 
                     .marker {
                         min-width: 18px;
@@ -506,6 +562,79 @@
         }
     }
 
+    .who-slider-container {
+        display: none;
+        width: 100%;
+        margin-bottom: $space-xxxxlg;
+
+        @media (max-width: $small-screen) {
+            display: inherit;
+        }
+
+        :global {
+            .slick-list {
+                display: flex;
+                overflow: visible;
+                width: 100%;
+
+                .slick-track {
+                    display: flex;
+                    align-items: center;
+
+                    .slick-slide {
+                        display: flex;
+
+                        & > div {
+                            display: flex;
+                        }
+                    }
+                }
+            }
+        }
+
+        .who-card-slider {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            background: $grey-background;
+            width: 100%;
+            margin: 0 $space-xs 0;
+
+            .who-title-section {
+                display: flex;
+
+                @media (max-width: $x-small-screen) {
+                    flex-direction: column;
+                }
+            }
+
+            .symbol {
+                margin-bottom: $space-md;
+                margin-right: $space-sm;
+
+                @media (max-width: $x-small-screen) {
+                    margin-right: 0;
+                }
+            }
+
+            .title {
+                margin: 0 0 $space-lg;
+                font-size: 30px;
+                line-height: inherit;
+            }
+
+            .details {
+                font-size: 14px;
+                line-height: 25px;
+                margin-bottom: $space-xs;
+
+                &:first-of-type {
+                    margin-bottom: $space-md;
+                }
+            }
+        }
+    }
+
     .who {
         width: 100%;
         max-width: 1160px;
@@ -515,60 +644,35 @@
         margin-bottom: 154px;
 
         @media (max-width: $small-screen) {
-            flex-direction: column;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 72px;
+            display: none;
+        }
+    }
+
+    .who-card {
+        padding: 36px;
+        display: flex;
+        flex-direction: column;
+        background: $grey-background;
+        width: 33%;
+
+        &:nth-child(even) {
+            margin: 0 $space-sm;
         }
 
-        .who-card {
-            padding: 36px;
-            display: flex;
-            flex-direction: column;
-            background: $grey-background;
-            width: 33%;
+        .symbol {
+            margin-bottom: 48px;
+        }
 
-            @media (max-width: $small-screen) {
-                width: 100%;
-            }
+        .title {
+            margin: 0 0 40px;
+            font-size: 38px;
+            line-height: 25px;
+        }
 
-            &:nth-child(even) {
-                margin: 0 $space-sm;
-
-                @media (max-width: $small-screen) {
-                    margin: $space-sm 0;
-                }
-            }
-
-            .symbol {
-                margin-bottom: 48px;
-
-                @media (max-width: $small-screen) {
-                    margin-bottom: 32px;
-                }
-            }
-
-            .title {
-                margin: 0 0 40px;
-                font-size: 38px;
-                line-height: 25px;
-
-                @media (max-width: $small-screen) {
-                    font-size: 30px;
-                    margin: 0 0 24px;
-                }
-            }
-
-            .details {
-                font-size: 16px;
-                line-height: 25px;
-                margin-bottom: 40px;
-
-                @media (max-width: $small-screen) {
-                    font-size: 14px;
-                    margin-bottom: 8px;
-                }
-            }
+        .details {
+            font-size: 16px;
+            line-height: 25px;
+            margin-bottom: 40px;
         }
     }
 

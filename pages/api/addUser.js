@@ -1,21 +1,25 @@
 import { addUser } from '../../db/addUser';
 import { addInvestor } from '../../db/addInvestor';
 import { addOperator } from '../../db/addOperator';
-import { getUserByEmail } from '../../db/getUserByEmail';
+import { getUserBySub } from '../../db/getUserBySub';
 import { getInvestorByUserId } from '../../db/getInvestorByUserId';
 import { getOperatorByUserId } from '../../db/getOperatorByUserId';
 import { updateUserById } from '../../db/updateUserById';
-import { updateInvestorByUserId } from '../../db/updateInvestorByUserId';
-import { updateOperatorByUserId } from '../../db/updateOperatorByUserId';
+import { updateInvestorById } from '../../db/updateInvestorById';
+import { updateOperatorById } from '../../db/updateOperatorById';
 
 export default async function handler(req, res) {
     try {
-        const existingUser = await getUserByEmail(req?.body?.user?.email);
+        const existingUser = await getUserBySub(req?.body?.user?.sub);
         let addedUserId;
         if (!existingUser) {
             addedUserId = await addUser(req.body);
         } else {
-            const updatedUser = await updateUserById(existingUser, req.body);
+            const updatedUser = await updateUserById({
+                ...existingUser,
+                ...(req.body?.user || {}),
+                ...(req.body?.onBoardState || {})
+            });
             addedUserId = updatedUser?.id;
         }
 
@@ -23,16 +27,16 @@ export default async function handler(req, res) {
             if (req?.body?.onBoardState?.type === 'investor') {
                 const existingInvestor = await getInvestorByUserId(addedUserId);
                 if (!existingInvestor) {
-                    await addInvestor(addedUserId, req.body);
+                    await addInvestor(addedUserId, req?.body?.onBoardState?.investor);
                 } else {
-                    await updateInvestorByUserId(existingInvestor, req.body);
+                    await updateInvestorById(existingInvestor?.id, req?.body?.onBoardState?.investor);
                 }
             } else if (req?.body?.onBoardState?.type === 'operator') {
                 const existingOperator = await getOperatorByUserId(addedUserId);
                 if (!existingOperator) {
-                    await addOperator(addedUserId, req.body);
+                    await addOperator(addedUserId, req?.body?.onBoardState?.operator);
                 } else {
-                    await updateOperatorByUserId(existingOperator, req.body);
+                    await updateOperatorById(existingOperator?.id, req?.body?.onBoardState?.operator);
                 }
             }
 
