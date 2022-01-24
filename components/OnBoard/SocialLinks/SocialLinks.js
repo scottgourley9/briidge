@@ -110,7 +110,7 @@ const SocialLinks = ({ user }) => {
                 }
             </div>
             {saveUserDataIsError &&
-                <Alert>
+                <Alert type="error" size="sm">
                     We apologize, but we are unable to create your profile at this time, please try again later.
                 </Alert>
             }

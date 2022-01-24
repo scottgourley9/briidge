@@ -23,6 +23,10 @@
 .textarea-section {
     display: flex;
     flex-direction: column;
+
+    textarea:focus {
+        outline: none;
+    }
 }
 
 .error-state {

@@ -65,7 +65,9 @@ const Profile = ({
                     </>
                 }
                 <h3>Investor Opportunities ({userDataToDisplay?.investorOpportunities?.length})</h3>
-                <button onClick={() => handleEdit({}, 'investor')}>Add Investor Opportunity</button>
+                {isEditable &&
+                    <button onClick={() => handleEdit({}, 'investor')}>Add Investor Opportunity</button>
+                }
                 {userDataToDisplay?.investorOpportunities?.map((investor, i) => {
                     return (
                         <div key={`${investor?.id}${i}`}>
@@ -86,7 +88,9 @@ const Profile = ({
                     )
                 })}
                 <h3>Operator Opportunities ({userDataToDisplay?.operatorOpportunities?.length})</h3>
-                <button onClick={() => handleEdit({}, 'operator')}>Add Operator Opportunity</button>
+                {isEditable &&
+                    <button onClick={() => handleEdit({}, 'operator')}>Add Operator Opportunity</button>
+                }
                 {userDataToDisplay?.operatorOpportunities?.map((operator, i) => {
                     return (
                         <div key={`${operator?.id}${i}`}>

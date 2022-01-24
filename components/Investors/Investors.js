@@ -1,14 +1,19 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import { GrClose } from 'react-icons/gr';
 
 import { useGetInvestors } from './hooks/useGetInvestors';
 
 import { debounce } from '../../helpers/debounce';
+import { disableBackgroundScroll } from '../../helpers/disableBackgroundScroll';
 
 import Button from '../Common/Button';
 import Select from '../Common/Select';
 import ConnectModal from '../ConnectModal';
+import Chevron from '../SVG/Chevron';
+import Input from '../Common/Input';
+import User from './User';
 
 import styles from './Investors.module.scss';
 
@@ -20,6 +25,7 @@ const Investors = ({
     user
 }) => {
     const formRef = useRef();
+    const filtersRef = useRef();
 
     const [selectedConnect, updateSelectedConnect] = useState({});
     const [showModal, updateShowModal] = useState(false);
@@ -34,6 +40,14 @@ const Investors = ({
     const [isMounted, updatedIsMounted] = useState(false);
     const [investorsList, updateInvestorsList] = useState(investors || []);
     const [searchBy, updateSearchBy] = useState('');
+    const [showFilters, updateShowFilters] = useState(false);
+    const [filterByObj, updateFilterByObject] = useState({
+        amount: false,
+        category: false,
+        location: false,
+        type: false,
+        timeframe: false
+    });
 
     const investorCount = investorsList?.[0]?.exact_count || 0;
 
@@ -64,16 +78,23 @@ const Investors = ({
 
     useEffect(() => {
         updatedIsMounted(true);
+        formRef.current.addEventListener('submit', e => e.preventDefault());
     }, []);
 
     useEffect(() => {
-        if (data?.data) {
+        let canceled = false;
+        if (!canceled && data?.data) {
             updateInvestorsList(data?.data);
+        }
+
+        return () => {
+            canceled = true;
         }
     }, [data]);
 
     useEffect(() => {
-        if (isMounted && !isLoading) {
+        let canceled = false;
+        if (isMounted && !isLoading && !canceled) {
             onGetInvestors({
                 limit: 5,
                 offset: 0,
@@ -90,10 +111,15 @@ const Investors = ({
             updateLimit(5);
             updateOffset(0);
         }
+
+        return () => {
+            canceled = true;
+        }
     }, [sortBy, amountFilter, categoryFilter, locationFilter, typeFilter, timeframeFilter]);
 
     useEffect(() => {
-        if (isMounted && !isLoading) {
+        let canceled = false;
+        if (isMounted && !isLoading && !canceled) {
             onGetInvestors({
                 limit,
                 offset,
@@ -108,10 +134,15 @@ const Investors = ({
                 searchBy
             });
         }
+
+        return () => {
+            canceled = true;
+        }
     }, [limit, offset]);
 
     useEffect(() => {
-        if (isMounted && !isLoading) {
+        let canceled = false;
+        if (isMounted && !isLoading && !canceled) {
             onGetInvestorsDebounced({
                 limit: 5,
                 offset: 0,
@@ -130,7 +161,15 @@ const Investors = ({
             });
             resetDebounced();
         }
+
+        return () => {
+            canceled = true;
+        }
     }, [searchBy]);
+
+    useEffect(() => {
+        disableBackgroundScroll(showFilters, filtersRef?.current);
+    }, [showFilters]);
 
     const handleAmountFilter = e => {
         const value = e?.target?.value;
@@ -178,131 +217,247 @@ const Investors = ({
         if (!investorCount) {
             return null
         }
-        const from = offset || 1;
+        const from = offset + 1;
         const to = (from + limit - 1) > investorCount ? investorCount : from + limit - 1;
 
         return `${from} - ${to} of ${investorCount}`;
     }
 
-    const states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+    const renderAmounts = useMemo(() => {
+        const a = ['$0-$50,000', '$50,000-$100,000', '$100,000-$150,000', '$150,000-$200,000', '$200,000-$250,000', '$250,000-$300,000', '$300,000-$350,000', '$350,000-$400,000', '$400,000-$450,000', '$450,000-$500,000', '$500,000+'];
+
+        return a.map((v, i) => {
+            const newValue = v?.replace(/[^0-9-]/gi, '');
+
+            return (
+                <div key={`${v}${i}`}>
+                    <input disabled={isLoading} type="checkbox" id={`${v}${i}`} value={newValue} onChange={handleAmountFilter} /> <label htmlFor={`${v}${i}`}>{v}</label>
+                </div>
+            )
+        });
+    }, [amountFilter, isLoading]);
+
+    const renderCategories = useMemo(() => {
+        const a = ['Spilled Milk Ice Cream', 'Crumbl', 'Fiiz Drinks', 'Dirty Dough'];
+
+        return a.map((v, i) => {
+            return (
+                <div key={`${v}${i}`}>
+                    <input disabled={isLoading} type="checkbox" id={`${v}${i}`} value={v} onChange={e => handleFilter(e, categoryFilter, 'investment_category', updateCategoryFilter)} /> <label htmlFor={`${v}${i}`}>{v}</label>
+                </div>
+            )
+        });
+    }, [categoryFilter, isLoading]);
+
+    const renderLocation = useMemo(() => {
+        const states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+
+        return states.map((v, i) => {
+            return (
+                <div key={`${v}${i}`}>
+                    <input disabled={isLoading} type="checkbox" id={`${v}${i}`} value={v} onChange={e => handleFilter(e, locationFilter, 'preferred_location', updateLocationFilter)} /> <label htmlFor={`${v}${i}`}>{v}</label>
+                </div>
+            )
+        });
+    }, [locationFilter, isLoading]);
+
+    const renderType = useMemo(() => {
+        const a = ['Debt Investment', 'Convertible Note', 'Equity Partnership', 'Other'];
+
+        return a.map((v, i) => {
+            return (
+                <div key={`${v}${i}`}>
+                    <input disabled={isLoading} type="checkbox" id={`${v}${i}`} value={v} onChange={e => handleFilter(e, typeFilter, 'investment_type', updateTypeFilter)} /> <label htmlFor={`${v}${i}`}>{v}</label>
+                </div>
+            )
+        });
+    }, [typeFilter, isLoading]);
+
+    const renderTimeframe = useMemo(() => {
+        const a = ['ASAP (within 30 days)', '1-2 months', '2-6 months', '6 months +'];
+
+        return a.map((v, i) => {
+            return (
+                <div key={`${v}${i}`}>
+                    <input disabled={isLoading} type="checkbox" id={`${v}${i}`} value={v} onChange={e => handleFilter(e, timeframeFilter, 'investment_timeframe', updateTimeframeFilter)} /> <label htmlFor={`${v}${i}`}>{v}</label>
+                </div>
+            )
+        });
+    }, [timeframeFilter, isLoading]);
+
+    const numOfPages = useMemo(() => {
+        return Math.ceil((investorCount || 0) / (limit || 1));
+    }, [investorCount, limit]);
+
+    const renderedPages = useMemo(() => {
+        try {
+            const onPage = Math.ceil((offset + 1) / limit);
+            const firstPage = 1;
+            const lastPage = numOfPages;
+
+            let a = [onPage - 1, onPage, onPage + 1 < numOfPages];
+            if (a[0] <= 0) {
+                // shift left
+                a = [onPage, onPage + 1, onPage + 2 < numOfPages];
+            } else if (a[1] >= numOfPages) {
+                // shift right
+                a = [onPage - 2, onPage - 1, onPage];
+            }
+
+            return a.map((v, i) => {
+                if (!v) {
+                    return ''
+                }
+
+                if (onPage === v) {
+                    return <div key={`${v}${i}`} className={`${styles['pagination-number']} ${styles['selected-pagination-number']}`.trim()} >{v}</div>
+                }
+
+                return <div key={`${v}${i}`} className={styles['pagination-number']} onClick={() => updateOffset((v - 1) * limit)}>{v}</div>
+            });
+        } catch (e) {
+            return '';
+        }
+    }, [offset, limit, numOfPages]);
+
 
     return (
         <>
-            <form ref={formRef}>
-                <div>Filters</div>
-                Investors {paginationNote()}
-                <input type="text" value={searchBy} onChange={e => updateSearchBy(e.target.value)} />
-                <Select
-                    onChange={e => {
-                        const a = e?.target?.value?.split('-');
-                        updateSortBy({
-                            column: a[0],
-                            direction: a[1]
-                        });
-                    }}
-                    disabled={isLoading}
-                    options={[
-                        { value: 'investor_last_edit_date-DESC', description: 'Newest - Oldest' },
-                        { value: 'investor_last_edit_date-ASC', description: 'Oldest - Newest' },
-                        { value: 'first_name-ASC', description: 'First Name A-Z' },
-                        { value: 'first_name-DESC', description: 'First Name Z-A' },
-                        { value: 'last_name-ASC', description: 'Last Name A-Z' },
-                        { value: 'last_name-DESC', description: 'Last Name Z-A' }
-                    ]}
-                />
-                <div>
-                    <input disabled={isLoading} type="checkbox" value="0-50000" onChange={handleAmountFilter} /> <span>$0-$50,000</span>
-                    <input disabled={isLoading} type="checkbox" value="50000-100000" onChange={handleAmountFilter} /> <span>$50,000-$100,000</span>
-                    <input disabled={isLoading} type="checkbox" value="100000-150000" onChange={handleAmountFilter} /> <span>$100,000-$150,000</span>
-                    <input disabled={isLoading} type="checkbox" value="150000-200000" onChange={handleAmountFilter} /> <span>$150,000-$200,000</span>
-                    <input disabled={isLoading} type="checkbox" value="200000-250000" onChange={handleAmountFilter} /> <span>$200,000-$250,000</span>
-                    <input disabled={isLoading} type="checkbox" value="250000-300000" onChange={handleAmountFilter} /> <span>$250,000-$300,000</span>
-                    <input disabled={isLoading} type="checkbox" value="300000-350000" onChange={handleAmountFilter} /> <span>$300,000-$350,000</span>
-                    <input disabled={isLoading} type="checkbox" value="350000-400000" onChange={handleAmountFilter} /> <span>$350,000-$400,000</span>
-                    <input disabled={isLoading} type="checkbox" value="400000-450000" onChange={handleAmountFilter} /> <span>$400,000-$450,000</span>
-                    <input disabled={isLoading} type="checkbox" value="450000-500000" onChange={handleAmountFilter} /> <span>$450,000-$500,000</span>
-                    <input disabled={isLoading} type="checkbox" value="500000-9999999999" onChange={handleAmountFilter} /> <span>$500,000+</span>
-                </div>
-                <div>
-                    <input disabled={isLoading} type="checkbox" value="Spilled Milk Ice Cream" onChange={e => handleFilter(e, categoryFilter, 'investment_category', updateCategoryFilter)} /> <span>Spilled Milk Ice Cream</span>
-                    <input disabled={isLoading} type="checkbox" value="Crumbl" onChange={e => handleFilter(e, categoryFilter, 'investment_category', updateCategoryFilter)} /> <span>Crumbl</span>
-                    <input disabled={isLoading} type="checkbox" value="Fiiz Drinks" onChange={e => handleFilter(e, categoryFilter, 'investment_category', updateCategoryFilter)} /> <span>Fiiz Drinks</span>
-                    <input disabled={isLoading} type="checkbox" value="Dirty Dough" onChange={e => handleFilter(e, categoryFilter, 'investment_category', updateCategoryFilter)} /> <span>Dirty Dough</span>
-                </div>
-                <div>
-                    {states.map((state, i) => (
-                        <div key={`${state}${i}`}>
-                            <input disabled={isLoading} type="checkbox" value={state} onChange={e => handleFilter(e, locationFilter, 'preferred_location', updateLocationFilter)} /> <span>{state}</span>
+            <form ref={formRef} className={styles['type-page-wrapper']}>
+                <div className={styles['filters-section']}>
+                    <div onClick={() => updateShowFilters(false)} className={`${styles['fitlers-background']} ${styles['animate__animated']} ${showFilters ? styles['animate__fadeIn'] : styles['animate__fadeOut']}`.trim()}/>
+                    <div ref={filtersRef} className={`${styles.filters} ${showFilters ? styles['filters-showing'] : ''}`.trim()}>
+                        <div className={styles['close-icon']}>
+                            <GrClose onClick={() => updateShowFilters(false)} />
                         </div>
-                    ))}
+                        <h3 className={styles['filters-title']}>Filters</h3>
+                        <Input
+                            containerClassName={styles['search-field']}
+                            value={searchBy}
+                            onChange={e => updateSearchBy(e.target.value)}
+                            placeholder="Search"
+                            size="xs"
+                        />
+                        <h4
+                            className={styles['filter-by-title']}
+                            onClick={() => updateFilterByObject({
+                                ...filterByObj,
+                                amount: !filterByObj?.amount
+                            })}
+                        >
+                            Amount<Chevron />
+                        </h4>
+                        <div className={`${styles['filter-by']} ${filterByObj?.amount ? styles['show-filter-by-section'] : ''}`.trim()}>
+                            {renderAmounts}
+                        </div>
+                        <h4
+                            className={styles['filter-by-title']}
+                            onClick={() => updateFilterByObject({
+                                ...filterByObj,
+                                category: !filterByObj?.category
+                            })}
+                        >
+                            Category<Chevron />
+                        </h4>
+                        <div className={`${styles['filter-by']} ${filterByObj?.category ? styles['show-filter-by-section'] : ''}`.trim()}>
+                            {renderCategories}
+                        </div>
+                        <h4
+                            className={styles['filter-by-title']}
+                            onClick={() => updateFilterByObject({
+                                ...filterByObj,
+                                location: !filterByObj?.location
+                            })}
+                        >
+                            Location<Chevron />
+                        </h4>
+                        <div className={`${styles['filter-by']} ${filterByObj?.location ? styles['show-filter-by-section'] : ''}`.trim()}>
+                            {renderLocation}
+                        </div>
+                        <h4
+                            className={styles['filter-by-title']}
+                            onClick={() => updateFilterByObject({
+                                ...filterByObj,
+                                type: !filterByObj?.type
+                            })}
+                        >
+                            Type<Chevron />
+                        </h4>
+                        <div className={`${styles['filter-by']} ${filterByObj?.type ? styles['show-filter-by-section'] : ''}`.trim()}>
+                            {renderType}
+                        </div>
+                        <h4
+                            className={styles['filter-by-title']}
+                            onClick={() => updateFilterByObject({
+                                ...filterByObj,
+                                timeframe: !filterByObj?.timeframe
+                            })}
+                        >
+                            Timeframe<Chevron />
+                        </h4>
+                        <div className={`${styles['filter-by']} ${filterByObj?.timeframe ? styles['show-filter-by-section'] : ''}`.trim()}>
+                            {renderTimeframe}
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <input disabled={isLoading} type="checkbox" value="Debt Investment" onChange={e => handleFilter(e, typeFilter, 'investment_type', updateTypeFilter)} /> <span>Debt Investment</span>
-                    <input disabled={isLoading} type="checkbox" value="Convertible Note" onChange={e => handleFilter(e, typeFilter, 'investment_type', updateTypeFilter)} /> <span>Convertible Note</span>
-                    <input disabled={isLoading} type="checkbox" value="Equity Partnership" onChange={e => handleFilter(e, typeFilter, 'investment_type', updateTypeFilter)} /> <span>Equity Partnership</span>
-                    <input disabled={isLoading} type="checkbox" value="Other" onChange={e => handleFilter(e, typeFilter, 'investment_type', updateTypeFilter)} /> <span>Other</span>
-                </div>
-                <div>
-                    <input disabled={isLoading} type="checkbox" value="ASAP (within 30 days)" onChange={e => handleFilter(e, timeframeFilter, 'investment_timeframe', updateTimeframeFilter)} /> <span>ASAP (within 30 days)</span>
-                    <input disabled={isLoading} type="checkbox" value="1-2 months" onChange={e => handleFilter(e, timeframeFilter, 'investment_timeframe', updateTimeframeFilter)} /> <span>1-2 months</span>
-                    <input disabled={isLoading} type="checkbox" value="2-6 months" onChange={e => handleFilter(e, timeframeFilter, 'investment_timeframe', updateTimeframeFilter)} /> <span>2-6 months</span>
-                    <input disabled={isLoading} type="checkbox" value="6 months +" onChange={e => handleFilter(e, timeframeFilter, 'investment_timeframe', updateTimeframeFilter)} /> <span>6 months +</span>
-                </div>
-                {investorsList.map((investor, i) => {
-                    const additionalOpportunites = investor?.allOpportunities?.slice(1) || [];
-
-                    return (
-                        <div key={`${investor?.id}${i}`}>
-                            <Link href={`/profile/${investor?.user_id}`}>
-                                <img src={investor?.picture} alt="profile pic" />
-                            </Link>
-                            <Link href={`/profile/${investor?.user_id}`}>
-                                <h3>{investor?.first_name} {investor?.last_name}</h3>
-                            </Link>
-                            <p>{investor?.preferred_location}</p>
-                            <p>{investor?.website}</p>
-                            <Button
-                                type="button"
-                                size="sm"
-                                onClick={() => {
-                                    handleConnectClick(investor);
-                                }}
-                            >
-                                Connect
+                <div className={styles['user-list-section']}>
+                    <div className={styles['title-actions']}>
+                        <h2 className={styles.title}>Investors<div className={styles['pagination-note']}>{paginationNote()}</div></h2>
+                        <div className={styles['filter-and-sort']}>
+                            <div className={styles.filter} onClick={() => updateShowFilters(true)}>
+                                <span>Filters</span><Chevron />
+                            </div>
+                            <div className={styles.sort}>
+                                <Select
+                                    size="xs"
+                                    containerClassName={styles['sort-container']}
+                                    onChange={e => {
+                                        const a = e?.target?.value?.split('-');
+                                        updateSortBy({
+                                            column: a[0],
+                                            direction: a[1]
+                                        });
+                                    }}
+                                    disabled={isLoading}
+                                    options={[
+                                        { value: 'investor_last_edit_date-DESC', description: 'Newest - Oldest' },
+                                        { value: 'investor_last_edit_date-ASC', description: 'Oldest - Newest' },
+                                        { value: 'first_name-ASC', description: 'First Name A-Z' },
+                                        { value: 'first_name-DESC', description: 'First Name Z-A' },
+                                        { value: 'last_name-ASC', description: 'Last Name A-Z' },
+                                        { value: 'last_name-DESC', description: 'Last Name Z-A' }
+                                    ]}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    {Boolean(investorsList?.length) ?
+                        (investorsList.map((investor, i) => (
+                            <User
+                                investor={investor}
+                                handleConnectClick={handleConnectClick}
+                                key={`${investor?.id}${i}`}
+                            />
+                        )))
+                        :
+                        <p className={styles['no-investors']}>No Investors match your criteria...</p>
+                    }
+                    {numOfPages > 1 &&
+                        <div className={styles['pagination-buttons']}>
+                            <Button containerClassName={`${styles['chevron-button']} ${styles.previous} ${!(offset > 0) ? styles['button-disabled'] : ''}`.trim()} size="sm" disabled={!(offset > 0) || isLoading} onClick={() => {
+                                updateOffset(offset - limit);
+                            }}>
+                                <Chevron />
                             </Button>
-                            <p>Looking for {investor?.need}</p>
-                            <p>{investor?.investment_amount_min && investor?.investment_amount_max ? `${investor?.investment_amount_min} - ${investor?.investment_amount_max}` : investor?.investment_amount_max} needed</p>
-                            <p>{investor?.ideal_operator_description}</p>
-                            <p>{investor?.investment_category}</p>
-                            <p>{investor?.investment_type}</p>
-                            <p>{investor?.investment_timeframe}</p>
-                            {additionalOpportunites?.length > 0 &&
-                                <>
-                                    <p>Additional Opportunities</p>
-                                    <div>
-                                        {additionalOpportunites.map((v, ii) => {
-                                            return (
-                                                <div key={`opportunity${ii}`} >{v?.need}</div>
-                                            )
-                                        })}
-                                    </div>
-                                </>
-                            }
+                            {renderedPages}
+                            <Button containerClassName={`${styles['chevron-button']} ${styles.next} ${!((offset + limit) < investorCount) ? styles['button-disabled'] : ''}`.trim()} size="sm" disabled={!((offset + limit) < investorCount) || isLoading} onClick={() => {
+                                updateOffset(offset + limit);
+                            }}>
+                                <Chevron />
+                            </Button>
                         </div>
-                    )
-                })}
-                <>
-                    <button type="button" disabled={!(offset > 0) || isLoading} onClick={() => {
-                        updateOffset(offset - limit);
-                    }}>
-                        Previous
-                    </button>
-                    <button type="button" disabled={!(((offset + 1) * limit) < investorCount) || isLoading} onClick={() => {
-                        updateOffset(offset + limit);
-                    }}>
-                        Next
-                    </button>
-                </>
+                    }
+                </div>
             </form>
             <ConnectModal
                 updateShowModal={updateShowModal}

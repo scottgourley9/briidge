@@ -1,5 +1,78 @@
 @import '../../styles/variables';
 
 .modal-content {
+    label {
+        font-size: 14px;
+    }
+}
 
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .cancel-button {
+        margin-right: $space-sm;
+    }
+
+     button {
+         width: 100px;
+         margin: 0;
+     }
+}
+
+.text-area-container {
+    textarea {
+        border-radius: 4px;
+        border-color: $border-grey-one;
+        font-size: 14px;
+        margin-bottom: $space-xs;
+    }
+}
+.email,
+.phone-number {
+    input {
+        border-radius: 4px;
+        border-color: $border-grey-one;
+        font-size: 14px;
+        margin-bottom: $space-xs;
+    }
+
+    p {
+        font-size: 12px;
+        margin-top: -4px;
+    }
+}
+
+.contact-section {
+    display: flex;
+    justify-content: space-around;
+    padding: $space-xs 0;
+    align-items: center;
+
+    .contact-line {
+        display: flex;
+        align-items: center;
+
+        label {
+            font-size: 14px;
+            margin-left: 4px;
+        }
+    }
+}
+
+.phone-input-section {
+    max-height: 0;
+    transition: max-height 0.5s;
+    overflow: hidden;
+}
+
+.show-phone {
+    max-height: 100px;
+}
+
+.hide-when-small {
+    @media (max-width: $x-small-screen) {
+        display: none;
+    }
 }

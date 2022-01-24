@@ -2,9 +2,38 @@
 
 .alert {
     width: 100%;
-    padding: $space-md;
-    color: $red-one;
     line-height: 1.25;
-    background-color: rgb(199, 0, 0, 0.1);
+}
+
+.small-alert {
+    padding: $space-sm;
     font-size: 14px;
+    margin: $space-xs 0;
+}
+
+.large-alert {
+    padding: $space-md;
+    font-size: 16px;
+    margin: $space-sm 0;
+}
+
+.error-alert {
+    background-color: rgb(199, 0, 0, 0.1);
+    color: $red-one;
+    border: 1px solid $red-one;
+    border-radius: 4px;
+}
+
+.info-alert {
+    background-color: rgb(43, 93, 117, 0.2);
+    color: $blue-background;
+    border: 1px solid $blue-background;
+    border-radius: 4px;
+}
+
+.success-alert {
+    background-color: rgb(75, 181, 67, 0.2);
+    color: $green-one;
+    border: 1px solid $green-one;
+    border-radius: 4px;
 }

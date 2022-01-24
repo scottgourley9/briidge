@@ -15,9 +15,9 @@ const Select = ({
     ...rest
 }) => {
     return (
-        <div className={`${styles['select-wrapper']} ${containerClassName || ''}`}>
+        <div className={`${styles['select-wrapper']} ${containerClassName || ''} ${size === 'lg' ? styles['large-select'] : ''} ${size === 'sm' ? styles['small-select'] : ''} ${size === 'xs' ? styles['xs-select'] : ''}`}>
             <Chevron className={styles['select-chevron']}/>
-            <select {...rest} onFocus={onFocus} onChange={onChange} className={`${size === 'lg' ? styles['large-select'] : styles['small-select']} ${messageType === 'error' ? styles['error-state'] : ''} ${className || ''}`.trim()}>
+            <select {...rest} onFocus={onFocus} onChange={onChange} className={`${messageType === 'error' ? styles['error-state'] : ''} ${className || ''}`.trim()}>
                 {placeholder &&
                     <option value="" disabled selected>{placeholder}</option>
                 }

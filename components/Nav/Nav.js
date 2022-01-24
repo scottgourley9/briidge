@@ -8,6 +8,8 @@ import { GrFacebook } from 'react-icons/gr';
 import { GrTwitter } from 'react-icons/gr';
 import { GrPinterest } from 'react-icons/gr';
 
+import { disableBackgroundScroll } from '../../helpers/disableBackgroundScroll';
+
 import Logo from '../Logo/Logo';
 import Button from '../Common/Button';
 
@@ -69,20 +71,10 @@ const Nav = ({ user }) => {
         if (window.innerWidth <= 767) {
             toggleMenu(!showing);
             if (!showing) {
-                disableBackgroundScroll(true);
+                disableBackgroundScroll(true, navRef?.current);
             } else {
-                disableBackgroundScroll(false);
+                disableBackgroundScroll(false, navRef?.current);
             }
-        }
-    }
-
-    const disableBackgroundScroll = disable => {
-        const parentElements = document.querySelectorAll('html, body');
-        const arr = [].slice.call(parentElements);
-        if (disable) {
-            arr.forEach(ele => ele.setAttribute('style', 'height: 100vh; overflow: hidden;'));
-        } else {
-            arr.forEach(ele => ele.removeAttribute('style'));
         }
     }
 
@@ -94,23 +86,19 @@ const Nav = ({ user }) => {
             <div onClick={handleToggleMenu} className={`${styles['nav-overlay']} ${showing ? styles['nav-overlay-showing'] : ''}`.trim()}/>
             <nav ref={navRef} className={`${styles['nav-wrapper']} ${setFixed ? styles['nav-fixed'] : ''} ${hideNav ? styles['nav-up'] : ''} ${showNav ? styles['nav-down'] : ''}`.trim()}>
                 <div className={`${styles['logo-and-ham']} ${showNav ? styles['show-shadow'] : ''}`.trim()}>
-                    <Link href="/">
-                        <Logo />
-                    </Link>
-                    <GrMenu className={styles['menu-icon']} onClick={handleToggleMenu} />
+                    <Logo />
+                    <div onClick={handleToggleMenu} className={styles['menu-icon']}>
+                        <span>Menu</span><GrMenu />
+                    </div>
                 </div>
                 <ul className={`${styles['nav-list-wrapper']} ${showing ? styles.showing : ''} ${mounted ? styles['display-it'] : ''} ${showNav ? styles['nav-show-shadow'] : ''}`.trim()}>
                     <div onClick={handleToggleMenu} className={`${styles['logo-and-close']} ${showNav ? styles['show-shadow'] : ''}`.trim()}>
-                        <Link href="/">
-                            <Logo inverted={true} />
-                        </Link>
-                        <GrClose className={`${styles['menu-icon']} ${styles['close-icon']}`} onClick={handleToggleMenu} />
+                        <Logo inverted={true} />
+                        <GrClose className={styles['close-icon']} onClick={handleToggleMenu} />
                     </div>
-                    <Link href="/">
-                        <li className={styles['briidge-logo-section']}>
-                            <Logo />
-                        </li>
-                    </Link>
+                    <li className={styles['briidge-logo-section']}>
+                        <Logo />
+                    </li>
                     {user && user?.registered &&
                         <Fragment>
                             <li onClick={handleToggleMenu} className={router?.pathname === '/operators' ? styles['on-page'] : ''}>

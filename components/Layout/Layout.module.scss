@@ -5,7 +5,7 @@
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    max-width: $large-screen;
+    max-width: $max-screen;
     margin: 90px auto auto;
 
     @media (max-width: $small-screen) {

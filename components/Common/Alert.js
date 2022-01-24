@@ -2,11 +2,12 @@ import styles from './Alert.module.scss';
 
 const Alert = ({
     className,
-    size = "sm",
-    children
+    size = "lg",
+    children,
+    type
 }) => {
     return (
-        <div className={`${styles.alert} ${className || ''} ${size === 'sm' ? styles['small-alert'] : ''}`}>
+        <div className={`${styles.alert} ${className || ''} ${size === 'lg' ? styles['large-alert'] : styles['small-alert']} ${type ? styles[`${type}-alert`] : ''}`.trim()}>
             {children}
         </div>
     )

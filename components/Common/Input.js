@@ -19,11 +19,11 @@ const Input = ({
                 onFocus={onFocus}
                 value={value}
                 onChange={onChange}
-                className={`${size === 'lg' ? styles['large-input'] : styles['small-input']} ${messageType === 'error' ? styles['error-state'] : ''} ${className || ''}`.trim()}
+                className={`${size === 'lg' ? styles['large-input'] : ''} ${size === 'sm' ? styles['small-input'] : ''} ${size === 'xs' ? styles['xs-input'] : ''} ${messageType === 'error' ? styles['error-state'] : ''} ${className || ''}`.trim()}
                 placeholder={placeholder}
             />
             {message &&
-                <p className={`${styles['input-message']} ${messageType === 'error' ? styles['error-message'] : ''}`.trim()}>{message}</p>
+                <p className={`${styles['input-message']} ${messageType === 'error' ? styles['error-message'] : ''} ${size !== 'lg' ? styles['input-message-small'] : ''}`.trim()}>{message}</p>
             }
         </div>
 

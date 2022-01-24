@@ -4,7 +4,7 @@
     -webkit-animation-duration: 0.5s;
     animation-duration: 0.5s;
     -webkit-animation-fill-mode: both;
-    animation-fill-mode: both
+    animation-fill-mode: both;
 }
 
 // FADE IN
@@ -86,7 +86,7 @@
     }
 
     to {
-        bottom: 50%;
+        bottom: 33%;
         opacity: 1;
         -webkit-transform: translateZ(0);
         transform: translateZ(0);
@@ -102,7 +102,39 @@
     }
 
     to {
-        bottom: 50%;
+        bottom: 33%;
+        opacity: 1;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        z-index: 11;
+    }
+}
+
+@-webkit-keyframes fadeInDownMobile {
+    0% {
+        opacity: 0;
+        bottom: 100%;
+        z-index: 11;
+    }
+
+    to {
+        bottom: 2%;
+        opacity: 1;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        z-index: 11;
+    }
+}
+
+@keyframes fadeInDownMobile {
+    0% {
+        opacity: 0;
+        bottom: 100%;
+        z-index: 11;
+    }
+
+    to {
+        bottom: 2%;
         opacity: 1;
         -webkit-transform: translateZ(0);
         transform: translateZ(0);
@@ -113,6 +145,11 @@
 .animate__fadeInDown {
     -webkit-animation-name: fadeInDown;
     animation-name: fadeInDown;
+
+    @media (max-width: $small-screen) {
+        -webkit-animation-name: fadeInDownMobile;
+        animation-name: fadeInDownMobile;
+    }
 }
 
 // FADE OUT UP
@@ -120,7 +157,7 @@
     0% {
         opacity: 1;
         z-index: 11;
-        bottom: 50%;
+        bottom: 33%;
     }
 
     99.999% {
@@ -143,7 +180,54 @@
     0% {
         opacity: 1;
         z-index: 11;
-        bottom: 50%;
+        bottom: 33%;
+    }
+
+    99.999% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+        z-index: 11;
+        bottom: 100%;
+
+    }
+
+    100% {
+        opacity: 0;
+        z-index: -1;
+        bottom: 100%;
+    }
+}
+
+// FADE OUT UP
+@-webkit-keyframes fadeOutUpMobile {
+    0% {
+        opacity: 1;
+        z-index: 11;
+        bottom: 2%;
+    }
+
+    99.999% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+        z-index: 11;
+        bottom: 100%;
+
+    }
+
+    100% {
+        opacity: 0;
+        z-index: -1;
+        bottom: 100%;
+    }
+}
+
+@keyframes fadeOutUpMobile {
+    0% {
+        opacity: 1;
+        z-index: 11;
+        bottom: 2%;
     }
 
     99.999% {
@@ -165,6 +249,11 @@
 .animate__fadeOutUp {
     -webkit-animation-name: fadeOutUp;
     animation-name: fadeOutUp;
+
+    @media (max-width: $small-screen) {
+        -webkit-animation-name: fadeOutUpMobile;
+        animation-name: fadeOutUpMobile;
+    }
 }
 
 .modal-background {
@@ -195,9 +284,9 @@
     }
 
     @media (max-width: $x-small-screen) {
-        width: 100%;
-        margin-left: 0;
-        left: 0;
+        width: 96%;
+        margin-left: auto;
+        left: 2%;
     }
 }
 
@@ -213,12 +302,19 @@
     border-bottom: 1px solid $border-grey-one;
     padding: $space-sm;
 
+    h3 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     svg {
         margin-top: 2px;
         width: 22px;
         height: 22px;
         flex: 0 0 22px;
         margin-left: $space-xs;
+        cursor: pointer;
     }
 }
 

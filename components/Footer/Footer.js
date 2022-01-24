@@ -10,9 +10,7 @@ import Logo from '../Logo/Logo';
 const Footer = () => (
     <footer className={styles.footer}>
         <div className={styles['footer-top']}>
-            <Link href="/">
-                <Logo />
-            </Link>
+            <Logo />
             <div className={styles['social-logos']}>
                 <GrInstagram />
                 <GrFacebook />

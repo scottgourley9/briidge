@@ -1,1 +1,357 @@
 @import '../../styles/variables';
+
+.type-page-wrapper {
+    padding: $space-md;
+
+    @media (min-width: $small-screen-mf) {
+        display: flex;
+    }
+}
+
+.title {
+    font-family: 'poppins bold', sans-serif;
+    font-size: 32px;
+    margin: 0 0 $space-sm;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    @media (min-width: $xx-small-screen-mf) {
+        font-size: 36px;
+    }
+
+    @media (min-width: $small-screen-mf) {
+        width: 100%;
+        margin: 0;
+        justify-content: flex-start;
+    }
+
+    .pagination-note {
+        color: $grey-two;
+        font-size: 14px;
+        margin-bottom: -12px;
+        margin-left: $space-sm;
+
+        @media (min-width: $xx-small-screen-mf) {
+            margin-bottom: -$space-sm;
+        }
+    }
+}
+
+.search-field {
+    border-bottom: 1px solid $border-grey-one;
+
+    input {
+        border-radius: 4px;
+        border-color: $border-grey-one;
+    }
+}
+
+.filter-and-sort {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-end;
+    padding-bottom: $space-sm;
+    border-bottom: 1px solid $border-grey-one;
+
+    @media (min-width: $small-screen-mf) {
+        border: none;
+        padding-bottom: 0;
+        margin-bottom: $space-xs;
+    }
+
+    @media (min-width: $large-screen) {
+        width: inherit;
+    }
+}
+
+.filter {
+    cursor: pointer;
+
+    @media (min-width: $large-screen) {
+        display: none;
+    }
+
+    svg {
+        margin-left: $space-xs;
+    }
+}
+
+.sort {
+    .sort-container {
+        margin-left: $space-md;
+
+        select {
+            cursor: pointer;
+            min-width: 160px;
+        }
+    }
+}
+
+.filters {
+    position: fixed;
+    width: 70%;
+    height: 100%;
+    right: -71%;
+    top: 0;
+    background: $white;
+    z-index: 4;
+    transition: right 0.5s;
+    overflow-y: scroll;
+    padding: $space-sm;
+    max-width: 400px;
+
+    @media (min-width: $large-screen) {
+        position: relative;
+        width: 265px;
+        height: inherit;
+        right: inherit;
+        top: inherit;
+        z-index: 1;
+        border: 1px solid $border-grey-one;
+        border-radius: 4px;
+        padding: $space-sm $space-sm 0;
+        margin-right: $space-xlg;
+        margin-top: $space-xxxxlg;
+    }
+
+    .close-icon {
+        position: absolute;
+        top: $space-sm;
+        right: $space-sm;
+        cursor: pointer;
+
+        svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        @media (min-width: $large-screen) {
+            display: none;
+        }
+    }
+
+    .filters-title {
+        margin-bottom: $space-lg;
+        margin-top: $space-sm;
+        font-size: 30px;
+        font-family: 'poppins bold', sans-serif;
+
+        @media (min-width: $large-screen) {
+            display: none;
+        }
+    }
+
+    .filter-by-title {
+        margin-top: 0;
+        font-size: 14px;
+        padding: $space-sm 0;
+        font-family: 'poppins bold', sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .filter-by {
+        max-height: 1px;
+        overflow: hidden;
+        transition: max-height 0.25s;
+        border-bottom: 1px solid $border-grey-one;
+        display: flex;
+        flex-direction: column;
+
+        &:last-child {
+            @media (min-width: $large-screen) {
+                border: none;
+            }
+        }
+
+        label,
+        input {
+            cursor: pointer;
+        }
+
+        div {
+            margin-bottom: $space-xs;
+            color: $grey-two;
+
+            input[type="checkbox"]:checked {
+                color: red;
+            }
+
+            &:last-of-type {
+                margin-bottom: $space-md;
+            }
+        }
+    }
+
+    .show-filter-by-section {
+        max-height: 200px;
+        overflow: scroll;
+    }
+}
+
+.filters-showing {
+    right: 0;
+}
+
+.animate__animated {
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+// FADE IN
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+        z-index: 2;
+    }
+
+    100% {
+        opacity: 1;
+        z-index: 2;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        z-index: 2;
+    }
+
+    100% {
+        opacity: 1;
+        z-index: 2;
+    }
+}
+
+.animate__fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
+
+// FADE OUT
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    99.999% {
+        opacity: 0;
+        z-index: 2;
+    }
+
+    100% {
+        opacity: 0;
+        z-index: -1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    99.999% {
+        opacity: 0;
+        z-index: 2;
+    }
+
+    100% {
+        opacity: 0;
+        z-index: -1;
+    }
+}
+
+.animate__fadeOut {
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+}
+
+.fitlers-background {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgb(0, 0, 0, 0.25);
+    opacity: 0;
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+
+.pagination-buttons {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: $space-lg 0;
+
+    .previous {
+        transform: rotate(90deg);
+    }
+
+    .next {
+        transform: rotate(-90deg);
+    }
+
+    .chevron-button {
+        button {
+            background: transparent;
+            border: none;
+            height: inherit;
+            margin: 0;
+            padding: $space-sm;
+
+            svg {
+                height: 24px;
+                width: 24px;
+            }
+        }
+    }
+
+    .button-disabled {
+        opacity: 0.25;
+    }
+}
+
+.pagination-number {
+    min-width: 40px;
+    min-height: 40px;
+    background: $white;
+    color: $black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: $space-xs $space-sm;
+    cursor: pointer;
+}
+
+.selected-pagination-number {
+    background: $black;
+    color: $white;
+}
+
+.user-list-section {
+    width: 100%;
+}
+
+.title-actions {
+    @media (min-width: $small-screen-mf) {
+        display: flex;
+        align-items: flex-end;
+        border-bottom: 1px solid $border-grey-one;
+        padding-bottom: $space-xs;
+    }
+}
+
+.no-operators {
+    margin-top: $space-lg;
+}
