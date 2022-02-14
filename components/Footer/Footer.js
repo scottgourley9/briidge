@@ -36,7 +36,7 @@ const Footer = () => (
             </Link>
             <br />
             <br />
-            <span className={styles.copyright}>© 2021 briidge | All Rights Reserved</span>
+            <span className={styles.copyright}>© 2022 briidge | All Rights Reserved</span>
         </div>
     </footer>
 );

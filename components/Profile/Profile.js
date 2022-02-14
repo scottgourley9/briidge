@@ -17,6 +17,7 @@ import ConnectModal from '../ConnectModal';
 import User from './User';
 import Opportunity from './Opportunity';
 import Modal from '../Common/Modal';
+import Button from '../Common/Button';
 
 import styles from './Profile.module.scss';
 
@@ -41,6 +42,8 @@ const Profile = ({
     const [selectedConnect, updateSelectedConnect] = useState({});
     const [showModal, updateShowModal] = useState(false);
     const [isMounted, updatedIsMounted] = useState(false);
+    const [showConfirmDelete, updateShowConfirmDelete] = useState(false);
+    const [deletionData, updateDeletionData] = useState({});
 
     const { onDeleteInvestor, isLoading: deleteInvestorIsLoading, data: deleteInvestorData, isSuccess: deleteInvestorSuccess, isError: deleteInvestorError } = useDeleteInvestor();
     const { onDeleteOperator, isLoading: deleteOperatorIsLoading, data: deleteOperatorData, isSuccess: deleteOperatorSuccess, isError: deleteOperatorError } = useDeleteOperator();
@@ -63,18 +66,34 @@ const Profile = ({
     }, [getUserSuccess]);
 
     const handleDelete = (data, type) => {
+        updateShowConfirmDelete(true);
+        updateDeletionData({
+            ...data,
+            type
+        });
+    };
+
+    const handleDeleteConfirm = () => {
+        updateShowConfirmDelete(false);
+
+        const {
+            type,
+            user_id,
+            id
+        } = deletionData || {};
+
         if (type === 'investor') {
             onDeleteInvestor({
-                userId: data?.user_id,
-                investorId: data?.id
+                userId: user_id,
+                investorId: id
             });
         } else if (type === 'operator') {
             onDeleteOperator({
-                userId: data?.user_id,
-                investorId: data?.id
+                userId: user_id,
+                investorId: id
             });
         }
-    };
+    }
 
     const handleEdit = (data, type) => {
         if (type === 'investor') {
@@ -127,6 +146,9 @@ const Profile = ({
                     handleConnectClick={handleConnectClick}
                     isEditable={isEditable}
                     handleEdit={handleEdit}
+                    onGetUserData={onGetUserData}
+                    getUserSuccess={getUserSuccess}
+                    getUserError={getUserError}
                 >
                     <InvestorForm
                         investorData={editData}
@@ -210,6 +232,21 @@ const Profile = ({
                         user={user}
                     />
                 }
+                <Modal
+                    onClose={() => {
+                        updateShowConfirmDelete(false);
+                    }}
+                    isOpen={showConfirmDelete}
+                    title="Confirm Delete"
+                    footer={
+                        <div className={`${styles.row} ${styles['form-save-cancel-buttons']}`.trim()}>
+                            <Button size="sm" onClick={() => updateShowConfirmDelete(false)}>Cancel</Button>
+                            <Button size="sm" selected={true} onClick={handleDeleteConfirm}>Yes, Delete</Button>
+                        </div>
+                    }
+                >
+                    Are you sure you want to delete this opportunity? This action can not be undone.
+                </Modal>
             </section>
         </>
     );

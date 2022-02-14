@@ -40,7 +40,8 @@
         }
     }
 
-    img {
+    img,
+    .loading-img {
         flex: none;
         height: inherit;
         border-radius: 50%;
@@ -48,12 +49,19 @@
         height: 160px;
         position: relative;
         cursor: pointer;
+        background: $border-grey-one;
 
         @media (min-width: $x-small-screen) {
             flex: 0 0 160px;
             height: 160px;
             left: inherit;
         }
+    }
+
+    .loading-img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .short-details {
@@ -191,4 +199,10 @@
     font-size: 14px;
     margin-bottom: $space-xs;
     cursor: pointer;
+}
+
+.file-input-hidden {
+    position: absolute;
+    z-index: -1;
+    visibility: hidden;
 }

@@ -132,11 +132,7 @@ const OperatorForm = ({
                 updateShowEditOperatorForm(false);
             }}
             isOpen={showEditOperatorForm}
-            title={
-                <h3>
-                    Operator Opportunity
-                </h3>
-            }
+            title="Operator Opportunity"
             footer={
                 <div className={`${styles.row} ${styles['form-save-cancel-buttons']}`.trim()}>
                     <Button size="sm" onClick={onCancel}>Cancel</Button>

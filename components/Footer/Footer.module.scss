@@ -38,6 +38,7 @@
     .footer-links {
         width: 50%;
         text-align: center;
+        line-height: 40px;
 
         @media (max-width: $small-screen) {
             width: 100%;
@@ -46,6 +47,7 @@
         a {
             text-decoration: underline;
             margin: $space-xs;
+            word-break: break-word;
         }
     }
 

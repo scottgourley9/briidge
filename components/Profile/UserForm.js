@@ -83,11 +83,7 @@ const UserForm = ({
                 updateShowUserForm(false);
             }}
             isOpen={showUserForm}
-            title={
-                <h3>
-                    Edit Your Profile
-                </h3>
-            }
+            title="Edit Your Profile"
             footer={
                 <div className={`${styles.row} ${styles['form-save-cancel-buttons']}`.trim()}>
                     <Button size="sm" onClick={onCancel}>Cancel</Button>

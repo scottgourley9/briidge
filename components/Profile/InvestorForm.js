@@ -132,11 +132,7 @@ const InvestorForm = ({
                 updateShowEditInvestorForm(false);
             }}
             isOpen={showEditInvestorForm}
-            title={
-                <h3>
-                    Investor Opportunity
-                </h3>
-            }
+            title="Investor Opportunity"
             footer={
                 <div className={`${styles.row} ${styles['form-save-cancel-buttons']}`.trim()}>
                     <Button size="sm" onClick={onCancel}>Cancel</Button>

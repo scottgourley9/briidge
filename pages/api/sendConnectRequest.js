@@ -22,7 +22,7 @@ export default async (req, res) => {
         const client = nodemailer.createTransport(sgTransport(options));
 
         const email = {
-            from: 'scottgourley9@gmail.com',
+            from: 'info@getbriidge.com',
             to: toEmail,
             subject: 'Briidge Connection Request',
             html: `

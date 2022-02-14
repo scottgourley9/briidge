@@ -1,11 +1,17 @@
+import { useRef, useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import axios from 'axios';
+
+import { useUploadPhoto } from './hooks/useUploadPhoto';
 
 import Button from '../Common/Button';
 import FacebookCircle from '../SVG/FacebookCircle';
 import LinkedIn from '../SVG/LinkedIn';
 import LinkIcon from '../SVG/LinkIcon';
 import LocationIcon from '../SVG/LocationIcon';
+import Alert from '../Common/Alert';
+import Spinner from '../Common/Spinner';
 
 import styles from './User.module.scss';
 
@@ -14,16 +20,95 @@ const User = ({
     handleConnectClick,
     isEditable,
     handleEdit,
-    children
+    children,
+    onGetUserData,
+    getUserSuccess,
+    getUserError
 }) => {
+    const imageInputRef = useRef();
+
+    const [photoErrorMessage, updatePhotoErrorMessage] = useState('');
+    const [showPhotoLoading, updateShowPhotoLoading] = useState(false);
+
+    const { onUploadPhoto, isSuccess, isError, data } = useUploadPhoto();
+
+    useEffect(() => {
+        if (data && isSuccess) {
+            onGetUserData({ userId: user?.id });
+        } else if (isError) {
+            updateShowPhotoLoading(false);
+            updatePhotoErrorMessage("We're sorry, there was an issue uploading you photo.");
+        }
+    }, [data]);
+
+    useEffect(() => {
+        let timeout;
+        if (showPhotoLoading) {
+            timeout = setTimeout(() => {
+                updateShowPhotoLoading(false);
+            }, 500);
+        }
+
+        return () => {
+            clearTimeout(timeout);
+        }
+    }, [getUserSuccess, getUserError]);
+
+    const previewFile = () => {
+        updatePhotoErrorMessage('');
+        const file = (imageInputRef?.current?.files?.[0]);
+
+        if (!file) {
+            return;
+        } else if (file?.size > 5000000) {
+            updatePhotoErrorMessage('This photo is too large. Please ensure the photo is less than 5MB');
+
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            const ext = file.name.split('.');
+            updateShowPhotoLoading(true);
+            onUploadPhoto({
+                imageName: file.name,
+                imageBody: reader.result,
+                imageExtension: ext[ext.length - 1],
+                userId: user?.id
+            });
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+
     const additionalOpportunites = user?.allOpportunities?.slice(1) || [];
+
     return (
         <div className={styles['entire-profile-container']}>
+            {photoErrorMessage &&
+                <Alert size="sm" type="error">{photoErrorMessage}</Alert>
+            }
             <div className={styles['list-user']}>
                 <div className={styles['img-and-details']}>
                     <div className={styles['image-container']}>
-                        <img src={user?.picture} alt="profile pic" />
-                        {isEditable && <u className={styles['edit-action']} onClick={() => {}}>Change Photo</u>}
+                        {showPhotoLoading ?
+                            <div className={styles['loading-img']}>
+                                <Spinner />
+                            </div>
+                            :
+                            <img src={user?.picture} alt="profile pic" />
+                        }
+                        {isEditable && (
+                            <>
+                                <label htmlFor="changePhotoInput">
+                                    <u className={styles['edit-action']}>Change Photo</u>
+                                </label>
+                                <input className={styles['file-input-hidden']} type="file" id="changePhotoInput" ref={imageInputRef} onChange={previewFile} accept='image/*' />
+                            </>
+                        )}
                     </div>
                     <div className={styles['short-details']}>
                         {user?.first_name &&

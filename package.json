@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.6.1",
+    "aws-sdk": "^2.1073.0",
     "axios": "^0.24.0",
     "body-scroll-lock": "^4.0.0-beta.0",
+    "crypto": "^1.0.1",
     "next": "12",
     "nodemailer": "^6.7.2",
     "nodemailer-sendgrid-transport": "^0.2.0",
@@ -24,6 +26,7 @@
     "react-slick": "^0.28.1",
     "sass": "^1.32.8",
     "scroll-into-view": "^1.16.0",
+    "sharp": "^0.30.1",
     "slick-carousel": "^1.8.1"
   }
 }
