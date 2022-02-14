@@ -71,9 +71,9 @@ const Nav = ({ user }) => {
         if (window.innerWidth <= 767) {
             toggleMenu(!showing);
             if (!showing) {
-                disableBackgroundScroll(true, navRef?.current);
+                disableBackgroundScroll(true);
             } else {
-                disableBackgroundScroll(false, navRef?.current);
+                disableBackgroundScroll(false);
             }
         }
     }

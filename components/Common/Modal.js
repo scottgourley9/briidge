@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 
+import { disableBackgroundScroll } from '../../helpers/disableBackgroundScroll';
+
 import { GrClose } from 'react-icons/gr';
 
 import styles from './Modal.module.scss';
@@ -24,13 +26,9 @@ const Modal = ({
         if (isMounted && isOpen) {
             updateAbleToBeShown(true);
             ref.current.scrollTop = 0;
-            document.body.style.top = `-${window.pageYOffset}px`;
-            document.body.style.position = 'fixed';
+            disableBackgroundScroll(true);
         } else {
-            const scrollY = document.body.style.top;
-            document.body.style.position = '';
-            document.body.style.top = '';
-            window.scrollTo(0, parseInt(scrollY || '0') * -1);
+            disableBackgroundScroll(false);
         }
     }, [isOpen]);
 

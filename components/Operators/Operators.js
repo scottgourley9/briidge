@@ -170,7 +170,7 @@ const Operators = ({
     }, [searchBy]);
 
     useEffect(() => {
-        disableBackgroundScroll(showFilters, filtersRef?.current);
+        disableBackgroundScroll(showFilters);
     }, [showFilters]);
 
     const handleAmountFilter = e => {
