@@ -82,8 +82,8 @@
         z-index: 2;
         justify-content: flex-start;
         padding: $space-sm 0 $space-xxlg $space-md;
-        -webkit-transition: margin 0.25s;
-        transition: margin 0.25s;
+        -webkit-transition: margin-left 0.25s;
+        transition: margin-left 0.25s;
 
         .last-list-item {
             display: none;
@@ -238,7 +238,7 @@
     margin-top: auto;
     justify-content: space-around;
     margin-left: -12px;
-    margin-bottom: 32px;
+    margin-bottom: 80px;
 
     @media (max-width: $small-screen) {
         display: flex;
