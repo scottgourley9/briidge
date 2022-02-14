@@ -85,6 +85,7 @@ const Investors = ({
 
     useEffect(() => {
         let canceled = false;
+        console.log('data update', data);
         if (!canceled && data?.data) {
             updateInvestorsList(data?.data);
         }
