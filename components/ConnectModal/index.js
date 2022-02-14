@@ -124,8 +124,8 @@ const ConnectModal = ({
             }
             footer={
                 <div className={styles['buttons']}>
-                    <Button containerClassName={styles['cancel-button']} size="xs" onClick={() => updateShowModal(false)}>Cancel</Button>
-                    <Button size="xs" selected={true} onClick={handleSendConnectionClick}>Send</Button>
+                    <Button containerClassName={styles['cancel-button']} size="sm" onClick={() => updateShowModal(false)}>Cancel</Button>
+                    <Button size="sm" selected={true} onClick={handleSendConnectionClick}>Send</Button>
                 </div>
             }
         >
