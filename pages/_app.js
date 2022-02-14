@@ -11,7 +11,6 @@ import Footer from '../components/Footer/Footer';
 import '../styles/globals.scss';
 
 const App = ({ Component, pageProps }) => {
-    console.log(pageProps);
     useEffect(() => {
         Router.events.on('routeChangeComplete', () => {
             window.scrollTo(0, 0);
