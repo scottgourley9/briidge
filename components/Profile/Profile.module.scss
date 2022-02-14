@@ -19,6 +19,9 @@
     margin-left: 18px;
     margin-top: $space-md;
     margin-bottom: -$space-md;
+    background: $white;
+    border: none;
+    font-size: 16px;
 
     @media (min-width: $x-small-screen) {
         margin-bottom: $space-sm;

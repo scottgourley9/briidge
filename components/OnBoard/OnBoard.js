@@ -40,9 +40,9 @@ const OnBoard = ({
             </div>
             <div className={styles['chevron-and-pills']}>
                 {step > 1 &&
-                    <div onClick={() => updateOnBoardState({ step: step - 1 })} className={styles['back-svg-container']}>
+                    <button type="button" onClick={() => updateOnBoardState({ step: step - 1 })} className={styles['back-svg-container']}>
                         <GrFormPrevious className={styles['onboard-back-chevron']} /> Back
-                    </div>
+                    </button>
                 }
                 <div className={styles.pills}>
                     <div className={`${styles['step-pill']} ${step >= 1 ? styles['pill-filled'] : ''}`.trim()} />

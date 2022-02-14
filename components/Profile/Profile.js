@@ -112,12 +112,15 @@ const Profile = ({
 
     return (
         <>
-            <div style={{ background: 'green' }} onClick={() => {
-                alert('clicked');
-                // referer ? router.back() : router.push('/');
-            }} className={styles['back-svg-container']}>
+            <button
+                type="button"
+                onClick={() => {
+                    referer ? router.back() : router.push('/');
+                }}
+                className={styles['back-svg-container']}
+            >
                 <GrFormPrevious className={styles['back-chevron']} /> Back
-            </div>
+            </button>
             <section className={styles['profile-page-wrapper']}>
                 <User
                     user={userDataToDisplay}
