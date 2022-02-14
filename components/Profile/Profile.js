@@ -115,7 +115,15 @@ const Profile = ({
             <button
                 type="button"
                 onClick={() => {
-                    referer ? router.back() : router.push('/');
+                    try {
+                        if (referer && router) {
+                            router.back();
+                        } else {
+                            router.push('/')
+                        }
+                    } catch (e) {
+                        window.location.href = '/';
+                    }
                 }}
                 className={styles['back-svg-container']}
             >
