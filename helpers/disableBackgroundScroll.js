@@ -5,7 +5,6 @@ import {
 
 // THIS IS NOT WORKING
 export const disableBackgroundScroll = (disable, target) => {
-    target = document.getElementsByClassName('button-actions')[0];
     if (target) {
         if (disable) {
             disableBodyScroll(target);

@@ -32,16 +32,23 @@ const ConnectModal = ({
     const { onSendConnectRequest, isLoading: sendConnectRequestLoading, isSuccess: sendConnectRequestSuccess, isError: sendConnectRequestError, data: sendConnectRequestData } = useSendConnectRequest();
 
     useEffect(() => {
+        let timeout;
         if (!showModal) {
-            updateHowToConnectData({
-                useEmail: true,
-                useText: false,
-                useCall: false
-            });
-            updateConnectPhoneNumber('');
-            updateConnectMessage('');
-            updateSuccessMessage('');
-            updateErrorMessage('');
+            timeout = setTimeout(() => {
+                updateHowToConnectData({
+                    useEmail: true,
+                    useText: false,
+                    useCall: false
+                });
+                updateConnectPhoneNumber('');
+                updateConnectMessage('');
+                updateSuccessMessage('');
+                updateErrorMessage('');
+            }, 500);
+        }
+
+        return () => {
+            clearTimeout(timeout);
         }
     }, [showModal]);
 

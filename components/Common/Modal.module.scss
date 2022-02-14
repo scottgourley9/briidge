@@ -110,10 +110,10 @@
     }
 }
 
-@-webkit-keyframes fadeInDownMobile {
+@-webkit-keyframes fadeInUpMobile {
     0% {
         opacity: 0;
-        bottom: 100%;
+        bottom: -100%;
         z-index: 11;
     }
 
@@ -126,10 +126,10 @@
     }
 }
 
-@keyframes fadeInDownMobile {
+@keyframes fadeInUpMobile {
     0% {
         opacity: 0;
-        bottom: 100%;
+        bottom: -100%;
         z-index: 11;
     }
 
@@ -147,8 +147,8 @@
     animation-name: fadeInDown;
 
     @media (max-width: $small-screen) {
-        -webkit-animation-name: fadeInDownMobile;
-        animation-name: fadeInDownMobile;
+        -webkit-animation-name: fadeInUpMobile;
+        animation-name: fadeInUpMobile;
     }
 }
 
@@ -200,7 +200,7 @@
 }
 
 // FADE OUT UP
-@-webkit-keyframes fadeOutUpMobile {
+@-webkit-keyframes fadeOutDownMobile {
     0% {
         opacity: 1;
         z-index: 11;
@@ -212,18 +212,18 @@
         -webkit-transform: translate3d(0, -100%, 0);
         transform: translate3d(0, -100%, 0);
         z-index: 11;
-        bottom: 100%;
+        bottom: -100%;
 
     }
 
     100% {
         opacity: 0;
         z-index: -1;
-        bottom: 100%;
+        bottom: -100%;
     }
 }
 
-@keyframes fadeOutUpMobile {
+@keyframes fadeOutDownMobile {
     0% {
         opacity: 1;
         z-index: 11;
@@ -235,14 +235,14 @@
         -webkit-transform: translate3d(0, -100%, 0);
         transform: translate3d(0, -100%, 0);
         z-index: 11;
-        bottom: 100%;
+        bottom: -100%;
 
     }
 
     100% {
         opacity: 0;
         z-index: -1;
-        bottom: 100%;
+        bottom: -100%;
     }
 }
 
@@ -251,8 +251,8 @@
     animation-name: fadeOutUp;
 
     @media (max-width: $small-screen) {
-        -webkit-animation-name: fadeOutUpMobile;
-        animation-name: fadeOutUpMobile;
+        -webkit-animation-name: fadeOutDownMobile;
+        animation-name: fadeOutDownMobile;
     }
 }
 
@@ -268,11 +268,11 @@
 }
 
 .common-modal {
-    width: 500px;
+    width: 600px;
     background: $white;
     position: fixed;
     left: 50%;
-    margin-left: -250px;
+    margin-left: -300px;
     opacity: 0;
     z-index: -1;
     bottom: 100%;
@@ -292,6 +292,12 @@
 
 .content {
     padding: $space-sm;
+    max-height: 77vh;
+    overflow-y: scroll;
+
+    @media (min-width: $small-screen-mf) {
+        max-height: 50vh;
+    }
 }
 
 .title-section {

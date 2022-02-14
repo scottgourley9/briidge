@@ -142,7 +142,6 @@
     }
 
     .additional-opportunities {
-        margin-left: auto;
         margin-top: $space-xs;
 
         @media (min-width: $small-screen-mf) {
@@ -152,10 +151,10 @@
 
     .inner-text-long {
         overflow: hidden;
-       text-overflow: ellipsis;
-       display: -webkit-box;
-       -webkit-line-clamp: 4; /* number of lines to show */
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4; /* number of lines to show */
                line-clamp: 4;
-       -webkit-box-orient: vertical;
+        -webkit-box-orient: vertical;
     }
 }

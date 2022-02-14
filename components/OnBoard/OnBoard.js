@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { GrFormPrevious } from 'react-icons/gr';
 
 import { useOnBoardState } from './StateProvider';
 
@@ -40,7 +41,7 @@ const OnBoard = ({
             <div className={styles['chevron-and-pills']}>
                 {step > 1 &&
                     <div onClick={() => updateOnBoardState({ step: step - 1 })} className={styles['back-svg-container']}>
-                        <Chevron className={styles['onboard-back-chevron']} /> Back
+                        <GrFormPrevious className={styles['onboard-back-chevron']} /> Back
                     </div>
                 }
                 <div className={styles.pills}>

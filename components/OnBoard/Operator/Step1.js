@@ -1,7 +1,11 @@
+import { useMemo } from 'react';
+
 import {
     useOnBoardState,
     useOperatorState
 } from '../StateProvider';
+
+import configs from '../../configs';
 
 import Select from '../../Common/Select';
 import Input from '../../Common/Input';
@@ -56,6 +60,10 @@ const Step1 = () => {
             updateOnBoardState({ step: step + 1 });
         }
     }
+
+    const franchiseCategoriesOptions = useMemo(() => {
+        return configs['franchise.categories'].map(v => ({ value: v, description: v }));
+    }, []);
 
     return (
         <section className={`${styles.step} ${step === 2 && type === 'operator' ? styles['active-step'] : ''}`.trim()}>
@@ -203,12 +211,7 @@ const Step1 = () => {
                     defaultValue={operatingCategory}
                     placeholder="Choose category"
                     value={categorySelected ? operatingCategory : ''}
-                    options={[
-                        { value: 'Spilled Milk Ice Cream', description: 'Spilled Milk Ice Cream' },
-                        { value: 'Crumbl', description: 'Crumbl' },
-                        { value: 'Fiiz Drinks', description: 'Fiiz Drinks' },
-                        { value: 'Dirty Dough', description: 'Dirty Dough' }
-                    ]}
+                    options={franchiseCategoriesOptions}
                     message={operatingCategoryErrorObj.message}
                     messageType={operatingCategoryErrorObj.messageType}
                 />

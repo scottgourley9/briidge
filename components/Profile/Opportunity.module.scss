@@ -1,0 +1,61 @@
+@import '../../styles/variables';
+
+.opportunity-container {
+    padding: $space-md $space-sm;
+    margin-bottom: $space-sm;
+    background: $grey-background;
+    border-radius: 4px;
+    border: 1px solid $border-grey-one;
+    width: 100%;
+
+    @media (min-width: $medium-screen) {
+        max-width: 100%;
+    }
+}
+
+.single {
+    background: $white;
+    border: none;
+    padding: 0;
+
+    @media (min-width: $medium-screen) {
+        margin-top: $space-lg;
+    }
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: $space-md;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    h4 {
+        font-family: 'poppins bold', sans-serif;
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .inner-text {
+        font-size: 14px;
+    }
+}
+
+.opportunity-action-buttons {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: $space-lg;
+
+    button {
+        width: 100px;
+
+        &:first-child {
+            margin-right: $space-sm;
+        }
+    }
+}

@@ -3,6 +3,8 @@ import axios from 'axios';
 import Link from 'next/link';
 import { GrClose } from 'react-icons/gr';
 
+import configs from '../../configs';
+
 import { useGetOperators } from './hooks/useGetOperators';
 
 import { debounce } from '../../helpers/debounce';
@@ -238,7 +240,7 @@ const Operators = ({
     }, [amountFilter, isLoading]);
 
     const renderCategories = useMemo(() => {
-        const a = ['Spilled Milk Ice Cream', 'Crumbl', 'Fiiz Drinks', 'Dirty Dough'];
+        const a = configs['franchise.categories'];
 
         return a.map((v, i) => {
             return (

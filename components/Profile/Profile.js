@@ -1,24 +1,79 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
+import { useRouter } from 'next/router';
+import scrollIntoView from 'scroll-into-view';
+import {
+    GrAdd,
+    GrFormPrevious
+} from 'react-icons/gr';
+
+import { useDeleteInvestor } from './hooks/useDeleteInvestor';
+import { useDeleteOperator } from './hooks/useDeleteOperator';
+import { useGetUserData } from './hooks/useGetUserData';
 
 import InvestorForm from './InvestorForm';
 import OperatorForm from './OperatorForm';
 import UserForm from './UserForm';
+import ConnectModal from '../ConnectModal';
+import User from './User';
+import Opportunity from './Opportunity';
+import Modal from '../Common/Modal';
 
 import styles from './Profile.module.scss';
 
 const Profile = ({
     user,
     profileUser,
-    isEditable
+    isEditable,
+    referer
 }) => {
+    const router = useRouter();
+
+    const investorTitle = useRef();
+    const operatorTitle = useRef();
+    const firstInvestor = useRef();
+    const firstOperator = useRef();
+
     const [editData, updateEditData] = useState({});
     const [showEditInvestorForm, updateShowEditInvestorForm] = useState(false);
     const [showEditOperatorForm, updateShowEditOperatorForm] = useState(false);
     const [showUserForm, updateShowUserForm] = useState(false);
     const [userDataToDisplay, updateUserDataToDisplay] = useState(isEditable ? user : profileUser);
+    const [selectedConnect, updateSelectedConnect] = useState({});
+    const [showModal, updateShowModal] = useState(false);
+    const [isMounted, updatedIsMounted] = useState(false);
 
-    const handleDelete = () => {
-        console.log('delete');
+    const { onDeleteInvestor, isLoading: deleteInvestorIsLoading, data: deleteInvestorData, isSuccess: deleteInvestorSuccess, isError: deleteInvestorError } = useDeleteInvestor();
+    const { onDeleteOperator, isLoading: deleteOperatorIsLoading, data: deleteOperatorData, isSuccess: deleteOperatorSuccess, isError: deleteOperatorError } = useDeleteOperator();
+    const { onGetUserData, isLoading: getUserIsLoading, data: getUserData, isSuccess: getUserSuccess, isError: getUserError } = useGetUserData();
+
+    useEffect(() => {
+        updatedIsMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (deleteInvestorSuccess || deleteOperatorSuccess) {
+            onGetUserData({ userId: user?.id });
+        }
+    }, [deleteInvestorSuccess, deleteOperatorSuccess]);
+
+    useEffect(() => {
+        if (getUserSuccess) {
+            updateUserDataToDisplay(getUserData?.data);
+        }
+    }, [getUserSuccess]);
+
+    const handleDelete = (data, type) => {
+        if (type === 'investor') {
+            onDeleteInvestor({
+                userId: data?.user_id,
+                investorId: data?.id
+            });
+        } else if (type === 'operator') {
+            onDeleteOperator({
+                userId: data?.user_id,
+                investorId: data?.id
+            });
+        }
     };
 
     const handleEdit = (data, type) => {
@@ -46,97 +101,111 @@ const Profile = ({
         updateEditData({});
     }
 
+    const handleConnectClick = operator => {
+        updateSelectedConnect(operator);
+        updateShowModal(true);
+    }
+
     if (!userDataToDisplay) {
         return null;
     }
 
     return (
-        <section className={styles['profile-page-wrapper']}>
-            <div>
-                <img src={userDataToDisplay?.picture} alt={userDataToDisplay?.first_name} />
-                <h2>{userDataToDisplay?.first_name} {userDataToDisplay?.last_name}</h2>
-                <p>{userDataToDisplay?.email}</p>
-                <p>{userDataToDisplay?.preferred_location}</p>
-                <p>{userDataToDisplay?.website}</p>
-                {isEditable &&
-                    <>
-                        <button onClick={() => handleEdit(userDataToDisplay, 'user')}>Edit</button>
-                        <a href="/api/auth/logout">Logout</a>
-                    </>
-                }
-                <h3>Investor Opportunities ({userDataToDisplay?.investorOpportunities?.length})</h3>
-                {isEditable &&
-                    <button onClick={() => handleEdit({}, 'investor')}>Add Investor Opportunity</button>
-                }
-                {userDataToDisplay?.investorOpportunities?.map((investor, i) => {
-                    return (
-                        <div key={`${investor?.id}${i}`}>
-                            <p>Looking for {investor?.need}</p>
-                            <p>{investor?.investment_amount_min && investor?.investment_amount_max ? `${investor?.investment_amount_min} - ${investor?.investment_amount_max}` : investor?.investment_amount_max} needed</p>
-                            <p>{investor?.ideal_operator_description}</p>
-                            <p>{investor?.investment_category}</p>
-                            <p>{investor?.investment_type}</p>
-                            <p>{investor?.investment_timeframe}</p>
-                            {isEditable &&
-                                <>
-                                    <button onClick={() => handleDelete(investor, 'investor')}>Delete</button>
-                                    <button onClick={() => handleEdit(investor, 'investor')}>Edit</button>
-                                </>
-                            }
-
-                        </div>
-                    )
-                })}
-                <h3>Operator Opportunities ({userDataToDisplay?.operatorOpportunities?.length})</h3>
-                {isEditable &&
-                    <button onClick={() => handleEdit({}, 'operator')}>Add Operator Opportunity</button>
-                }
-                {userDataToDisplay?.operatorOpportunities?.map((operator, i) => {
-                    return (
-                        <div key={`${operator?.id}${i}`}>
-                            <p>Looking for {operator?.need}</p>
-                            <p>{operator?.capital_amount_min && operator?.capital_amount_max ? `${operator?.capital_amount_min} - ${operator?.capital_amount_max}` : operator?.capital_amount_max} needed</p>
-                            <p>{operator?.ideal_investor_description}</p>
-                            <p>{operator?.operating_category}</p>
-                            <p>{operator?.investment_type}</p>
-                            <p>{operator?.timeframe}</p>
-                            {isEditable &&
-                                <>
-                                    <button onClick={() => handleDelete(operator, 'operator')}>Delete</button>
-                                    <button onClick={() => handleEdit(operator, 'operator')}>Edit</button>
-                                </>
-                            }
-                        </div>
-                    )
-                })}
+        <>
+            <div onClick={() => { referer ? router.back() : router.push('/') }} className={styles['back-svg-container']}>
+                <GrFormPrevious className={styles['back-chevron']} /> Back
             </div>
-            {showEditInvestorForm &&
-                <InvestorForm
-                    investorData={editData}
-                    onCancel={cancelEdit}
-                    updateData={updateEditData}
-                    userId={userDataToDisplay?.id}
-                    updateUserDataToDisplay={updateUserDataToDisplay}
-                />
-            }
-            {showEditOperatorForm &&
-                <OperatorForm
-                    operatorData={editData}
-                    onCancel={cancelEdit}
-                    updateData={updateEditData}
-                    userId={userDataToDisplay?.id}
-                    updateUserDataToDisplay={updateUserDataToDisplay}
-                />
-            }
-            {showUserForm &&
-                <UserForm
-                    userData={editData}
-                    onCancel={cancelEdit}
-                    updateData={updateEditData}
-                    updateUserDataToDisplay={updateUserDataToDisplay}
-                />
-            }
-        </section>
+            <section className={styles['profile-page-wrapper']}>
+                <User
+                    user={userDataToDisplay}
+                    handleConnectClick={handleConnectClick}
+                    isEditable={isEditable}
+                    handleEdit={handleEdit}
+                >
+                    <InvestorForm
+                        investorData={editData}
+                        onCancel={cancelEdit}
+                        updateData={updateEditData}
+                        userId={userDataToDisplay?.id}
+                        updateUserDataToDisplay={updateUserDataToDisplay}
+                        updateShowEditInvestorForm={updateShowEditInvestorForm}
+                        showEditInvestorForm={showEditInvestorForm}
+                    />
+                    <OperatorForm
+                        operatorData={editData}
+                        onCancel={cancelEdit}
+                        updateData={updateEditData}
+                        userId={userDataToDisplay?.id}
+                        updateUserDataToDisplay={updateUserDataToDisplay}
+                        updateShowEditOperatorForm={updateShowEditOperatorForm}
+                        showEditOperatorForm={showEditOperatorForm}
+                    />
+                    <UserForm
+                        userData={editData}
+                        onCancel={cancelEdit}
+                        updateData={updateEditData}
+                        updateUserDataToDisplay={updateUserDataToDisplay}
+                        updateShowUserForm={updateShowUserForm}
+                        showUserForm={showUserForm}
+                    />
+                    <div className={styles['opportunity-title']}>
+                        <h3 ref={investorTitle}>Investor Opportunities&nbsp;
+                            {(userDataToDisplay?.investorOpportunities?.length > 1 || userDataToDisplay?.operatorOpportunities?.length > 0) &&
+                                <span>({userDataToDisplay?.investorOpportunities?.length})</span>
+                            }
+                        </h3>
+                        {isEditable &&
+                            <GrAdd className={styles['plus-container']} onClick={() => handleEdit({}, 'investor')} />
+                        }
+                    </div>
+                    <div className={styles['opportunities-wrapper']}>
+                        {userDataToDisplay?.investorOpportunities?.map((investor, i) => (
+                            <div ref={i ? null : firstInvestor} key={`${investor?.id}${i}`} className={styles['opportunity-wrapper']}>
+                                <Opportunity
+                                    handleDelete={handleDelete}
+                                    handleEdit={handleEdit}
+                                    isEditable={isEditable}
+                                    opportunity={investor}
+                                    type="investor"
+                                />
+                            </div>
+                        ))}
+                    </div>
+                    <div className={styles['opportunity-title']}>
+                        <h3 ref={operatorTitle}>Operator Opportunities&nbsp;
+                            {(userDataToDisplay?.operatorOpportunities?.length > 1 || userDataToDisplay?.investorOpportunities?.length > 0) &&
+                                <span>({userDataToDisplay?.operatorOpportunities?.length})</span>
+                            }
+                        </h3>
+                        {isEditable &&
+                            <GrAdd className={styles['plus-container']} onClick={() => handleEdit({}, 'operator')} />
+                        }
+                    </div>
+                    <div className={styles['opportunities-wrapper']}>
+                        {userDataToDisplay?.operatorOpportunities?.map((operator, i) => (
+                            <div ref={i ? null : firstOperator} key={`${operator?.id}${i}`} className={styles['opportunity-wrapper']}>
+                                <Opportunity
+                                    handleDelete={handleDelete}
+                                    handleEdit={handleEdit}
+                                    isEditable={isEditable}
+                                    opportunity={operator}
+                                    type="operator"
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </User>
+                {!isEditable &&
+                    <ConnectModal
+                        updateShowModal={updateShowModal}
+                        showModal={showModal}
+                        updateSelectedConnect={updateSelectedConnect}
+                        selectedConnect={selectedConnect}
+                        user={user}
+                    />
+                }
+            </section>
+        </>
     );
 }
 

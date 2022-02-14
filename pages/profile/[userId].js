@@ -38,7 +38,8 @@ export const getServerSideProps = async context => {
                 props: {
                     user: JSON.parse(JSON.stringify(user)),
                     profileUser: {},
-                    isEditable: true
+                    isEditable: true,
+                    referer: context?.req?.headers?.referer || null
                 }
             };
         } else {
@@ -48,7 +49,8 @@ export const getServerSideProps = async context => {
                 props: {
                     user: JSON.parse(JSON.stringify(user)),
                     profileUser: JSON.parse(JSON.stringify(profileUser)),
-                    isEditable: false
+                    isEditable: false,
+                    referer: context?.req?.headers?.referer || null
                 }
             };
         }
@@ -59,7 +61,8 @@ export const getServerSideProps = async context => {
             props: {
                 user: {},
                 profileUser: {},
-                isEditable: false
+                isEditable: false,
+                referer: context?.req?.headers?.referer || null
             }
         };
     }

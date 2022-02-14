@@ -5,6 +5,8 @@ import { GrClose } from 'react-icons/gr';
 
 import { useGetInvestors } from './hooks/useGetInvestors';
 
+import configs from '../../configs';
+
 import { debounce } from '../../helpers/debounce';
 import { disableBackgroundScroll } from '../../helpers/disableBackgroundScroll';
 
@@ -238,7 +240,7 @@ const Investors = ({
     }, [amountFilter, isLoading]);
 
     const renderCategories = useMemo(() => {
-        const a = ['Spilled Milk Ice Cream', 'Crumbl', 'Fiiz Drinks', 'Dirty Dough'];
+        const a = configs['franchise.categories'];
 
         return a.map((v, i) => {
             return (

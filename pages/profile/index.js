@@ -35,7 +35,8 @@ export const getServerSideProps = async ({ req }) => {
             props: {
                 user: JSON.parse(JSON.stringify(user)),
                 profileUser: {},
-                isEditable: true
+                isEditable: true,
+                referer: req?.headers?.referer || null
             }
         };
     } catch (e) {
@@ -43,7 +44,8 @@ export const getServerSideProps = async ({ req }) => {
             props: {
                 user: {},
                 profileUser: {},
-                isEditable: false
+                isEditable: false,
+                referer: req?.headers?.referer || null
             }
         };
     }

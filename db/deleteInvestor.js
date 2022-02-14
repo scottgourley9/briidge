@@ -1,0 +1,18 @@
+import { Client } from 'pg';
+
+export const deleteInvestor = async (userId, investorId) => {
+    const text = 'DELETE FROM investors WHERE user_id = $1 AND id=$2';
+    const values = [userId, investorId];
+
+    try {
+        const client = new Client();
+        await client.connect();
+        const res = await client.query(text, values);
+        const dbResponse = res?.rows?.[0];
+        await client.end();
+
+        return dbResponse || {};
+    } catch (error) {
+        throw error;
+    }
+};

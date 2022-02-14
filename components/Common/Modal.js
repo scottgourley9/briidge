@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import { GrClose } from 'react-icons/gr';
 
@@ -14,6 +14,8 @@ const Modal = ({
     const [isMounted, updatedIsMounted] = useState(false);
     const [ableToBeShown, updateAbleToBeShown] = useState(false);
 
+    const ref = useRef();
+
     useEffect(() => {
         updatedIsMounted(true);
     }, []);
@@ -21,6 +23,14 @@ const Modal = ({
     useEffect(() => {
         if (isMounted && isOpen) {
             updateAbleToBeShown(true);
+            ref.current.scrollTop = 0;
+            document.body.style.top = `-${window.pageYOffset}px`;
+            document.body.style.position = 'fixed';
+        } else {
+            const scrollY = document.body.style.top;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
         }
     }, [isOpen]);
 
@@ -34,7 +44,7 @@ const Modal = ({
                         <GrClose onClick={onClose} />
                     </div>
                 }
-                <div className={styles.content}>
+                <div ref={ref} className={styles.content}>
                     {children}
                 </div>
                 {footer &&
