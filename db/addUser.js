@@ -26,7 +26,7 @@ export const addUser = async body => {
     const values = [email, first_name, last_name, type === 'investor', type === 'operator', facebook, linkedin, website, picture, sub];
 
     try {
-        const client = new Client({ ssl: process.env.NODE_ENV !== 'development' });
+        const client = new Client({ ssl: process.env.NODE_ENV !== 'development' ? { rejectUnauthorized: false, ca: Buffer.from(process.env.PG_CA, 'base64').toString('ascii') } : null });
         await client.connect();
         const res = await client.query(text, values);
         dbResponse = res?.rows?.[0]?.id;

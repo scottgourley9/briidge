@@ -4,7 +4,7 @@ export const getOperatorByUserId = async (userId, getAll) => {
     let dbResponse = [];
 
     try {
-        const client = new Client({ ssl: process.env.NODE_ENV !== 'development' });
+        const client = new Client({ ssl: process.env.NODE_ENV !== 'development' ? { rejectUnauthorized: false, ca: Buffer.from(process.env.PG_CA, 'base64').toString('ascii') } : null });
         await client.connect();
         const text = 'SELECT * FROM operators WHERE user_id = $1 ORDER BY operator_last_edit_date DESC';
         const values = [userId];

@@ -53,7 +53,7 @@ export const getAllOperators = async (offset, limit, sortBy, filterBy, searchBy)
     }
 
     try {
-        const client = new Client({ ssl: process.env.NODE_ENV !== 'development' });
+        const client = new Client({ ssl: process.env.NODE_ENV !== 'development' ? { rejectUnauthorized: false, ca: Buffer.from(process.env.PG_CA, 'base64').toString('ascii') } : null });
         await client.connect();
         const formatted = format('SELECT *, count(*) OVER() AS exact_count FROM (SELECT DISTINCT ON (user_id) * FROM operators ORDER BY user_id, operator_last_edit_date) operators INNER JOIN users ON users.id = operators.user_id %s ORDER BY %s OFFSET %s LIMIT %s', filtersStr, `${!sortBy?.column ? 'operator_last_edit_date DESC' : `${sortBy?.column} ${sortBy?.direction}`}`, offset, limit);
         const res = await client.query(formatted);
