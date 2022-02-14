@@ -5,7 +5,7 @@ import {
     useInvestorState
 } from '../StateProvider';
 
-import configs from '../../configs';
+import configs from '../../../configs';
 
 import Select from '../../Common/Select';
 import Input from '../../Common/Input';
