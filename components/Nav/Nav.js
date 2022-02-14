@@ -113,6 +113,11 @@ const Nav = ({ user }) => {
                             </li>
                         </Fragment>
                     }
+                    <li onClick={handleToggleMenu} className={router?.pathname === '/faq' ? styles['on-page'] : ''}>
+                        <Link href="/faq">
+                            <a>FAQ</a>
+                        </Link>
+                    </li>
                     <li onClick={handleToggleMenu} className={router?.pathname === '/about' ? styles['on-page'] : ''}>
                         <Link href="/about">
                             <a>About</a>

@@ -70,6 +70,7 @@
 
 .phone-input-section {
     max-height: 0;
+    -webkit-transition: max-height 0.5s;
     transition: max-height 0.5s;
     overflow: hidden;
 }

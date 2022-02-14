@@ -19,10 +19,10 @@ const Footer = () => (
             </div>
         </div>
         <div className={styles['footer-links']}>
-            <Link href="/">
+            <Link href="/faq">
                 FAQ
             </Link>
-            <Link href="/">
+            <Link href="/contactus">
                 Contact Us
             </Link>
             <Link href="/">

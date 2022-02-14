@@ -7,6 +7,7 @@
     top: 0;
     left: 0;
     z-index: 2;
+    -webkit-transition: top 0.5s;
     transition: top 0.5s;
 }
 .nav-fixed {
@@ -26,6 +27,7 @@
     align-items: center;
     justify-content: flex-start;
     position: relative;
+    -webkit-transition: box-shadow 0.5s;
     transition: box-shadow 0.5s;
     width: 100%;
     margin: 0 auto;
@@ -35,6 +37,7 @@
 
     li {
         margin-left: 40px;
+        -webkit-transition: color 0.25s;
         transition: color 0.25s;
         font-size: 16px;
 
@@ -79,6 +82,7 @@
         z-index: 2;
         justify-content: flex-start;
         padding: $space-sm 0 $space-xxlg $space-md;
+        -webkit-transition: margin 0.25s;
         transition: margin 0.25s;
 
         .last-list-item {
@@ -156,6 +160,7 @@
     top: 0;
     left: 0;
     background: $white;
+    -webkit-transition: all 0.5s;
     transition: all 0.5s;
     opacity: 0;
     z-index: -1;
@@ -171,6 +176,7 @@
     justify-content: flex-start;
     padding-left: $space-md;
     height: 64px;
+    -webkit-transition: box-shadow 0.5s;
     transition: box-shadow 0.5s;
     background: transparent;
     @media (max-width: $small-screen) {

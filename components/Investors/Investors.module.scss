@@ -97,6 +97,7 @@
     top: 0;
     background: $white;
     z-index: 4;
+    -webkit-transition: right 0.5s;
     transition: right 0.5s;
     overflow-y: scroll;
     padding: $space-sm;
@@ -158,6 +159,7 @@
     .filter-by {
         max-height: 1px;
         overflow: hidden;
+        -webkit-transition: max-height 0.25s;
         transition: max-height 0.25s;
         border-bottom: 1px solid $border-grey-one;
         display: flex;
