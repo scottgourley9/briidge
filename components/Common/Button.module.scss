@@ -11,6 +11,12 @@
     button {
         color: $black;
     }
+
+    .selected-button {
+        background: $orange-main;
+        color: $white;
+        border: 1px solid $orange-main;
+    }
 }
 
 .error-state {
@@ -72,10 +78,4 @@
     margin-bottom: $space-sm;
     border-radius: 4px;
     padding: 0 $space-md;
-}
-
-.selected-button {
-    background: $orange-main;
-    color: $white;
-    border: 1px solid $orange-main;
 }
