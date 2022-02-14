@@ -16,7 +16,7 @@ export const addOperator = async (userId, operatorData) => {
     const values = [need, Number(capitalAmountMin?.replace(/[^0-9]/gi, '') || 0), Number(capitalAmountMax?.replace(/[^0-9]/gi, '') || 9999999999), operatingCategory, preferredLocation, investmentType, timeframe, idealInvestorDescription, userId];
 
     try {
-        const client = new Client();
+        const client = new Client({ ssl: process.env.NODE_ENV !== 'development' });
         await client.connect();
         const res = await client.query(text, values);
         const dbResponse = res?.rows?.[0];

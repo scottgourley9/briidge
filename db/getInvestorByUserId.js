@@ -4,7 +4,7 @@ export const getInvestorByUserId = async (userId, getAll) => {
     let dbResponse = [];
 
     try {
-        const client = new Client();
+        const client = new Client({ ssl: process.env.NODE_ENV !== 'development' });
         await client.connect();
         const text = 'SELECT * FROM investors WHERE user_id = $1 ORDER BY investor_last_edit_date DESC';
         const values = [userId];

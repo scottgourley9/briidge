@@ -4,7 +4,7 @@ export const getUserBySub = async sub => {
     let dbResponse = [];
 
     try {
-        const client = new Client();
+        const client = new Client({ ssl: process.env.NODE_ENV !== 'development' });
         await client.connect();
         const text = 'SELECT * from users where sub = $1';
         const values = [sub];

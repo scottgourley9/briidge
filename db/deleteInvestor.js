@@ -5,7 +5,7 @@ export const deleteInvestor = async (userId, investorId) => {
     const values = [userId, investorId];
 
     try {
-        const client = new Client();
+        const client = new Client({ ssl: process.env.NODE_ENV !== 'development' });
         await client.connect();
         const res = await client.query(text, values);
         const dbResponse = res?.rows?.[0];

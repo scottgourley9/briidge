@@ -16,7 +16,7 @@ export const updateUserById = async data => {
     } = data || {};
 
     try {
-        const client = new Client();
+        const client = new Client({ ssl: process.env.NODE_ENV !== 'development' });
         await client.connect();
         const text = 'UPDATE users SET email = $1, first_name = $2, last_name = $3, investor = $4, operator = $5, facebook = $6, linkedin = $7, website = $8 WHERE id = $9 RETURNING id';
         const values = [email, first_name, last_name, investor || type === 'investor', operator || type === 'operator', facebook, linkedin, website, id];

@@ -4,7 +4,7 @@ export const getUserById = async id => {
     let dbResponse = [];
 
     try {
-        const client = new Client();
+        const client = new Client({ ssl: process.env.NODE_ENV !== 'development' });
         await client.connect();
         const text = 'SELECT * from users where id = $1';
         const values = [id];

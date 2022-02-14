@@ -16,7 +16,7 @@ export const addInvestor = async (userId, investorData) => {
     const values = [need, Number(investmentAmountMin?.replace(/[^0-9]/gi, '') || 0), Number(investmentAmountMax?.replace(/[^0-9]/gi, '') || 9999999999), investmentCategory, preferredLocation, investmentType, investmentTimeframe, idealOperatorDescription, userId];
 
     try {
-        const client = new Client();
+        const client = new Client({ ssl: process.env.NODE_ENV !== 'development' });
         await client.connect();
         const res = await client.query(text, values);
         const dbResponse = res?.rows?.[0];
