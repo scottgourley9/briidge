@@ -2,4 +2,42 @@
 
 .faq-page-wrapper {
     padding: $space-md;
+    line-height: 25px;
+    max-width: 800px;
+    margin: auto;
+
+    .section-title {
+        font-size: 22px;
+        font-family: 'poppins bold', sans-serif;
+        margin: $space-xlg 0 $space-md;
+        background: $orange-main;
+        color: $white;
+        padding: $space-sm;
+
+        &:first-of-type {
+            margin-top: 0;
+        }
+    }
+
+    .question {
+        font-size: 18px;
+        font-family: 'poppins bold', sans-serif;
+        margin: $space-md 0 $space-sm;
+        font-style: italic;
+    }
+
+    .answer {
+        font-size: 14px;
+        margin: $space-sm 0;
+    }
+
+    b {
+        font-family: 'poppins bold', sans-serif;
+        font-size: 18px;
+        font-style: italic;
+    }
+
+    ul {
+        list-style: circle;
+    }
 }
