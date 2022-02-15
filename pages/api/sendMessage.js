@@ -20,7 +20,7 @@ export default async (req, res) => {
 
         const email = {
             from: 'info@getbriidge.com',
-            to: 'scottgourley9@gmail.com',
+            to: 'info@getbriidge.com',
             subject: 'Briidge Contact Us Message',
             html: `
                 <div style="display: flex;align-items: center"><b>Name:&nbsp;</b>${fromName}</div><br>
