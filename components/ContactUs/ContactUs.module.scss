@@ -1,5 +1,65 @@
 @import '../../styles/variables';
 
-.contact-us-page-wrapper {
+.contact-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+        margin: 0;
+        color: $orange-main;
+        padding: $space-xxlg $space-md 0;
+        font-size: 22px;
+
+        @media (min-width: $small-screen-mf) {
+            font-size: 36px;
+        }
+    }
+}
+
+.contact-us-form {
+    max-width: 600px;
+    width: 100%;
     padding: $space-md;
+
+    input,
+    textarea {
+        border-radius: 4px;
+        border-color: $border-grey-one;
+        font-size: 16px;
+        margin-bottom: $space-sm;
+        padding: $space-xs $space-sm;
+    }
+
+    textarea {
+        padding: $space-sm;
+        height: 100px;
+    }
+
+    label {
+        font-size: 16px;
+    }
+}
+
+.names {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+
+    & > div {
+        width: 48%;
+    }
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+     button {
+         width: 120px;
+         margin: 0;
+     }
 }

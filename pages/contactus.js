@@ -1,4 +1,11 @@
+import {
+   QueryClient,
+   QueryClientProvider
+ } from 'react-query'
+
 import { getUserFromRequestData } from '../helpers/getUserFromRequestData';
+
+import ContactUs from '../components/ContactUs/ContactUs';
 
 export const getServerSideProps = async ({ req }) => {
     try {
@@ -14,4 +21,14 @@ export const getServerSideProps = async ({ req }) => {
     }
 };
 
-export { default } from '../components/ContactUs/ContactUs';
+const ContactUsWithReactQuery = props => {
+    const queryClient = new QueryClient()
+
+    return (
+        <QueryClientProvider client={queryClient}>
+            <ContactUs {...props} />
+        </QueryClientProvider>
+    )
+}
+
+export default ContactUsWithReactQuery;
