@@ -6,8 +6,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    color: $white;
-    background: $black-two;
+    color: $black;
+    background: $white;
     min-height: 300px;
 
     @media (max-width: $small-screen) {
@@ -36,7 +36,7 @@
     }
 
     .footer-links {
-        width: 50%;
+        width: 100%;
         text-align: center;
         line-height: 40px;
 
