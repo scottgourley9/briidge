@@ -182,7 +182,7 @@ const Operators = ({
             copy.push(
                 {
                     column: 'capital_amount',
-                    value: `${a[0]}-${a[1] || 9999999999}`
+                    value: `${a[0]}-${a[1] || 9999999998}`
                 }
             );
         } else {
