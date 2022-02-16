@@ -13,7 +13,7 @@ const User = ({
     investor,
     handleConnectClick
 }) => {
-    const additionalOpportunites = investor?.allOpportunities?.slice(1) || [];
+    // const additionalOpportunites = investor?.allOpportunities?.slice(1) || [];
     return (
         <div className={styles['list-user']}>
             <div className={styles['img-and-details']}>
@@ -62,11 +62,14 @@ const User = ({
                 {investor?.ideal_operator_description &&
                     <p className={styles['inner-text-long']}>{investor?.ideal_operator_description}</p>
                 }
-                {additionalOpportunites?.length > 0 &&
+                {/*additionalOpportunites?.length > 0 &&
                     <Link href={`/profile/${investor?.user_id}`}>
                         <a className={styles['additional-opportunities']}>Additional Opportunities</a>
                     </Link>
-                }
+                */}
+                <Link href={`/profile/${investor?.user_id}`}>
+                    <a className={styles['additional-opportunities']}>See all opportunities</a>
+                </Link>
             </div>
         </div>
     )

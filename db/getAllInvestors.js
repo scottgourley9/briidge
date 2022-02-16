@@ -60,30 +60,30 @@ export const getAllInvestors = async (offset, limit, sortBy, filterBy, searchBy)
         dbResponse = res?.rows;
         await client.end();
 
-        const promiseArray = (dbResponse || []).reduce((acc, curr) => {
-            const p = new Promise(async resolve => {
-                const r = await Promise.allSettled([getInvestorByUserId(curr.id, true), getOperatorByUserId(curr.id, true)]);
-                resolve([...((r?.[0]?.value || []).concat(r?.[1]?.value || []))]);
-            });
-            acc.push(p);
-
-            return acc;
-        }, []);
-
-        const results = await Promise.allSettled(promiseArray);
-
-        dbResponse = (dbResponse || []).map((user, i) => {
-            if (
-                !user?.allOpportunities &&
-                user?.id === results?.[i]?.value?.[0]?.user_id
-            ) {
-                user.allOpportunities = [...(results?.[i]?.value || [])];
-            } else if (user?.id === results?.[i]?.value?.[0]?.user_id) {
-                user.allOpportunities.push(...(results?.[i]?.value || []));
-            }
-
-            return user;
-        })
+        // const promiseArray = (dbResponse || []).reduce((acc, curr) => {
+        //     const p = new Promise(async resolve => {
+        //         const r = await Promise.allSettled([getInvestorByUserId(curr.id, true), getOperatorByUserId(curr.id, true)]);
+        //         resolve([...((r?.[0]?.value || []).concat(r?.[1]?.value || []))]);
+        //     });
+        //     acc.push(p);
+        //
+        //     return acc;
+        // }, []);
+        //
+        // const results = await Promise.allSettled(promiseArray);
+        //
+        // dbResponse = (dbResponse || []).map((user, i) => {
+        //     if (
+        //         !user?.allOpportunities &&
+        //         user?.id === results?.[i]?.value?.[0]?.user_id
+        //     ) {
+        //         user.allOpportunities = [...(results?.[i]?.value || [])];
+        //     } else if (user?.id === results?.[i]?.value?.[0]?.user_id) {
+        //         user.allOpportunities.push(...(results?.[i]?.value || []));
+        //     }
+        //
+        //     return user;
+        // })
     } catch (error) {
         console.log('error getting investors from db: ', error);
     }

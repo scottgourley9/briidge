@@ -33,12 +33,19 @@ export const getUserFromRequestData = async req => {
             };
         }
 
-        const results = await Promise.allSettled([getInvestorByUserId(userData?.id, true), getOperatorByUserId(userData?.id, true)]);
+        if (/profile/gi.test(req?.url)) {
+            const results = await Promise.allSettled([getInvestorByUserId(userData?.id, true), getOperatorByUserId(userData?.id, true)]);
+
+            return {
+                ...(userData || user || {}),
+                investorOpportunities: results?.[0]?.value || [],
+                operatorOpportunities: results?.[1]?.value || [],
+                registered: Boolean(userData?.id)
+            }
+        }
 
         return {
             ...(userData || user || {}),
-            investorOpportunities: results?.[0]?.value || [],
-            operatorOpportunities: results?.[1]?.value || [],
             registered: Boolean(userData?.id)
         }
     } catch (e) {

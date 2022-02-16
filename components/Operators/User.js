@@ -13,7 +13,7 @@ const User = ({
     operator,
     handleConnectClick
 }) => {
-    const additionalOpportunites = operator?.allOpportunities?.slice(1) || [];
+    // const additionalOpportunites = operator?.allOpportunities?.slice(1) || [];
     return (
         <div className={styles['list-user']}>
             <div className={styles['img-and-details']}>
@@ -62,11 +62,14 @@ const User = ({
                 {operator?.ideal_investor_description &&
                     <p className={styles['inner-text-long']}>{operator?.ideal_investor_description}</p>
                 }
-                {additionalOpportunites?.length > 0 &&
+                {/* additionalOpportunites?.length > 0 &&
                     <Link href={`/profile/${operator?.user_id}`}>
                         <a className={styles['additional-opportunities']}>Additional Opportunities</a>
                     </Link>
-                }
+                */}
+                <Link href={`/profile/${operator?.user_id}`}>
+                    <a className={styles['additional-opportunities']}>See all opportunities</a>
+                </Link>
             </div>
         </div>
     )

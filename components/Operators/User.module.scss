@@ -143,6 +143,8 @@
     }
 
     .additional-opportunities {
+        color: $dark-grey-one;
+        text-decoration: underline;
         margin-top: $space-xs;
 
         @media (min-width: $small-screen-mf) {
