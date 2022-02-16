@@ -182,7 +182,7 @@ const Investors = ({
             copy.push(
                 {
                     column: 'investment_amount',
-                    value: `${a[0]}-${a[1]}`
+                    value: `${a[0]}-${a[1] || 9999999999}`
                 }
             );
         } else {
