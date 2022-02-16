@@ -176,52 +176,60 @@ const Profile = ({
                         updateShowUserForm={updateShowUserForm}
                         showUserForm={showUserForm}
                     />
-                    <div className={styles['opportunity-title']}>
-                        <h3 ref={investorTitle}>Investor Opportunities&nbsp;
-                            {(userDataToDisplay?.investorOpportunities?.length > 1 || userDataToDisplay?.operatorOpportunities?.length > 0) &&
-                                <span>({userDataToDisplay?.investorOpportunities?.length})</span>
-                            }
-                        </h3>
-                        {isEditable &&
-                            <GrAdd className={styles['plus-container']} onClick={() => handleEdit({}, 'investor')} />
-                        }
-                    </div>
-                    <div className={styles['opportunities-wrapper']}>
-                        {userDataToDisplay?.investorOpportunities?.map((investor, i) => (
-                            <div ref={i ? null : firstInvestor} key={`${investor?.id}${i}`} className={styles['opportunity-wrapper']}>
-                                <Opportunity
-                                    handleDelete={handleDelete}
-                                    handleEdit={handleEdit}
-                                    isEditable={isEditable}
-                                    opportunity={investor}
-                                    type="investor"
-                                />
+                    {(userDataToDisplay?.investorOpportunities?.length > 0 || isEditable) &&
+                        <>
+                            <div className={styles['opportunity-title']}>
+                                <h3 ref={investorTitle}>Investor Opportunities&nbsp;
+                                    {(userDataToDisplay?.investorOpportunities?.length > 1 || userDataToDisplay?.operatorOpportunities?.length > 0) &&
+                                        <span>({userDataToDisplay?.investorOpportunities?.length})</span>
+                                    }
+                                </h3>
+                                {isEditable &&
+                                    <GrAdd className={styles['plus-container']} onClick={() => handleEdit({}, 'investor')} />
+                                }
                             </div>
-                        ))}
-                    </div>
-                    <div className={styles['opportunity-title']}>
-                        <h3 ref={operatorTitle}>Operator Opportunities&nbsp;
-                            {(userDataToDisplay?.operatorOpportunities?.length > 1 || userDataToDisplay?.investorOpportunities?.length > 0) &&
-                                <span>({userDataToDisplay?.operatorOpportunities?.length})</span>
-                            }
-                        </h3>
-                        {isEditable &&
-                            <GrAdd className={styles['plus-container']} onClick={() => handleEdit({}, 'operator')} />
-                        }
-                    </div>
-                    <div className={styles['opportunities-wrapper']}>
-                        {userDataToDisplay?.operatorOpportunities?.map((operator, i) => (
-                            <div ref={i ? null : firstOperator} key={`${operator?.id}${i}`} className={styles['opportunity-wrapper']}>
-                                <Opportunity
-                                    handleDelete={handleDelete}
-                                    handleEdit={handleEdit}
-                                    isEditable={isEditable}
-                                    opportunity={operator}
-                                    type="operator"
-                                />
+                            <div className={styles['opportunities-wrapper']}>
+                                {userDataToDisplay?.investorOpportunities?.map((investor, i) => (
+                                    <div ref={i ? null : firstInvestor} key={`${investor?.id}${i}`} className={styles['opportunity-wrapper']}>
+                                        <Opportunity
+                                            handleDelete={handleDelete}
+                                            handleEdit={handleEdit}
+                                            isEditable={isEditable}
+                                            opportunity={investor}
+                                            type="investor"
+                                        />
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
+                        </>
+                    }
+                    {(userDataToDisplay?.operatorOpportunities?.length > 0 || isEditable) &&
+                        <>
+                            <div className={styles['opportunity-title']}>
+                                <h3 ref={operatorTitle}>Operator Opportunities&nbsp;
+                                    {(userDataToDisplay?.operatorOpportunities?.length > 1 || userDataToDisplay?.investorOpportunities?.length > 0) &&
+                                        <span>({userDataToDisplay?.operatorOpportunities?.length})</span>
+                                    }
+                                </h3>
+                                {isEditable &&
+                                    <GrAdd className={styles['plus-container']} onClick={() => handleEdit({}, 'operator')} />
+                                }
+                            </div>
+                            <div className={styles['opportunities-wrapper']}>
+                                {userDataToDisplay?.operatorOpportunities?.map((operator, i) => (
+                                    <div ref={i ? null : firstOperator} key={`${operator?.id}${i}`} className={styles['opportunity-wrapper']}>
+                                        <Opportunity
+                                            handleDelete={handleDelete}
+                                            handleEdit={handleEdit}
+                                            isEditable={isEditable}
+                                            opportunity={operator}
+                                            type="operator"
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    }
                 </User>
                 {!isEditable &&
                     <ConnectModal
