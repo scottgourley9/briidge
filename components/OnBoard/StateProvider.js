@@ -103,7 +103,15 @@ const initialOnBoardingData = {
         timeframeSelected: false
     },
     step: 1,
-    user: {}
+    user: {},
+    firstNameErrorObj: {
+        messageType: '',
+        message: ''
+    },
+    lastNameErrorObj: {
+        messageType: '',
+        message: ''
+    }
 }
 
 export const OnBoardContext = createContext({
@@ -123,7 +131,7 @@ export const OnBoardContextProvider = props => {
                 ...state.investor,
                 ...newObj
             }
-        })
+        });
     }
 
     const updateOperatorState = newObj => {
@@ -133,14 +141,14 @@ export const OnBoardContextProvider = props => {
                 ...state.operator,
                 ...newObj
             }
-        })
+        });
     }
 
     const updateOnBoardState = newObj => {
         setState({
             ...state,
             ...newObj
-        })
+        });
     }
 
     const updateStateFunctions = {

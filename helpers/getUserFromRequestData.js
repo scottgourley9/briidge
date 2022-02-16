@@ -12,8 +12,8 @@ export const getUserFromRequestData = async req => {
     if (typeof sessionData?.user === 'object') {
         user = {
             ...sessionData?.user || {},
-            first_name: sessionData?.user?.given_name || sessionData?.user?.['https://www.getbriidge.com/user_metadata']?.first_name,
-            last_name: sessionData?.user?.family_name || sessionData?.user?.['https://www.getbriidge.com/user_metadata']?.last_name
+            first_name: sessionData?.user?.given_name,
+            last_name: sessionData?.user?.family_name
         }
     }
 

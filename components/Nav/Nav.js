@@ -140,7 +140,7 @@ const Nav = ({ user }) => {
                                 <a href="/api/auth/login?returnTo=/profile">Log in</a>
                             </li>
                             <li className={styles['last-list-item']} onClick={handleToggleMenu}>
-                                <a href="/api/auth/login?returnTo=/profile">
+                                <a href="/api/auth/login?returnTo=/profile&screen_hint=signup">
                                     <Button
                                         size="sm"
                                         selected={true}
@@ -151,7 +151,7 @@ const Nav = ({ user }) => {
                                 </a>
                             </li>
                             <li className={styles['last-list-item-mobile']} onClick={handleToggleMenu}>
-                                <a href="/api/auth/login?returnTo=/profile">
+                                <a href="/api/auth/login?returnTo=/profile&screen_hint=signup">
                                     Sign up
                                 </a>
                             </li>

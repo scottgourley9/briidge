@@ -307,3 +307,21 @@
         display: none;
     }
 }
+
+.name-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: $space-xs;
+
+    & > :first-child {
+        margin-right: 15px;
+    }
+
+    & > :last-child {
+        margin-left: 15px;
+    }
+
+    .form-field {
+        width: 230px;
+    }
+}

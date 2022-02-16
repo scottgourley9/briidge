@@ -9,6 +9,7 @@ import Operator from './Operator/Operator';
 import SocialLinks from './SocialLinks/SocialLinks';
 import Button from '../Common/Button';
 import Chevron from '../SVG/Chevron';
+import Input from '../Common/Input';
 
 import styles from './OnBoard.module.scss';
 
@@ -22,10 +23,25 @@ const OnBoard = ({
     }, []);
 
     const handleTypeClick = type => {
-        updateOnBoardState({
-            type,
-            step: 2
-        })
+        const firstNameValid = onBoardState?.user?.first_name;
+        const lastNameValid = onBoardState?.user?.last_name;
+        if (!firstNameValid || !lastNameValid) {
+            updateOnBoardState({
+                firstNameErrorObj: {
+                    messageType: !firstNameValid ? 'error' : '',
+                    message: !firstNameValid ? 'First name is required' : ''
+                },
+                lastNameErrorObj: {
+                    messageType: !lastNameValid ? 'error' : '',
+                    message: !lastNameValid ? 'Last name is required' : ''
+                }
+            });
+        } else if (firstNameValid && lastNameValid) {
+            updateOnBoardState({
+                type,
+                step: 2
+            });
+        }
     }
 
     const {
@@ -56,7 +72,57 @@ const OnBoard = ({
                     <div className={`${styles.step} ${step === 1 ? styles['active-step'] : ''}`}>
                         <h2>Welcome! Let’s set up your profile and get you started.</h2>
 
-                        <h3>First, select an account type</h3>
+                        {(!user?.first_name || !user?.last_name) ?
+                            <>
+                                <h3>First, tell us your name and select an account type</h3>
+                                <div className={styles['name-row']}>
+                                    <Input
+                                        containerClassName={styles['form-field']}
+                                        onFocus={() => {
+                                            updateOnBoardState({
+                                                firstNameErrorObj: {
+                                                    messageType: '',
+                                                    message: ''
+                                                }
+                                            });
+                                        }}
+                                        value={onBoardState?.user?.first_name}
+                                        onChange={e => updateOnBoardState({
+                                            user: {
+                                                ...(onBoardState?.user || {}),
+                                                first_name: e?.target?.value
+                                            }
+                                        })}
+                                        placeholder="First Name"
+                                        message={onBoardState?.firstNameErrorObj?.message}
+                                        messageType={onBoardState?.firstNameErrorObj?.messageType}
+                                    />
+                                    <Input
+                                        containerClassName={styles['form-field']}
+                                        onFocus={() => {
+                                            updateOnBoardState({
+                                                lastNameErrorObj: {
+                                                    messageType: '',
+                                                    message: ''
+                                                }
+                                            });
+                                        }}
+                                        value={onBoardState?.user?.last_name}
+                                        onChange={e => updateOnBoardState({
+                                            user: {
+                                                ...(onBoardState?.user || {}),
+                                                last_name: e?.target?.value
+                                            }
+                                        })}
+                                        placeholder="Last Name"
+                                        message={onBoardState?.lastNameErrorObj?.message}
+                                        messageType={onBoardState?.lastNameErrorObj?.messageType}
+                                    />
+                                </div>
+                            </>
+                            :
+                            <h3>First, select an account type</h3>
+                        }
 
                         <div className={styles['main-type-buttons']}>
                             <div className={styles.left}>
