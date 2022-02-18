@@ -5,6 +5,8 @@ import axios from 'axios';
 
 import { useUploadPhoto } from './hooks/useUploadPhoto';
 
+import { ensureAbsolutePath } from '../../helpers/ensureAbsolutePath';
+
 import Button from '../Common/Button';
 import FacebookCircle from '../SVG/FacebookCircle';
 import LinkedIn from '../SVG/LinkedIn';
@@ -153,13 +155,13 @@ const User = ({
                             <p><LocationIcon />&nbsp;<span className={styles['inner-text']}>{user?.preferred_location}, US</span></p>
                         }
                         {user?.facebook &&
-                            <a href={user?.facebook} target="__blank" rel="noopener noreferrer"><FacebookCircle />&nbsp;<span className={styles['inner-text']}>{user?.facebook}</span></a>
+                            <a href={ensureAbsolutePath(user?.facebook)} target="__blank" rel="noopener noreferrer"><FacebookCircle />&nbsp;<span className={styles['inner-text']}>Facebook</span></a>
                         }
                         {user?.linkedin &&
-                            <a href={user?.linkedin} target="__blank" rel="noopener noreferrer"><LinkedIn />&nbsp;<span className={styles['inner-text']}>{user?.linkedin}</span></a>
+                            <a href={ensureAbsolutePath(user?.linkedin)} target="__blank" rel="noopener noreferrer"><LinkedIn />&nbsp;<span className={styles['inner-text']}>LinkedIn</span></a>
                         }
                         {user?.website &&
-                            <a href={user?.website} target="__blank" rel="noopener noreferrer"><LinkIcon className={styles['link-icon']} />&nbsp;<span className={styles['inner-text']}>{user?.website}</span></a>
+                            <a href={ensureAbsolutePath(user?.website)} target="__blank" rel="noopener noreferrer"><LinkIcon className={styles['link-icon']} />&nbsp;<span className={styles['inner-text']}>{isEditable ? 'Your' : `${user?.first_name}'s`} Website</span></a>
                         }
                         {!isEditable ?
                             <Button

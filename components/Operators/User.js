@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
+import { ensureAbsolutePath } from '../../helpers/ensureAbsolutePath';
+
 import Button from '../Common/Button';
 import FacebookCircle from '../SVG/FacebookCircle';
 import LinkedIn from '../SVG/LinkedIn';
@@ -30,13 +32,13 @@ const User = ({
                         <p><LocationIcon />&nbsp;<span className={styles['inner-text']}>{operator?.preferred_location}, US</span></p>
                     }
                     {operator?.facebook &&
-                        <a href={operator?.facebook} target="__blank" rel="noopener noreferrer"><FacebookCircle />&nbsp;<span className={styles['inner-text']}>{operator?.facebook}</span></a>
+                        <a href={ensureAbsolutePath(operator?.facebook)} target="__blank" rel="noopener noreferrer"><FacebookCircle />&nbsp;<span className={styles['inner-text']}>Facebook</span></a>
                     }
                     {operator?.linkedin &&
-                        <a href={operator?.linkedin} target="__blank" rel="noopener noreferrer"><LinkedIn />&nbsp;<span className={styles['inner-text']}>{operator?.linkedin}</span></a>
+                        <a href={ensureAbsolutePath(operator?.linkedin)} target="__blank" rel="noopener noreferrer"><LinkedIn />&nbsp;<span className={styles['inner-text']}>LinkedIn</span></a>
                     }
                     {operator?.website &&
-                        <a href={operator?.website} target="__blank" rel="noopener noreferrer"><LinkIcon className={styles['link-icon']} />&nbsp;<span className={styles['inner-text']}>{operator?.website}</span></a>
+                        <a href={ensureAbsolutePath(operator?.website)} target="__blank" rel="noopener noreferrer"><LinkIcon className={styles['link-icon']} />&nbsp;<span className={styles['inner-text']}>{operator?.first_name}&apos;s Website</span></a>
                     }
                     <Button
                         type="button"

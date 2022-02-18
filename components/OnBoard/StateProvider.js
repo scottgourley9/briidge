@@ -48,6 +48,18 @@ const initialOnBoardingData = {
             linkedin: '',
             website: ''
         },
+        facebookErrorObj: {
+            messageType: '',
+            message: ''
+        },
+        linkedinErrorObj: {
+            messageType: '',
+            message: ''
+        },
+        websiteErrorObj: {
+            messageType: '',
+            message: ''
+        },
         investmentSelected: false,
         categorySelected: false,
         timeframeSelected: false
@@ -98,6 +110,18 @@ const initialOnBoardingData = {
             linkedin: '',
             website: '',
         },
+        facebookErrorObj: {
+            messageType: '',
+            message: ''
+        },
+        linkedinErrorObj: {
+            messageType: '',
+            message: ''
+        },
+        websiteErrorObj: {
+            messageType: '',
+            message: ''
+        },
         capitalSelected: false,
         categorySelected: false,
         timeframeSelected: false
@@ -125,6 +149,13 @@ export const OnBoardContextProvider = props => {
     const [state, setState] = useState(initialOnBoardingData);
 
     const updateInvestorState = newObj => {
+        console.log({
+            ...state,
+            investor: {
+                ...state.investor,
+                ...newObj
+            }
+        });
         setState({
             ...state,
             investor: {

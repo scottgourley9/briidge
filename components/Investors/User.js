@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
+import { ensureAbsolutePath } from '../../helpers/ensureAbsolutePath';
+
 import Button from '../Common/Button';
 import FacebookCircle from '../SVG/FacebookCircle';
 import LinkedIn from '../SVG/LinkedIn';
@@ -30,13 +32,13 @@ const User = ({
                         <p><LocationIcon />&nbsp;<span className={styles['inner-text']}>{investor?.preferred_location}, US</span></p>
                     }
                     {investor?.facebook &&
-                        <a href={investor?.facebook} target="__blank" rel="noopener noreferrer"><FacebookCircle />&nbsp;<span className={styles['inner-text']}>{investor?.facebook}</span></a>
+                        <a href={ensureAbsolutePath(investor?.facebook)} target="__blank" rel="noopener noreferrer"><FacebookCircle />&nbsp;<span className={styles['inner-text']}>Facebook</span></a>
                     }
                     {investor?.linkedin &&
-                        <a href={investor?.linkedin} target="__blank" rel="noopener noreferrer"><LinkedIn />&nbsp;<span className={styles['inner-text']}>{investor?.linkedin}</span></a>
+                        <a href={ensureAbsolutePath(investor?.linkedin)} target="__blank" rel="noopener noreferrer"><LinkedIn />&nbsp;<span className={styles['inner-text']}>LinkedIn</span></a>
                     }
                     {investor?.website &&
-                        <a href={investor?.website} target="__blank" rel="noopener noreferrer"><LinkIcon className={styles['link-icon']} />&nbsp;<span className={styles['inner-text']}>{investor?.website}</span></a>
+                        <a href={ensureAbsolutePath(investor?.website)} target="__blank" rel="noopener noreferrer"><LinkIcon className={styles['link-icon']} />&nbsp;<span className={styles['inner-text']}>{investor?.first_name}&apos;s Website</span></a>
                     }
                     <Button
                         type="button"

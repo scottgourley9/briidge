@@ -27,20 +27,21 @@
     }
 
     input {
-        margin-bottom: 0;
+        margin-bottom: $space-sm;
         padding-left: 54px;
         padding-right: $space-sm;
+        min-width: 300px;
     }
 
     .input-section {
-        margin-bottom: $space-sm;
+        margin-bottom: $space-xs;
         position: relative;
 
         svg {
             position: absolute;
             left: 16px;
             top: 50%;
-            margin-top: -11px;
+            margin-top: -19px;
         }
     }
 }

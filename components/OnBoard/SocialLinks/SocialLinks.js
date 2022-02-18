@@ -40,8 +40,44 @@ const SocialLinks = ({ user }) => {
         socialMediaLinks: operatorLinks = {}
     } = operatorState || {};
 
+    const isValidURL = url => {
+        try {
+            return /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/.test(url)
+        } catch (e) {
+            return url;
+        }
+    }
+
+    const setLinkErrors = (socialLinksObj, updateState) => {
+        const links = Object.entries(socialLinksObj || {});
+        const errorObj = links.reduce((acc, curr) => {
+            if (curr[1] && !isValidURL(curr[1])) {
+                acc[`${curr[0]}ErrorObj`] = {
+                    messageType: 'error',
+                    message: 'Invalid URL, please update or remove'
+                }
+            }
+
+            return acc;
+        }, {});
+        const hasErrors = Boolean(Object.values(errorObj)?.length);
+        if (hasErrors) {
+            updateState(errorObj);
+        }
+
+        return hasErrors;
+    }
+
     const handleEnterSiteClick = () => {
-        onSaveUserData();
+        let hasError = false;
+        if (type === 'investor') {
+            hasError = setLinkErrors(investorState?.socialMediaLinks, updateInvestorState);
+        } else if (type === 'operator') {
+            hasError = setLinkErrors(operatorState?.socialMediaLinks, updateOperatorState);
+        }
+        if (!hasError) {
+            onSaveUserData();
+        }
     }
 
     const handleUpdate = (value, linkType) => {
@@ -63,25 +99,82 @@ const SocialLinks = ({ user }) => {
                 <div className={styles['input-section']}>
                     <FacebookCircle />
                     <Input
+                        onFocus={() => {
+                            if (type === 'investor') {
+                                updateInvestorState({
+                                    facebookErrorObj: {
+                                        messageType: '',
+                                        message: ''
+                                    }
+                                });
+                            } else {
+                                updateOperatorState({
+                                    facebookErrorObj: {
+                                        messageType: '',
+                                        message: ''
+                                    }
+                                });
+                            }
+                        }}
                         value={[type === 'investor' ? investorLinks : operatorLinks].facebook}
                         onChange={e => handleUpdate(e.target.value, 'facebook')}
                         placeholder="Facebook profile"
+                        messageType={type === 'investor' ? (investorState?.facebookErrorObj?.messageType) : (operatorState?.facebookErrorObj?.messageType)}
+                        message={type === 'investor' ? (investorState?.facebookErrorObj?.message) : (operatorState?.facebookErrorObj?.message)}
                     />
                 </div>
                 <div className={styles['input-section']}>
                     <LinkedIn />
                     <Input
+                        onFocus={() => {
+                            if (type === 'investor') {
+                                updateInvestorState({
+                                    linkedinErrorObj: {
+                                        messageType: '',
+                                        message: ''
+                                    }
+                                });
+                            } else {
+                                updateOperatorState({
+                                    linkedinErrorObj: {
+                                        messageType: '',
+                                        message: ''
+                                    }
+                                });
+                            }
+                        }}
                         value={[type === 'investor' ? investorLinks : operatorLinks].linkedin}
                         onChange={e => handleUpdate(e.target.value, 'linkedin')}
                         placeholder="LinkedIn profile"
+                        messageType={type === 'investor' ? (investorState?.linkedinErrorObj?.messageType) : (operatorState?.linkedinErrorObj?.messageType)}
+                        message={type === 'investor' ? (investorState?.linkedinErrorObj?.message) : (operatorState?.linkedinErrorObj?.message)}
                     />
                 </div>
                 <div className={styles['input-section']}>
                     <LinkIcon />
                     <Input
+                        onFocus={() => {
+                            if (type === 'investor') {
+                                updateInvestorState({
+                                    websiteErrorObj: {
+                                        messageType: '',
+                                        message: ''
+                                    }
+                                });
+                            } else {
+                                updateOperatorState({
+                                    websiteErrorObj: {
+                                        messageType: '',
+                                        message: ''
+                                    }
+                                });
+                            }
+                        }}
                         value={[type === 'investor' ? investorLinks : operatorLinks].website}
                         onChange={e => handleUpdate(e.target.value, 'website')}
                         placeholder="personal website"
+                        messageType={type === 'investor' ? (investorState?.websiteErrorObj?.messageType) : (operatorState?.websiteErrorObj?.messageType)}
+                        message={type === 'investor' ? (investorState?.websiteErrorObj?.message) : (operatorState?.websiteErrorObj?.message)}
                     />
                 </div>
             </div>
