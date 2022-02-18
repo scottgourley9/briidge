@@ -153,7 +153,7 @@ const OperatorForm = ({
                         onClick={() => handleDataUpdate({ need: 'loan' })}
                         selected={need === 'loan'}
                         type="button"
-                        size="lg"
+                        size="sm"
                         message={need_error_obj?.message}
                         messageType={need_error_obj?.messageType}
                     >
@@ -169,7 +169,7 @@ const OperatorForm = ({
                         onClick={() => handleDataUpdate({ need: 'private investor' })}
                         selected={need === 'private investor'}
                         type="button"
-                        size="lg"
+                        size="sm"
                         message={need_error_obj?.message}
                         messageType={need_error_obj?.messageType}
                     >
@@ -198,6 +198,7 @@ const OperatorForm = ({
                                 capital_selected: true
                             });
                         }}
+                        size="sm"
                         value={capital_selected ? `${capital_amount_min}-${capital_amount_max}` : ''}
                         placeholder="Capital Amount"
                         options={[
@@ -216,53 +217,68 @@ const OperatorForm = ({
                         message={capital_amount_min_error_obj?.message || capital_amount_max_error_obj?.message}
                         messageType={capital_amount_min_error_obj?.messageType || capital_amount_max_error_obj?.messageType}
                     />
-                    <div className={styles['min-max-other']}>
-                        <Input
-                            onFocus={() => {
-                                handleDataUpdate({
-                                    capital_amount_min_error_obj: {
-                                        message: '',
-                                        messageType: ''
-                                    }
-                                });
-                                if (capital_selected) {
+                    <div>
+                        <div className={`${styles['min-max-other']} ${(capital_amount_min_error_obj?.message || capital_amount_max_error_obj?.message) ? styles['min-max-error'] : ''}`.trim()}>
+                            <Input
+                                onFocus={() => {
                                     handleDataUpdate({
-                                        capital_amount_min: '',
-                                        capital_amount_max: '',
+                                        capital_amount_min_error_obj: {
+                                            message: '',
+                                            messageType: ''
+                                        },
+                                        capital_amount_max_error_obj: {
+                                            message: '',
+                                            messageType: ''
+                                        }
+                                    });
+                                    if (capital_selected) {
+                                        handleDataUpdate({
+                                            capital_amount_min: '',
+                                            capital_amount_max: '',
+                                            capital_selected: false
+                                        });
+                                    }
+                                }}
+                                size="sm"
+                                value={capital_selected ? '' : capital_amount_min}
+                                onChange={e => handleDataUpdate({ capital_amount_min: e.target.value })}
+                                placeholder="Min Other"
+                            />
+                            <span>-</span>
+                            <Input
+                                onFocus={() => {
+                                    handleDataUpdate({
+                                        capital_amount_min_error_obj: {
+                                            message: '',
+                                            messageType: ''
+                                        },
+                                        capital_amount_max_error_obj: {
+                                            message: '',
+                                            messageType: ''
+                                        }
+                                    });
+                                    if (capital_selected) {
+                                        handleDataUpdate({
+                                            capital_amount_min: '',
+                                            capital_amount_max: '',
+                                            capital_selected: false
+                                        });
+                                    }
+                                }}
+                                size="sm"
+                                value={capital_selected ? '' : capital_amount_max}
+                                onChange={e => {
+                                    handleDataUpdate({
+                                        capital_amount_max: e.target.value,
                                         capital_selected: false
                                     });
-                                }
-                            }}
-                            value={capital_selected ? '' : capital_amount_min}
-                            onChange={e => handleDataUpdate({ capital_amount_min: e.target.value })}
-                            placeholder="Min Other"
-                        />
-                        <span>-</span>
-                        <Input
-                            onFocus={() => {
-                                handleDataUpdate({
-                                    capital_amount_max_error_obj: {
-                                        message: '',
-                                        messageType: ''
-                                    }
-                                });
-                                if (capital_selected) {
-                                    handleDataUpdate({
-                                        capital_amount_min: '',
-                                        capital_amount_max: '',
-                                        capital_selected: false
-                                    });
-                                }
-                            }}
-                            value={capital_selected ? '' : capital_amount_max}
-                            onChange={e => {
-                                handleDataUpdate({
-                                    capital_amount_max: e.target.value,
-                                    capital_selected: false
-                                });
-                            }}
-                            placeholder="Max Other"
-                        />
+                                }}
+                                placeholder="Max Other"
+                            />
+                        </div>
+                        {(capital_amount_min_error_obj?.message || capital_amount_max_error_obj?.message) &&
+                            <p className={styles['min-and-max-error']}>{capital_amount_max_error_obj?.message}</p>
+                        }
                     </div>
                 </div>
                 <h3>What category are you operating in?</h3>
@@ -280,6 +296,7 @@ const OperatorForm = ({
                                 category_selected: true
                             });
                         }}
+                        size="sm"
                         defaultValue={operating_category}
                         placeholder="Choose category"
                         value={category_selected ? operating_category : ''}
@@ -302,6 +319,7 @@ const OperatorForm = ({
                                 });
                             }
                         }}
+                        size="sm"
                         value={category_selected ? '' : operating_category}
                         onChange={e => handleDataUpdate({ operating_category: e.target.value })}
                         placeholder="Other"
@@ -319,6 +337,7 @@ const OperatorForm = ({
                                     messageType: ''
                                 }
                             })}
+                            size="sm"
                             defaultValue={preferred_location}
                             onChange={e => handleDataUpdate({ preferred_location: e.target.value })}
                             placeholder="Choose State"
@@ -338,6 +357,7 @@ const OperatorForm = ({
                                     messageType: ''
                                 }
                             })}
+                            size="sm"
                             defaultValue={investment_type}
                             onChange={e => handleDataUpdate({ investment_type: e.target.value })}
                             placeholder="Choose category"
@@ -361,6 +381,7 @@ const OperatorForm = ({
                                 messageType: ''
                             }
                         })}
+                        size="sm"
                         value={timeframe_selected ? timeframe : ''}
                         defaultValue={timeframe}
                         onChange={e => handleDataUpdate({
@@ -392,6 +413,7 @@ const OperatorForm = ({
                                 });
                             }
                         }}
+                        size="sm"
                         value={timeframe_selected ? '' : timeframe}
                         onChange={e => handleDataUpdate({ timeframe: e.target.value })}
                         placeholder="Other"
@@ -408,6 +430,7 @@ const OperatorForm = ({
                                 messageType: ''
                             }
                         })}
+                        size="sm"
                         value={ideal_investor_description}
                         onChange={e => handleDataUpdate({ ideal_investor_description: e.target.value })}
                         className={styles['ideal-partner']}

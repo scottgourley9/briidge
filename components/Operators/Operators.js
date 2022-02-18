@@ -59,6 +59,29 @@ const Operators = ({
         onGetOperatorsDebounced = debounce(onGetOperators, 500);
     }
 
+    const resetFitler = () => {
+        updateLimit(5);
+        updateOffset(0);
+        updateSortBy({
+            column: 'operator_last_edit_date',
+            direction: 'DESC'
+        });
+        updateAmountFilter([]);
+        updateCategoryFilter([]);
+        updateLocationFilter([]);
+        updateTypeFilter([]);
+        updateTimeframeFilter([]);
+        updateSearchBy('');
+        updateFilterByObject({
+            amount: false,
+            category: false,
+            location: false,
+            type: false,
+            timeframe: false
+        });
+        formRef?.current?.reset();
+    }
+
     const reset = () => {
         updateLimit(5);
         updateOffset(0);
@@ -182,7 +205,7 @@ const Operators = ({
             copy.push(
                 {
                     column: 'capital_amount',
-                    value: `${a[0]}-${a[1] || 9999999998}`
+                    value: `${a[0]}-${a[1]}`
                 }
             );
         } else {
@@ -229,7 +252,10 @@ const Operators = ({
         const a = ['$0-$50,000', '$50,000-$100,000', '$100,000-$150,000', '$150,000-$200,000', '$200,000-$250,000', '$250,000-$300,000', '$300,000-$350,000', '$350,000-$400,000', '$400,000-$450,000', '$450,000-$500,000', '$500,000+'];
 
         return a.map((v, i) => {
-            const newValue = v?.replace(/[^0-9-]/gi, '');
+            let newValue = v?.replace(/[^0-9-]/gi, '');
+            if (i + 1 === a.length) {
+                newValue = `${newValue}-9999999999`;
+            }
 
             return (
                 <div key={`${v}${i}`}>
@@ -400,6 +426,9 @@ const Operators = ({
                         <div className={`${styles['filter-by']} ${filterByObj?.timeframe ? styles['show-filter-by-section'] : ''}`.trim()}>
                             {renderTimeframe}
                         </div>
+                        <Button containerClassName={`${styles['reset-filters-button']}`.trim()} size="xs" disabled={isLoading} onClick={resetFitler}>
+                            Reset Filters
+                        </Button>
                     </div>
                 </div>
                 <div className={styles['user-list-section']}>

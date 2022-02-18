@@ -54,7 +54,12 @@ const User = ({
                     <p className={styles['inner-text']}>Looking for {investor?.need}</p>
                 }
                 {investor?.investment_amount_max &&
-                    <p className={styles['inner-text']}>{investor?.investment_amount_min && investor?.investment_amount_max ? `$${Number(investor?.investment_amount_min)?.toLocaleString()} - $${Number(investor?.investment_amount_max)?.toLocaleString()}` : `$${Number(investor?.investment_amount_max)?.toLocaleString()}`} needed</p>
+                    (investor?.investment_amount_max < 9999999999
+                        ?
+                        <p className={styles['inner-text']}>{investor?.investment_amount_min && investor?.investment_amount_max ? `$${Number(investor?.investment_amount_min)?.toLocaleString()} - $${Number(investor?.investment_amount_max)?.toLocaleString()}` : `$${Number(investor?.investment_amount_max)?.toLocaleString()}`} available for investment</p>
+                        :
+                        <p className={styles['inner-text']}>(No investment amount specified)</p>
+                    )
                 }
                 {investor?.investment_category &&
                     <p className={styles['inner-text']}>Interested in {investor?.investment_category}</p>

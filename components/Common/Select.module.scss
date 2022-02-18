@@ -26,9 +26,9 @@
     select {
         width: 100%;
         height: 50px;
-        font-size: 18px;
-        border-radius: 0px;
-        border: 1px solid $black;
+        font-size: 16px;
+        border-radius: 4px;
+        border: 1px solid $border-grey-one;
         margin-bottom: $space-sm;
         padding: 0 $space-md;
         text-align: left;
@@ -75,15 +75,19 @@
     select:focus {
         outline: none;
     }
-}
 
-.error-state {
-    border: 1px solid $red-one;
+    .error-state {
+        border: 1px solid $red-one;
+    }
+
+    .default-select {
+        color: $grey-two;
+    }
 }
 
 .select-message {
     font-size: 14px;
-    margin-top: -$space-sm;
+    margin-top: -$space-xs;
     line-height: 20px;
 
     @media (max-width: $small-screen) {
@@ -93,4 +97,8 @@
 
 .error-message {
     color: $red-one;
+}
+
+.large-message {
+    margin-top: -$space-sm;
 }

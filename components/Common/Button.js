@@ -25,7 +25,7 @@ const Button = ({
                 {children}
             </button>
             {message &&
-                <p className={`${styles['button-message']} ${messageType ? styles['error-message'] : ''}`.trim()}>{message}</p>
+                <p className={`${styles['button-message']} ${messageType ? styles['error-message'] : ''} ${size === 'lg' ? styles['large-message'] : ''}`.trim()}>{message}</p>
             }
         </div>
 

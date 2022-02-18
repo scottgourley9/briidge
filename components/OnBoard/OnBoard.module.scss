@@ -120,11 +120,11 @@
         }
 
         .left {
-            margin-right: 15px;
+            margin-right: $space-xs;
         }
 
         .right {
-            margin-left: 15px;
+            margin-left: $space-xs;
         }
 
         @media (max-width: $small-screen-medium) {
@@ -162,6 +162,7 @@
         font-weight: 600;
         font-size: 30px;
         margin-bottom: $space-xlg;
+        text-align: center;
 
         @media (max-width: $small-screen) {
             font-size: 24px;
@@ -174,6 +175,7 @@
         font-weight: normal;
         font-size: 22px;
         margin-bottom: $space-md;
+        text-align: center;
 
         @media (max-width: $small-screen) {
             font-size: 18px;
@@ -304,7 +306,7 @@
 
 .back-button-section {
     @media (max-width: $small-screen) {
-        display: none;
+        display: none !important;
     }
 }
 
@@ -314,14 +316,34 @@
     margin-bottom: $space-xs;
 
     & > :first-child {
-        margin-right: 15px;
+        margin-right: $space-xs;
     }
 
     & > :last-child {
-        margin-left: 15px;
+        margin-left: $space-xs;
     }
 
     .form-field {
         width: 230px;
+    }
+
+    @media (max-width: $small-screen-medium) {
+        width: 100%;
+
+        .form-field {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: $x-small-screen) {
+        flex-direction: column;
+
+        & > :first-child {
+            margin-right: 0;
+        }
+
+        & > :last-child {
+            margin-left: 0;
+        }
     }
 }

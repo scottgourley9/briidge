@@ -14,9 +14,9 @@
 .small-input {
     width: 100%;
     height: 50px;
-    font-size: 18px;
-    border-radius: 0px;
-    border: 1px solid $black;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid $border-grey-one;
     margin-bottom: $space-sm;
     padding: 0 $space-md;
     text-align: left;
@@ -40,6 +40,21 @@
     input:focus {
         outline: none;
     }
+
+    input {
+        &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: $grey-two;
+            opacity: 1; /* Firefox */
+        }
+
+        &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: $grey-two;
+        }
+
+        *::-ms-input-placeholder { /* Microsoft Edge */
+            color: $grey-two;
+        }
+    }
 }
 
 .error-state {
@@ -48,7 +63,7 @@
 
 .input-message {
     font-size: 14px;
-    margin-top: -$space-sm;
+    margin-top: -$space-xs;
     line-height: 20px;
     color: $grey-two;
 
@@ -63,4 +78,8 @@
 
 .error-message {
     color: $red-one;
+}
+
+.large-message {
+    margin-top: -$space-sm;
 }

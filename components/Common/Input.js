@@ -23,7 +23,7 @@ const Input = ({
                 placeholder={placeholder}
             />
             {message &&
-                <p className={`${styles['input-message']} ${messageType === 'error' ? styles['error-message'] : ''} ${size !== 'lg' ? styles['input-message-small'] : ''}`.trim()}>{message}</p>
+                <p className={`${styles['input-message']} ${messageType === 'error' ? styles['error-message'] : ''} ${size === 'lg' ? styles['large-message'] : ''} ${size !== 'lg' ? styles['input-message-small'] : ''}`.trim()}>{message}</p>
             }
         </div>
 

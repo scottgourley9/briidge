@@ -357,3 +357,14 @@
 .no-investors {
     margin-top: $space-lg;
 }
+
+.reset-filters-button {
+    margin-top: $space-lg;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    button {
+        max-width: 240px;
+    }
+}

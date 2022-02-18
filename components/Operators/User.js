@@ -54,7 +54,12 @@ const User = ({
                     <p className={styles['inner-text']}>Looking for {operator?.need}</p>
                 }
                 {operator?.capital_amount_max &&
-                    <p className={styles['inner-text']}>{operator?.capital_amount_min && operator?.capital_amount_max ? `$${Number(operator?.capital_amount_min)?.toLocaleString()} - $${Number(operator?.capital_amount_max)?.toLocaleString()}` : `$${Number(operator?.capital_amount_max)?.toLocaleString()}`} needed</p>
+                    (operator?.capital_amount_max < 9999999999
+                        ?
+                        <p className={styles['inner-text']}>{operator?.capital_amount_min && operator?.capital_amount_max ? `$${Number(operator?.capital_amount_min)?.toLocaleString()} - $${Number(operator?.capital_amount_max)?.toLocaleString()}` : `$${Number(operator?.capital_amount_max)?.toLocaleString()}`} needed</p>
+                        :
+                        <p className={styles['inner-text']}>(No capital amount specified)</p>
+                    )
                 }
                 {operator?.operating_category &&
                     <p className={styles['inner-text']}>Interested in {operator?.operating_category}</p>

@@ -12,12 +12,12 @@
 
 .small-textarea {
     width: 100%;
-    border: 1px solid $black;
-    border-radius: 0;
-    font-size: 18px;
+    border: 1px solid $border-grey-one;
+    border-radius: 4px;
+    font-size: 16px;
     resize: none;
     padding: $space-sm;
-    margin-bottom: $space-md;
+    margin-bottom: $space-sm;
 }
 
 .textarea-section {
@@ -27,6 +27,21 @@
     textarea:focus {
         outline: none;
     }
+
+    textarea {
+        &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: $grey-two;
+            opacity: 1; /* Firefox */
+        }
+
+        &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: $grey-two;
+        }
+
+        *::-ms-input-placeholder { /* Microsoft Edge */
+            color: $grey-two;
+        }
+    }
 }
 
 .error-state {
@@ -35,7 +50,7 @@
 
 .textarea-message {
     font-size: 14px;
-    margin-top: -$space-sm;
+    margin-top: -$space-xs;
     line-height: 20px;
 
     @media (max-width: $small-screen) {
@@ -45,4 +60,8 @@
 
 .error-message {
     color: $red-one;
+}
+
+.large-message {
+    margin-top: -$space-sm;
 }

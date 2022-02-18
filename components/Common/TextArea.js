@@ -21,7 +21,7 @@ const TextArea = ({
                 placeholder={placeholder}
             />
             {message &&
-                <p className={`${styles['textarea-message']} ${messageType === 'error' ? styles['error-message'] : ''}`.trim()}>{message}</p>
+                <p className={`${styles['textarea-message']} ${messageType === 'error' ? styles['error-message'] : ''} ${size === 'lg' ? styles['large-message'] : ''}`.trim()}>{message}</p>
             }
         </div>
 

@@ -153,7 +153,7 @@ const InvestorForm = ({
                         onClick={() => handleDataUpdate({ need: 'operating partner' })}
                         selected={need === 'operating partner'}
                         type="button"
-                        size="lg"
+                        size="sm"
                         message={need_error_obj?.message}
                         messageType={need_error_obj?.messageType}
                     >
@@ -169,7 +169,7 @@ const InvestorForm = ({
                         onClick={() => handleDataUpdate({ need: 'manager' })}
                         selected={need === 'manager'}
                         type="button"
-                        size="lg"
+                        size="sm"
                         message={need_error_obj?.message}
                         messageType={need_error_obj?.messageType}
                     >
@@ -198,6 +198,7 @@ const InvestorForm = ({
                                 investment_selected: true
                             });
                         }}
+                        size="sm"
                         value={investment_selected ? `${investment_amount_min}-${investment_amount_max}` : ''}
                         placeholder="Investment Amount"
                         options={[
@@ -216,53 +217,68 @@ const InvestorForm = ({
                         message={investment_amount_min_error_obj?.message || investment_amount_max_error_obj?.message}
                         messageType={investment_amount_min_error_obj?.messageType || investment_amount_max_error_obj?.messageType}
                     />
-                    <div className={styles['min-max-other']}>
-                        <Input
-                            onFocus={() => {
-                                handleDataUpdate({
-                                    investment_amount_min_error_obj: {
-                                        message: '',
-                                        messageType: ''
-                                    }
-                                });
-                                if (investment_selected) {
+                    <div>
+                        <div className={`${styles['min-max-other']} ${(investment_amount_min_error_obj?.message || investment_amount_max_error_obj?.message) ? styles['min-max-error'] : ''}`.trim()}>
+                            <Input
+                                onFocus={() => {
                                     handleDataUpdate({
-                                        investment_amount_min: '',
-                                        investment_amount_max: '',
+                                        investment_amount_min_error_obj: {
+                                            message: '',
+                                            messageType: ''
+                                        },
+                                        investment_amount_max_error_obj: {
+                                            message: '',
+                                            messageType: ''
+                                        }
+                                    });
+                                    if (investment_selected) {
+                                        handleDataUpdate({
+                                            investment_amount_min: '',
+                                            investment_amount_max: '',
+                                            investment_selected: false
+                                        });
+                                    }
+                                }}
+                                size="sm"
+                                value={investment_selected ? '' : investment_amount_min}
+                                onChange={e => handleDataUpdate({ investment_amount_min: e.target.value })}
+                                placeholder="Min Other"
+                            />
+                            <span>-</span>
+                            <Input
+                                onFocus={() => {
+                                    handleDataUpdate({
+                                        investment_amount_min_error_obj: {
+                                            message: '',
+                                            messageType: ''
+                                        },
+                                        investment_amount_max_error_obj: {
+                                            message: '',
+                                            messageType: ''
+                                        }
+                                    });
+                                    if (investment_selected) {
+                                        handleDataUpdate({
+                                            investment_amount_min: '',
+                                            investment_amount_max: '',
+                                            investment_selected: false
+                                        });
+                                    }
+                                }}
+                                size="sm"
+                                value={investment_selected ? '' : investment_amount_max}
+                                onChange={e => {
+                                    handleDataUpdate({
+                                        investment_amount_max: e.target.value,
                                         investment_selected: false
                                     });
-                                }
-                            }}
-                            value={investment_selected ? '' : investment_amount_min}
-                            onChange={e => handleDataUpdate({ investment_amount_min: e.target.value })}
-                            placeholder="Min Other"
-                        />
-                        <span>-</span>
-                        <Input
-                            onFocus={() => {
-                                handleDataUpdate({
-                                    investment_amount_max_error_obj: {
-                                        message: '',
-                                        messageType: ''
-                                    }
-                                });
-                                if (investment_selected) {
-                                    handleDataUpdate({
-                                        investment_amount_min: '',
-                                        investment_amount_max: '',
-                                        investment_selected: false
-                                    });
-                                }
-                            }}
-                            value={investment_selected ? '' : investment_amount_max}
-                            onChange={e => {
-                                handleDataUpdate({
-                                    investment_amount_max: e.target.value,
-                                    investment_selected: false
-                                });
-                            }}
-                            placeholder="Max Other"
-                        />
+                                }}
+                                placeholder="Max Other"
+                            />
+                        </div>
+                        {(investment_amount_min_error_obj?.message || investment_amount_max_error_obj?.message) &&
+                            <p className={styles['min-and-max-error']}>{investment_amount_max_error_obj?.message}</p>
+                        }
                     </div>
                 </div>
                 <h3>Preferred Investment category</h3>
@@ -280,6 +296,7 @@ const InvestorForm = ({
                                 category_selected: true
                             });
                         }}
+                        size="sm"
                         defaultValue={investment_category}
                         placeholder="Choose category"
                         value={category_selected ? investment_category : ''}
@@ -302,6 +319,7 @@ const InvestorForm = ({
                                 });
                             }
                         }}
+                        size="sm"
                         value={category_selected ? '' : investment_category}
                         onChange={e => handleDataUpdate({ investment_category: e.target.value })}
                         placeholder="Other"
@@ -319,6 +337,7 @@ const InvestorForm = ({
                                     messageType: ''
                                 }
                             })}
+                            size="sm"
                             defaultValue={preferred_location}
                             onChange={e => handleDataUpdate({ preferred_location: e.target.value })}
                             placeholder="Choose State"
@@ -338,6 +357,7 @@ const InvestorForm = ({
                                     messageType: ''
                                 }
                             })}
+                            size="sm"
                             defaultValue={investment_type}
                             onChange={e => handleDataUpdate({ investment_type: e.target.value })}
                             placeholder="Choose category"
@@ -361,6 +381,7 @@ const InvestorForm = ({
                                 messageType: ''
                             }
                         })}
+                        size="sm"
                         value={timeframe_selected ? investment_timeframe : ''}
                         defaultValue={investment_timeframe}
                         onChange={e => handleDataUpdate({
@@ -392,6 +413,7 @@ const InvestorForm = ({
                                 });
                             }
                         }}
+                        size="sm"
                         value={timeframe_selected ? '' : investment_timeframe}
                         onChange={e => handleDataUpdate({ investment_timeframe: e.target.value })}
                         placeholder="Other"
@@ -408,6 +430,7 @@ const InvestorForm = ({
                                 messageType: ''
                             }
                         })}
+                        size="sm"
                         value={ideal_operator_description}
                         onChange={e => handleDataUpdate({ ideal_operator_description: e.target.value })}
                         className={styles['ideal-partner']}

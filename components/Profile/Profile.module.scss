@@ -78,9 +78,10 @@
 .min-max-other {
     display: flex;
     align-items: center;
-    border: 1px solid $black;
+    border: 1px solid $border-grey-one;
+    border-radius: 4px;
     width: 100%;
-    height: 60px;
+    height: 50px;
 
     div {
         margin-top: $space-md;
@@ -89,7 +90,7 @@
     input {
         width: 100%;
         border: none;
-        height: 58px;
+        height: 48px;
         margin: 0;
         text-align: center;
     }
@@ -109,19 +110,17 @@
     .row,
     .row-single {
         display: flex;
-        align-items: center;
         width: 100%;
         flex-direction: column;
-        margin-bottom: $space-lg;
+        margin-bottom: $space-xs;
 
         div,
         input,
         select,
         textarea,
         button {
-            margin: 0;
             width: 100%;
-            border-radius: 0;
+            border-radius: 4;
         }
 
         .left,
@@ -133,7 +132,15 @@
     }
 
     .row {
+        &:nth-child(4) {
+            margin-bottom: $space-md;
+        }
+
         & > :first-child {
+            margin-bottom: 0;
+        }
+
+        & > :last-child {
             margin-bottom: $space-sm;
         }
 
@@ -155,6 +162,11 @@
 
             & > :last-child {
                 margin-left: $space-xs;
+                margin-bottom: 0;
+            }
+
+            &:nth-child(4) {
+                margin-bottom: $space-xs;
             }
         }
     }
@@ -170,8 +182,24 @@
     }
 
     .min-max-other {
+        div,
         input {
             margin: 0;
+        }
+    }
+
+    .min-max-error {
+        border: 1px solid $red-one;
+    }
+
+    .min-and-max-error {
+        font-size: 14px;
+        margin-top: 8px;
+        line-height: 20px;
+        color: $red-one;
+
+        @media (max-width: $small-screen) {
+            margin-bottom: $space-xs;
         }
     }
 }
