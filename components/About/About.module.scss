@@ -57,21 +57,14 @@
 }
 
 .point-one {
-    background-image: url('../../public/briidgeCover.jpg');
-    background-size: cover;
-    width: 100vw;
-    height: 33vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: -24px;
-
-    @media (min-width: $small-screen-mf) {
-        margin-top: 0;
-        width: 100%;
-    }
+    position: relative;
+    margin-top: -$space-md;
+    width: 100%;
 
     .banner {
+        position: absolute;
+        top: 30%;
+        left: auto;
         background: rgb(255, 255, 255, 0.80);
         padding: $space-sm;
         font-size: 28px;
@@ -81,7 +74,9 @@
 }
 
 .point-two {
+    position: relative;
     background: $white;
+    z-index: 1;
 
     @media (min-width: $small-screen-mf) {
         margin-top: -110px;
@@ -117,19 +112,23 @@
     }
 }
 
+.point-two-img,
+.point-four-img,
 .point-three-img {
     width: 100vw;
+    position: relative;
+    min-height: 40vh;
     margin-left: -$space-md;
 
     @media (min-width: $small-screen-mf) {
         width: 100%;
         margin-left: 0;
+        height: auto;
     }
 }
 
-.point-two-img,
-.point-four-img {
-    width: 100%;
+.point-two-img {
+    margin-left: 0;
 }
 
 .row {
