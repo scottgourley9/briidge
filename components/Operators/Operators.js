@@ -427,9 +427,11 @@ const Operators = ({
                         <div className={`${styles['filter-by']} ${filterByObj?.timeframe ? styles['show-filter-by-section'] : ''}`.trim()}>
                             {renderTimeframe}
                         </div>
-                        <Button containerClassName={`${styles['reset-filters-button']}`.trim()} size="xs" disabled={isLoading} onClick={resetFitler}>
-                            Reset Filters
-                        </Button>
+                        {/*
+                            <Button containerClassName={`${styles['reset-filters-button']}`.trim()} size="xs" disabled={isLoading} onClick={resetFitler}>
+                                Reset Filters
+                            </Button>
+                        */}
                     </div>
                 </div>
                 <div className={styles['user-list-section']}>
