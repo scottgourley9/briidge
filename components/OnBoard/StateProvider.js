@@ -149,13 +149,6 @@ export const OnBoardContextProvider = props => {
     const [state, setState] = useState(initialOnBoardingData);
 
     const updateInvestorState = newObj => {
-        console.log({
-            ...state,
-            investor: {
-                ...state.investor,
-                ...newObj
-            }
-        });
         setState({
             ...state,
             investor: {

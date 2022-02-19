@@ -7,11 +7,7 @@ import { getOperatorByUserId } from '../db/getOperatorByUserId';
 export const getUserFromRequestData = async req => {
     const startTime = (new Date()).getTime();
 
-    console.log('getUserFromRequestData START');
-
     const sessionData = getSession(req, {});
-
-    console.log('getUserFromRequestData getSession: ', (new Date()).getTime() - startTime);
 
     let user = {};
 
@@ -30,8 +26,6 @@ export const getUserFromRequestData = async req => {
 
         const userData = await getUserBySub(user?.sub);
 
-        console.log('getUserFromRequestData getUserBySub: ', (new Date()).getTime() - startTime);
-
         if (!userData?.id) {
             return {
                 ...(user || {}),
@@ -44,8 +38,6 @@ export const getUserFromRequestData = async req => {
         if (/profile/gi.test(req?.url)) {
             const results = await Promise.allSettled([getInvestorByUserId(userData?.id, true), getOperatorByUserId(userData?.id, true)]);
 
-            console.log('getUserFromRequestData allPromises: ', (new Date()).getTime() - startTime);
-
             return {
                 ...(userData || user || {}),
                 investorOpportunities: results?.[0]?.value || [],
@@ -53,8 +45,6 @@ export const getUserFromRequestData = async req => {
                 registered: Boolean(userData?.id)
             }
         }
-
-        console.log('getUserFromRequestData END: ', (new Date()).getTime() - startTime);
 
         return {
             ...(userData || user || {}),
