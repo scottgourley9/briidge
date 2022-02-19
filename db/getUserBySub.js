@@ -1,4 +1,9 @@
-import { Client } from 'pg';
+import { Pool } from 'pg';
+
+const pool = new Pool({
+    ssl: process.env.NODE_ENV !== 'development' ? { rejectUnauthorized: false, ca: Buffer.from(process.env.PG_CA, 'base64').toString('ascii') } : null,
+    max: 20
+});
 
 export const getUserBySub = async sub => {
     const startTime = (new Date()).getTime();
@@ -6,15 +11,12 @@ export const getUserBySub = async sub => {
     let dbResponse = [];
 
     try {
-        const client = new Client({ ssl: process.env.NODE_ENV !== 'development' ? { rejectUnauthorized: false, ca: Buffer.from(process.env.PG_CA, 'base64').toString('ascii') } : null });
-        await client.connect();
         console.log('getUserBySub connect: ', (new Date()).getTime() - startTime);
         const text = 'SELECT * from users where sub = $1';
         const values = [sub];
-        const res = await client.query(text, values);
+        const res = await pool.query(text, values);
         console.log('getUserBySub query: ', (new Date()).getTime() - startTime);
         dbResponse = res?.rows?.[0];
-        await client.end();
     } catch (error) {
         console.log('error getting users from db: ', error);
     }
