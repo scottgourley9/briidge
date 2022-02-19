@@ -244,3 +244,28 @@
         display: flex;
     }
 }
+
+.complete-profile {
+    background: $blue-background;
+    border-radius: 50%;
+    color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+
+    @media (max-width: $small-screen) {
+        background: $white;
+        color: $orange-main;
+    }
+}
+
+.log-in {
+    a {
+        display: flex;
+        align-items: center;
+    }
+}

@@ -29,6 +29,13 @@
     color: $blue-background;
     border: 1px solid $blue-background;
     border-radius: 4px;
+
+    .title {
+        font-family: 'poppins bold';
+        color: $blue-background;
+        font-size: 18px;
+        margin-right: $space-sm;
+    }
 }
 
 .success-alert {
@@ -36,4 +43,8 @@
     color: $green-one;
     border: 1px solid $green-one;
     border-radius: 4px;
+}
+
+.link {
+    cursor: pointer;
 }

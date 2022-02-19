@@ -16,6 +16,7 @@ import ConnectModal from '../ConnectModal';
 import Chevron from '../SVG/Chevron';
 import Input from '../Common/Input';
 import User from './User';
+import Alert from '../Common/Alert';
 
 import styles from './Investors.module.scss';
 
@@ -432,6 +433,16 @@ const Investors = ({
                     </div>
                 </div>
                 <div className={styles['user-list-section']}>
+                    {false &&
+                        <Alert
+                            size="sm"
+                            type="info"
+                            title="Complete your profile"
+                            link="/profile"
+                        >
+                            Please go to your profile and fill out the required fields
+                        </Alert>
+                    }
                     <div className={styles['title-actions']}>
                         <h2 className={styles.title}>Investors<div className={styles['pagination-note']}>{paginationNote()}</div></h2>
                         <div className={styles['filter-and-sort']}>

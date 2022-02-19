@@ -129,9 +129,9 @@ const Nav = ({ user }) => {
                         </Link>
                     </li>
                     {user ?
-                        <li className={styles['log-in']} onClick={handleToggleMenu} className={router?.pathname === '/profile' ? styles['on-page'] : ''}>
+                        <li onClick={handleToggleMenu} className={`${styles['log-in']} ${router?.pathname === '/profile' ? styles['on-page'] : ''}`}>
                             <Link href="/profile">
-                                <a>{user?.first_name || user?.email}</a>
+                                <a>{false && <div className={styles['complete-profile']}>!</div>}{user?.first_name || user?.email}</a>
                             </Link>
                         </li>
                         :

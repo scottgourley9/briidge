@@ -18,6 +18,7 @@ import User from './User';
 import Opportunity from './Opportunity';
 import Modal from '../Common/Modal';
 import Button from '../Common/Button';
+import Alert from '../Common/Alert';
 
 import styles from './Profile.module.scss';
 
@@ -141,6 +142,15 @@ const Profile = ({
                 <GrFormPrevious className={styles['back-chevron']} /> Back
             </button>
             <section className={styles['profile-page-wrapper']}>
+                {false &&
+                    <Alert
+                        size="sm"
+                        type="info"
+                        title="Complete your profile"
+                    >
+                        Please fill out the required fields
+                    </Alert>
+                }
                 <User
                     user={userDataToDisplay}
                     handleConnectClick={handleConnectClick}

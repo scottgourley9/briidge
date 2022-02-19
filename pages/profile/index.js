@@ -8,8 +8,12 @@ import { getUserFromRequestData } from '../../helpers/getUserFromRequestData';
 import Profile from '../../components/Profile/Profile';
 
 export const getServerSideProps = async ({ req }) => {
+    const startTime = (new Date()).getTime();
+    console.log('PROFILE PAGE START');
     try {
         const user = await getUserFromRequestData(req);
+
+        console.log('PROFILE PAGE END: ', (new Date()).getTime() - startTime);
 
         if (!user) {
             // not logged in
