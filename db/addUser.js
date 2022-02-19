@@ -1,4 +1,11 @@
-import { Client } from 'pg';
+import { Pool } from 'pg';
+
+const pool = new Pool({
+    ssl: process.env.NODE_ENV !== 'development' ? { rejectUnauthorized: false, ca: Buffer.from(process.env.PG_CA, 'base64').toString('ascii') } : null,
+    max: 20,
+    connectionTimeoutMillis: 0,
+    idleTimeoutMillis: 0
+});
 
 export const addUser = async body => {
     let dbResponse = null;
@@ -46,11 +53,8 @@ export const addUser = async body => {
     const values = [email, first_name, last_name, type === 'investor', type === 'operator', facebook, linkedin, website, authorizedPicture(picture), sub];
 
     try {
-        const client = new Client({ ssl: process.env.NODE_ENV !== 'development' ? { rejectUnauthorized: false, ca: Buffer.from(process.env.PG_CA, 'base64').toString('ascii') } : null });
-        await client.connect();
-        const res = await client.query(text, values);
+        const res = await pool.query(text, values);
         dbResponse = res?.rows?.[0]?.id;
-        await client.end();
     } catch (error) {
         console.log('error adding user to db: ', error);
         throw error;

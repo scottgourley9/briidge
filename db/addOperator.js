@@ -1,4 +1,11 @@
-import { Client } from 'pg';
+import { Pool } from 'pg';
+
+const pool = new Pool({
+    ssl: process.env.NODE_ENV !== 'development' ? { rejectUnauthorized: false, ca: Buffer.from(process.env.PG_CA, 'base64').toString('ascii') } : null,
+    max: 20,
+    connectionTimeoutMillis: 0,
+    idleTimeoutMillis: 0
+});
 
 export const addOperator = async (userId, operatorData) => {
     const {
@@ -16,11 +23,8 @@ export const addOperator = async (userId, operatorData) => {
     const values = [need, Number(capitalAmountMin?.replace(/[^0-9]/gi, '') || 0), Number(capitalAmountMax?.replace(/[^0-9]/gi, '') || 9999999999), operatingCategory, preferredLocation, investmentType, timeframe, idealInvestorDescription, userId];
 
     try {
-        const client = new Client({ ssl: process.env.NODE_ENV !== 'development' ? { rejectUnauthorized: false, ca: Buffer.from(process.env.PG_CA, 'base64').toString('ascii') } : null });
-        await client.connect();
-        const res = await client.query(text, values);
+        const res = await pool.query(text, values);
         const dbResponse = res?.rows?.[0];
-        await client.end();
 
         return dbResponse || {};
     } catch (error) {
