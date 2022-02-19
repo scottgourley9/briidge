@@ -95,13 +95,15 @@ const User = ({
             }
             <div className={styles['list-user']}>
                 <div className={styles['img-and-details']}>
-                    <div className={styles['image-container']}>
+                    <div className={styles['image-section']}>
                         {showPhotoLoading ?
                             <div className={styles['loading-img']}>
                                 <Spinner />
                             </div>
                             :
-                            <img src={user?.picture} alt="profile pic" />
+                            <div className={styles['image-container']}>
+                                <Image layout="fill" alt="profile pic" src={user?.picture || 'https://getbriidge.s3-accelerate.amazonaws.com/073f282ce936a53931fb3c24114431bb0ecb5c25.png'} quality={100} />
+                            </div>
                         }
                         {isEditable && (
                             <>

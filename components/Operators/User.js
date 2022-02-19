@@ -20,7 +20,9 @@ const User = ({
         <div className={styles['list-user']}>
             <div className={styles['img-and-details']}>
                 <Link href={`/profile/${operator?.user_id}`}>
-                    <img src={operator?.picture} alt="profile pic" />
+                    <div className={styles['image-container']}>
+                        <Image layout="fill" alt="profile pic" src={operator?.picture || 'https://getbriidge.s3-accelerate.amazonaws.com/073f282ce936a53931fb3c24114431bb0ecb5c25.png'} quality={50} />
+                    </div>
                 </Link>
                 <div className={styles['short-details']}>
                     {operator?.first_name &&

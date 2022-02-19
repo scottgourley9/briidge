@@ -23,18 +23,23 @@
         width: inherit;
     }
 
-    img {
+    .image-container {
         flex: none;
         height: inherit;
         border-radius: 50%;
-        max-width: 160px;
+        width: 160px;
+        height: 160px;
         margin-right: 0;
         left: 50%;
         margin-left: -80px;
         position: relative;
         margin-bottom: $space-sm;
         cursor: pointer;
-        object-fit: cover;
+        overflow: hidden;
+
+        img {
+            object-fit: cover;
+        }
 
         @media (min-width: $xx-small-screen-mf) {
             flex: 0 0 120px;
