@@ -1,11 +1,4 @@
-import { Pool } from 'pg';
-
-const pool = new Pool({
-    ssl: process.env.NODE_ENV !== 'development' ? { rejectUnauthorized: false, ca: Buffer.from(process.env.PG_CA, 'base64').toString('ascii') } : null,
-    max: 20,
-    connectionTimeoutMillis: 0,
-    idleTimeoutMillis: 0
-});
+import pool from './initialize';
 
 export const addUser = async body => {
     let dbResponse = null;

@@ -1,11 +1,6 @@
-import { Pool } from 'pg';
+import pool from './initialize';
 
-const pool = new Pool({
-    ssl: process.env.NODE_ENV !== 'development' ? { rejectUnauthorized: false, ca: Buffer.from(process.env.PG_CA, 'base64').toString('ascii') } : null,
-    max: 20,
-    connectionTimeoutMillis: 0,
-    idleTimeoutMillis: 0
-});
+import { updateOperatorValueForUser } from './updateOperatorValueForUser';
 
 export const deleteOperator = async (userId, operatorId) => {
     const text = 'DELETE FROM operators WHERE user_id = $1 AND id=$2';
@@ -13,6 +8,13 @@ export const deleteOperator = async (userId, operatorId) => {
 
     try {
         const res = await pool.query(text, values);
+        const text2 = 'SELECT COUNT(*) FROM operators WHERE user_id = $1';
+        const values2 = [userId];
+        const res2 = await pool.query(text2, values2);
+        if ((res2?.rows?.[0]?.count) == '0') {
+            updateOperatorValueForUser({ id: userId, operator: false });
+        }
+
         const dbResponse = res?.rows?.[0];
 
         return dbResponse || {};

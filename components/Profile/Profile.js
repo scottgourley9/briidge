@@ -97,6 +97,9 @@ const Profile = ({
     }
 
     const handleEdit = (data, type) => {
+        if (!Object.keys(data || {})?.length) {
+            updateEditData({});
+        }
         if (type === 'investor') {
             updateShowEditInvestorForm(true);
             updateShowEditOperatorForm(false);

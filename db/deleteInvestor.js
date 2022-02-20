@@ -1,11 +1,6 @@
-import { Pool } from 'pg';
+import pool from './initialize';
 
-const pool = new Pool({
-    ssl: process.env.NODE_ENV !== 'development' ? { rejectUnauthorized: false, ca: Buffer.from(process.env.PG_CA, 'base64').toString('ascii') } : null,
-    max: 20,
-    connectionTimeoutMillis: 0,
-    idleTimeoutMillis: 0
-});
+import { updateInvestorValueForUser } from './updateInvestorValueForUser';
 
 export const deleteInvestor = async (userId, investorId) => {
     const text = 'DELETE FROM investors WHERE user_id = $1 AND id=$2';
@@ -13,6 +8,13 @@ export const deleteInvestor = async (userId, investorId) => {
 
     try {
         const res = await pool.query(text, values);
+        const text2 = 'SELECT COUNT(*) FROM investors WHERE user_id = $1';
+        const values2 = [userId];
+        const res2 = await pool.query(text2, values2);
+        if ((res2?.rows?.[0]?.count) == '0') {
+            updateInvestorValueForUser({ id: userId, investor: false });
+        }
+
         const dbResponse = res?.rows?.[0];
 
         return dbResponse || {};

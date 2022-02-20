@@ -1,11 +1,6 @@
-import { Pool } from 'pg';
+import pool from './initialize';
 
-const pool = new Pool({
-    ssl: process.env.NODE_ENV !== 'development' ? { rejectUnauthorized: false, ca: Buffer.from(process.env.PG_CA, 'base64').toString('ascii') } : null,
-    max: 20,
-    connectionTimeoutMillis: 0,
-    idleTimeoutMillis: 0
-});
+import { updateOperatorValueForUser } from './updateOperatorValueForUser';
 
 export const addOperator = async (userId, operatorData) => {
     const {
@@ -24,6 +19,7 @@ export const addOperator = async (userId, operatorData) => {
 
     try {
         const res = await pool.query(text, values);
+        updateOperatorValueForUser({ id: userId, operator: true });
         const dbResponse = res?.rows?.[0];
 
         return dbResponse || {};
