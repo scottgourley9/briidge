@@ -327,7 +327,7 @@ const Operators = ({
             let a = [onPage - 1, onPage, onPage + 1 <= numOfPages ? onPage + 1 : null];
             if (a[0] <= 0) {
                 // shift left
-                a = [onPage, onPage + 1, onPage + 2 < numOfPages ? onPage + 2 : null];
+                a = [onPage, onPage + 1, onPage + 2 <= numOfPages ? onPage + 2 : null];
             } else if (a[1] >= numOfPages) {
                 // shift right
                 a = [onPage - 2, onPage - 1, onPage];
