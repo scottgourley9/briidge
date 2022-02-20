@@ -102,6 +102,7 @@ const UserForm = ({
                                 }
                             });
                         }}
+                        size="sm"
                         value={first_name || ''}
                         onChange={e => handleDataUpdate({ first_name: e.target.value })}
                         placeholder="First Name"
@@ -117,6 +118,7 @@ const UserForm = ({
                                 }
                             });
                         }}
+                        size="sm"
                         value={last_name || ''}
                         onChange={e => handleDataUpdate({ last_name: e.target.value })}
                         placeholder="Last Name"
@@ -134,6 +136,7 @@ const UserForm = ({
                                 }
                             });
                         }}
+                        size="sm"
                         value={email || ''}
                         onChange={e => handleDataUpdate({ email: e.target.value })}
                         placeholder="Email"
@@ -145,6 +148,7 @@ const UserForm = ({
                     <div className={styles['input-section']}>
                         <FacebookCircle />
                         <Input
+                            size="sm"
                             value={facebook || ''}
                             onChange={e => handleDataUpdate({ facebook: e.target.value })}
                             placeholder="Facebook profile"
@@ -153,6 +157,7 @@ const UserForm = ({
                     <div className={styles['input-section']}>
                         <LinkedIn />
                         <Input
+                            size="sm"
                             value={linkedin || ''}
                             onChange={e => handleDataUpdate({ linkedin: e.target.value })}
                             placeholder="LinkedIn profile"
@@ -161,6 +166,7 @@ const UserForm = ({
                     <div className={styles['input-section']}>
                         <LinkIcon />
                         <Input
+                            size="sm"
                             value={website || ''}
                             onChange={e => handleDataUpdate({ website: e.target.value })}
                             placeholder="personal website"

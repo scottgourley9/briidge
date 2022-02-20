@@ -260,7 +260,7 @@ const Investors = ({
 
             return (
                 <div key={`${v}${i}`}>
-                    <input disabled={isLoading} type="checkbox" id={`${v}${i}`} value={newValue} onChange={handleAmountFilter} /> <label htmlFor={`${v}${i}`}>{v}</label>
+                    <input disabled={isLoading} type="checkbox" id={`${v}${i}`} value={newValue} onInput={handleAmountFilter} /> <label htmlFor={`${v}${i}`}>{v}</label>
                 </div>
             )
         });
@@ -272,7 +272,7 @@ const Investors = ({
         return a.map((v, i) => {
             return (
                 <div key={`${v}${i}`}>
-                    <input disabled={isLoading} type="checkbox" id={`${v}${i}`} value={v} onChange={e => handleFilter(e, categoryFilter, 'investment_category', updateCategoryFilter)} /> <label htmlFor={`${v}${i}`}>{v}</label>
+                    <input disabled={isLoading} type="checkbox" id={`${v}${i}`} value={v} onInput={e => handleFilter(e, categoryFilter, 'investment_category', updateCategoryFilter)} /> <label htmlFor={`${v}${i}`}>{v}</label>
                 </div>
             )
         });
@@ -284,7 +284,7 @@ const Investors = ({
         return states.map((v, i) => {
             return (
                 <div key={`${v}${i}`}>
-                    <input disabled={isLoading} type="checkbox" id={`${v}${i}`} value={v} onChange={e => handleFilter(e, locationFilter, 'preferred_location', updateLocationFilter)} /> <label htmlFor={`${v}${i}`}>{v}</label>
+                    <input disabled={isLoading} type="checkbox" id={`${v}${i}`} value={v} onInput={e => handleFilter(e, locationFilter, 'preferred_location', updateLocationFilter)} /> <label htmlFor={`${v}${i}`}>{v}</label>
                 </div>
             )
         });
@@ -296,7 +296,7 @@ const Investors = ({
         return a.map((v, i) => {
             return (
                 <div key={`${v}${i}`}>
-                    <input disabled={isLoading} type="checkbox" id={`${v}${i}`} value={v} onChange={e => handleFilter(e, typeFilter, 'investment_type', updateTypeFilter)} /> <label htmlFor={`${v}${i}`}>{v}</label>
+                    <input disabled={isLoading} type="checkbox" id={`${v}${i}`} value={v} onInput={e => handleFilter(e, typeFilter, 'investment_type', updateTypeFilter)} /> <label htmlFor={`${v}${i}`}>{v}</label>
                 </div>
             )
         });
@@ -308,7 +308,7 @@ const Investors = ({
         return a.map((v, i) => {
             return (
                 <div key={`${v}${i}`}>
-                    <input disabled={isLoading} type="checkbox" id={`${v}${i}`} value={v} onChange={e => handleFilter(e, timeframeFilter, 'investment_timeframe', updateTimeframeFilter)} /> <label htmlFor={`${v}${i}`}>{v}</label>
+                    <input disabled={isLoading} type="checkbox" id={`${v}${i}`} value={v} onInput={e => handleFilter(e, timeframeFilter, 'investment_timeframe', updateTimeframeFilter)} /> <label htmlFor={`${v}${i}`}>{v}</label>
                 </div>
             )
         });
@@ -363,7 +363,7 @@ const Investors = ({
                         <Input
                             containerClassName={styles['search-field']}
                             value={searchBy}
-                            onChange={e => updateSearchBy(e.target.value)}
+                            onInput={e => updateSearchBy(e.target.value)}
                             placeholder="Search"
                             size="xs"
                         />
@@ -427,11 +427,9 @@ const Investors = ({
                         <div className={`${styles['filter-by']} ${filterByObj?.timeframe ? styles['show-filter-by-section'] : ''}`.trim()}>
                             {renderTimeframe}
                         </div>
-                        {/*
-                            <Button containerClassName={`${styles['reset-filters-button']}`.trim()} size="xs" disabled={isLoading} onClick={resetFitler}>
-                                Reset Filters
-                            </Button>
-                        */}
+                        <Button containerClassName={`${styles['reset-filters-button']}`.trim()} size="xs" disabled={isLoading} onClick={resetFitler}>
+                            Reset Filters
+                        </Button>
                     </div>
                 </div>
                 <div className={styles['user-list-section']}>

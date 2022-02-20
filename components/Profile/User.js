@@ -102,7 +102,7 @@ const User = ({
                             </div>
                             :
                             <div className={styles['image-container']}>
-                                <Image layout="fill" alt="profile pic" src={user?.picture || 'https://getbriidge.s3-accelerate.amazonaws.com/073f282ce936a53931fb3c24114431bb0ecb5c25.png'} quality={100} />
+                                <Image priority={true} layout="fill" alt="profile pic" src={user?.picture || 'https://getbriidge.s3-accelerate.amazonaws.com/073f282ce936a53931fb3c24114431bb0ecb5c25.png'} quality={100} />
                             </div>
                         }
                         {isEditable && (
