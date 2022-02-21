@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { useRouter } from 'next/router';
 
 import { useGetUserData } from './hooks/useGetUserData';
 import { useUpdateOperator } from './hooks/useUpdateOperator';
@@ -23,29 +24,32 @@ const OperatorForm = ({
     updateData,
     updateUserDataToDisplay,
     updateShowEditOperatorForm,
-    showEditOperatorForm
+    showEditOperatorForm,
+    hasIncompleteOperators
 }) => {
     const {
-        need,
+        need = '',
         need_error_obj = {},
-        capital_selected,
-        capital_amount_min,
-        capital_amount_max,
-        capital_amount_min_error_obj,
-        capital_amount_max_error_obj,
-        operating_category,
-        category_selected,
-        operating_category_error_obj,
-        preferred_location,
-        preferred_location_error_obj,
-        investment_type,
-        investment_type_error_obj,
-        timeframe_selected,
-        timeframe,
-        timeframe_error_obj,
-        ideal_investor_description,
-        ideal_investor_description_error_obj,
+        capital_selected = false,
+        capital_amount_min = '',
+        capital_amount_max = '',
+        capital_amount_min_error_obj = {},
+        capital_amount_max_error_obj = {},
+        operating_category = '',
+        category_selected = false,
+        operating_category_error_obj = {},
+        preferred_location = '',
+        preferred_location_error_obj = {},
+        investment_type = '',
+        investment_type_error_obj = {},
+        timeframe_selected = false,
+        timeframe = '',
+        timeframe_error_obj = {},
+        ideal_investor_description = '',
+        ideal_investor_description_error_obj = {},
     } = operatorData || {};
+
+    const router = useRouter();
 
     const { onGetUserData, isLoading: getUserIsLoading, data: getUserData, isSuccess: getUserSuccess, isError: getUserError } = useGetUserData();
     const { onUpdateOperator, isLoading: updateOperatorIsLoading, data: updateOperatorData, isSuccess: updateOperatorSuccess, isError: updateOperatorError } = useUpdateOperator();
@@ -61,6 +65,9 @@ const OperatorForm = ({
         if (getUserSuccess) {
             updateUserDataToDisplay(getUserData?.data);
             onCancel();
+            if (hasIncompleteOperators) {
+                router.replace(router.asPath);
+            }
         }
     }, [getUserSuccess]);
 
@@ -297,7 +304,6 @@ const OperatorForm = ({
                             });
                         }}
                         size="sm"
-                        defaultValue={operating_category}
                         placeholder="Choose category"
                         value={category_selected ? operating_category : ''}
                         options={franchiseCategoriesOptions}
@@ -338,7 +344,7 @@ const OperatorForm = ({
                                 }
                             })}
                             size="sm"
-                            defaultValue={preferred_location}
+                            value={preferred_location}
                             onChange={e => handleDataUpdate({ preferred_location: e.target.value })}
                             placeholder="Choose State"
                             options={states.map(state => ({
@@ -358,7 +364,7 @@ const OperatorForm = ({
                                 }
                             })}
                             size="sm"
-                            defaultValue={investment_type}
+                            value={investment_type}
                             onChange={e => handleDataUpdate({ investment_type: e.target.value })}
                             placeholder="Choose category"
                             options={[
@@ -383,7 +389,6 @@ const OperatorForm = ({
                         })}
                         size="sm"
                         value={timeframe_selected ? timeframe : ''}
-                        defaultValue={timeframe}
                         onChange={e => handleDataUpdate({
                             timeframe: e.target.value,
                             timeframe_selected: true

@@ -145,7 +145,7 @@ const Profile = ({
                 <GrFormPrevious className={styles['back-chevron']} /> Back
             </button>
             <section className={styles['profile-page-wrapper']}>
-                {false &&
+                {isEditable && (user?.has_incomplete_investors || user?.has_incomplete_operators) &&
                     <Alert
                         size="sm"
                         type="info"
@@ -171,6 +171,7 @@ const Profile = ({
                         updateUserDataToDisplay={updateUserDataToDisplay}
                         updateShowEditInvestorForm={updateShowEditInvestorForm}
                         showEditInvestorForm={showEditInvestorForm}
+                        hasIncompleteInvestors={user?.hasIncompleteInvestors}
                     />
                     <OperatorForm
                         operatorData={editData}
@@ -180,6 +181,7 @@ const Profile = ({
                         updateUserDataToDisplay={updateUserDataToDisplay}
                         updateShowEditOperatorForm={updateShowEditOperatorForm}
                         showEditOperatorForm={showEditOperatorForm}
+                        hasIncompleteOperators={user?.hasIncompleteOperators}
                     />
                     <UserForm
                         userData={editData}

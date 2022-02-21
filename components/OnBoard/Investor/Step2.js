@@ -72,7 +72,7 @@ const Step2 = () => {
                                 messageType: ''
                             }
                         })}
-                        defaultValue={preferredLocation}
+                        value={preferredLocation}
                         onChange={e => updateInvestorState({ preferredLocation: e.target.value })}
                         placeholder="Choose State"
                         options={states.map(state => ({
@@ -92,7 +92,7 @@ const Step2 = () => {
                                 messageType: ''
                             }
                         })}
-                        defaultValue={investmentType}
+                        value={investmentType}
                         onChange={e => updateInvestorState({ investmentType: e.target.value })}
                         placeholder="Choose category"
                         options={[
@@ -117,7 +117,6 @@ const Step2 = () => {
                         }
                     })}
                     value={timeframeSelected ? investmentTimeframe : ''}
-                    defaultValue={investmentTimeframe}
                     onChange={e => updateInvestorState({
                         investmentTimeframe: e.target.value,
                         timeframeSelected: true

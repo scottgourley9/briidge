@@ -212,7 +212,6 @@ const Step1 = () => {
                             categorySelected: true
                         });
                     }}
-                    defaultValue={investmentCategory}
                     placeholder="Choose category"
                     value={categorySelected ? investmentCategory : ''}
                     options={franchiseCategoriesOptions}

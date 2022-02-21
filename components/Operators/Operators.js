@@ -433,7 +433,7 @@ const Operators = ({
                     </div>
                 </div>
                 <div className={styles['user-list-section']}>
-                    {false &&
+                    {(user?.has_incomplete_investors || user?.has_incomplete_operators) &&
                         <Alert
                             size="sm"
                             type="info"
@@ -460,6 +460,7 @@ const Operators = ({
                                             direction: a[1]
                                         });
                                     }}
+                                    value={sortBy}
                                     disabled={isLoading}
                                     options={[
                                         { value: 'operator_last_edit_date-DESC', description: 'Newest - Oldest' },

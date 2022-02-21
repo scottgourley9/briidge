@@ -433,7 +433,7 @@ const Investors = ({
                     </div>
                 </div>
                 <div className={styles['user-list-section']}>
-                    {false &&
+                    {(user?.has_incomplete_investors || user?.has_incomplete_operators) &&
                         <Alert
                             size="sm"
                             type="info"
@@ -461,6 +461,7 @@ const Investors = ({
                                         });
                                     }}
                                     disabled={isLoading}
+                                    value={sortBy}
                                     options={[
                                         { value: 'investor_last_edit_date-DESC', description: 'Newest - Oldest' },
                                         { value: 'investor_last_edit_date-ASC', description: 'Oldest - Newest' },

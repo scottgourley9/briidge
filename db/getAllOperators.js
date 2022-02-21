@@ -53,34 +53,9 @@ export const getAllOperators = async (offset, limit, sortBy, filterBy, searchBy)
     }
 
     try {
-        const formatted = format('SELECT *, count(*) OVER() AS exact_count FROM (SELECT DISTINCT ON (user_id) * FROM operators ORDER BY user_id, operator_last_edit_date) operators INNER JOIN users ON users.id = operators.user_id %s ORDER BY %s OFFSET %s LIMIT %s', filtersStr, `${!sortBy?.column ? 'operator_last_edit_date DESC' : `${sortBy?.column} ${sortBy?.direction}`}`, offset, limit);
+        const formatted = format('SELECT *, count(*) OVER() AS exact_count FROM (SELECT DISTINCT ON (user_id) * FROM operators, users %s ORDER BY user_id, operator_last_edit_date) operators INNER JOIN users ON users.id = operators.user_id ORDER BY %s OFFSET %s LIMIT %s', filtersStr, `${!sortBy?.column ? 'operator_last_edit_date DESC' : `${sortBy?.column} ${sortBy?.direction}`}`, offset, limit);
         const res = await pool.query(formatted);
         dbResponse = res?.rows;
-
-        // const promiseArray = (dbResponse || []).reduce((acc, curr) => {
-        //     const p = new Promise(async resolve => {
-        //         const r = await Promise.allSettled([getInvestorByUserId(curr.id, true), getOperatorByUserId(curr.id, true)]);
-        //         resolve([...((r?.[0]?.value || []).concat(r?.[1]?.value || []))]);
-        //     });
-        //     acc.push(p);
-        //
-        //     return acc;
-        // }, []);
-        //
-        // const results = await Promise.allSettled(promiseArray);
-        //
-        // dbResponse = (dbResponse || []).map((user, i) => {
-        //     if (
-        //         !user?.allOpportunities &&
-        //         user?.id === results?.[i]?.value?.[0]?.user_id
-        //     ) {
-        //         user.allOpportunities = [...(results?.[i]?.value || [])];
-        //     } else if (user?.id === results?.[i]?.value?.[0]?.user_id) {
-        //         user.allOpportunities.push(...(results?.[i]?.value || []));
-        //     }
-        //
-        //     return user;
-        // })
     } catch (error) {
         console.log('error getting operators from db: ', error);
     }

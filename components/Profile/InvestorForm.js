@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { useRouter } from 'next/router';
 
 import { useGetUserData } from './hooks/useGetUserData';
 import { useUpdateInvestor } from './hooks/useUpdateInvestor';
@@ -23,29 +24,32 @@ const InvestorForm = ({
     updateData,
     updateUserDataToDisplay,
     updateShowEditInvestorForm,
-    showEditInvestorForm
+    showEditInvestorForm,
+    hasIncompleteInvestors
 }) => {
     const {
-        need,
+        need = '',
         need_error_obj = {},
-        investment_selected,
-        investment_amount_min,
-        investment_amount_max,
-        investment_amount_min_error_obj,
-        investment_amount_max_error_obj,
-        investment_category,
-        category_selected,
-        investment_category_error_obj,
-        preferred_location,
-        preferred_location_error_obj,
-        investment_type,
-        investment_type_error_obj,
-        timeframe_selected,
-        investment_timeframe,
-        investment_timeframe_error_obj,
-        ideal_operator_description,
-        ideal_operator_description_error_obj,
+        investment_selected = false,
+        investment_amount_min = '',
+        investment_amount_max = '',
+        investment_amount_min_error_obj = {},
+        investment_amount_max_error_obj = {},
+        investment_category = '',
+        category_selected = false,
+        investment_category_error_obj = {},
+        preferred_location = '',
+        preferred_location_error_obj = {},
+        investment_type = '',
+        investment_type_error_obj = {},
+        timeframe_selected = false,
+        investment_timeframe = '',
+        investment_timeframe_error_obj = {},
+        ideal_operator_description = '',
+        ideal_operator_description_error_obj = {},
     } = investorData || {};
+
+    const router = useRouter();
 
     const { onGetUserData, isLoading: getUserIsLoading, data: getUserData, isSuccess: getUserSuccess, isError: getUserError } = useGetUserData();
     const { onUpdateInvestor, isLoading: updateInvestorIsLoading, data: updateInvestorData, isSuccess: updateInvestorSuccess, isError: updateInvestorError } = useUpdateInvestor();
@@ -61,6 +65,9 @@ const InvestorForm = ({
         if (getUserSuccess) {
             updateUserDataToDisplay(getUserData?.data);
             onCancel();
+            if (hasIncompleteInvestors) {
+                router.replace(router.asPath);
+            }
         }
     }, [getUserSuccess]);
 
@@ -297,7 +304,6 @@ const InvestorForm = ({
                             });
                         }}
                         size="sm"
-                        defaultValue={investment_category}
                         placeholder="Choose category"
                         value={category_selected ? investment_category : ''}
                         options={franchiseCategoriesOptions}
@@ -338,7 +344,7 @@ const InvestorForm = ({
                                 }
                             })}
                             size="sm"
-                            defaultValue={preferred_location}
+                            value={preferred_location}
                             onChange={e => handleDataUpdate({ preferred_location: e.target.value })}
                             placeholder="Choose State"
                             options={states.map(state => ({
@@ -358,7 +364,7 @@ const InvestorForm = ({
                                 }
                             })}
                             size="sm"
-                            defaultValue={investment_type}
+                            value={investment_type}
                             onChange={e => handleDataUpdate({ investment_type: e.target.value })}
                             placeholder="Choose category"
                             options={[
@@ -383,7 +389,6 @@ const InvestorForm = ({
                         })}
                         size="sm"
                         value={timeframe_selected ? investment_timeframe : ''}
-                        defaultValue={investment_timeframe}
                         onChange={e => handleDataUpdate({
                             investment_timeframe: e.target.value,
                             timeframe_selected: true
